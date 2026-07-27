@@ -146,12 +146,11 @@ struct CompassView: View {
 
     @StateObject private var compass = CompassManager()
 
-    private let ringSize: CGFloat = 300
+    private let ringSize: CGFloat = screenWidth-50
 
     var body: some View {
         ZStack {
-            backgroundGradient
-
+            
             VStack(spacing: 28) {
                 headerSection
                 dialSection
@@ -163,18 +162,6 @@ struct CompassView: View {
         }
         .onAppear { compass.start() }
         .onDisappear { compass.stop() }
-    }
-
-    // MARK: Background
-    private var backgroundGradient: some View {
-        RadialGradient(
-            colors: [Color(red: 0.07, green: 0.08, blue: 0.08),
-                     Color(red: 0.02, green: 0.02, blue: 0.02)],
-            center: .center,
-            startRadius: 40,
-            endRadius: 420
-        )
-        .ignoresSafeArea()
     }
 
     // MARK: Header
@@ -218,7 +205,7 @@ struct CompassView: View {
             Circle()
                 .fill(
                     RadialGradient(
-                        colors: [Color(white: 0.16), Color(white: 0.08)],
+                        colors: [.clear]/*[Color(white: 0.16), Color(white: 0.08)]*/,
                         center: .center, startRadius: 10, endRadius: ringSize / 2
                     )
                 )
@@ -227,15 +214,15 @@ struct CompassView: View {
                 )
 
             Circle()
-                .fill(Color.black.opacity(0.55))
-                .padding(34)
+                .fill(.clear)
+                .padding(18)
                 .overlay(
                     Circle().stroke(Color(white: 0.22), lineWidth: 1).padding(34)
                 )
 
-            Circle()
-                .stroke(Color(white: 0.3), lineWidth: 10)
-                .padding(4)
+//            Circle()
+//                .stroke(Color(white: 0.3), lineWidth: 10)
+//                .padding(4)
         }
     }
 
@@ -270,7 +257,7 @@ struct CompassView: View {
                 context.stroke(path, with: .color(.white.opacity(opacity)), lineWidth: tickWidth)
             }
         }
-        .padding(14)
+        .padding(2)
     }
 
     private var cardinalLetters: some View {
@@ -281,8 +268,8 @@ struct CompassView: View {
             ForEach(cardinalPoints, id: \.label) { point in
                 Text(point.label)
                     .font(.custom("Georgia-Bold", size: point.label.count > 1 ? 15 : 24))
-                    .foregroundColor(point.label.count > 1 ? Color(white: 0.65) : .white)
-                    .rotationEffect(.degrees(compass.rotation)) // keep letters upright
+                    .foregroundColor(point.label.count > 1 ? Color(white: 0.65) : point.label == "N" ? . red : .white)
+                    .rotationEffect(.degrees(compass.rotation))
                     .position(
                         x: center.x + CGFloat(cos(point.angleRadians)) * radius,
                         y: center.y + CGFloat(sin(point.angleRadians)) * radius
@@ -325,7 +312,7 @@ struct CompassView: View {
                     startPoint: .top, endPoint: .bottom
                 )
             )
-            .frame(width: 28, height: ringSize - 100)
+            .frame(width: 28, height: ringSize - 150)
             .shadow(color: .black.opacity(0.5), radius: 6, x: 0, y: 2)
     }
 

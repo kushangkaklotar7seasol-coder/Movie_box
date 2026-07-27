@@ -28,6 +28,10 @@ func destination(for route: Route) -> some View {
         ArtistDetail(viewModel: ArtistDetailViewModel(celebrityId: id))
     case .compass:
         CompassScreen()
+    case .photoCleaner:
+        PhotoCleanerScreen()
+    case .soundMeter:
+        SoundMeterScreen()
     }
 }
 
@@ -41,6 +45,8 @@ enum Route: Hashable {
     case movieList(movieBunch: MediaBunch?)
     case artistDetail(artistId: Int)
     case compass
+    case photoCleaner
+    case soundMeter
 }
 
 final class Router: ObservableObject {

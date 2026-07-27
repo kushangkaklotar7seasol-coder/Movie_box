@@ -242,6 +242,12 @@ class HomeDesign {
                         .onTapGesture {
                             if discover.id == 0 {
                                 Router.shared.push(.compass)
+                            } else if discover.id == 1 {
+                                print("Photo editor")
+                            } else if discover.id == 2 {
+                                Router.shared.push(.photoCleaner)
+                            } else if discover.id == 3 {
+                                Router.shared.push(.soundMeter)
                             }
                         }
                     }

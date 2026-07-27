@@ -12,6 +12,7 @@ struct CompassScreen: View {
         ZStack {
             VStack {
                 DefaultDesign.Header(name: "Compass")
+                    .padding(.horizontal, 16)
                 
                 Spacer()
                 
