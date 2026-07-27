@@ -257,13 +257,16 @@ class DefaultDesign {
                 Text((movies.title ?? movies.name) ?? "")
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(.whiteColour)
+                    .lineLimit(1)
                 
                 if let releaseDate = (movies.releaseDate ?? movies.firstAirDate) {
                     Text(releaseDate)
                         .font(.system(size: 12, weight: .regular))
                         .foregroundColor(.grayColour)
+                        .lineLimit(1)
                 }
             }
+            .frame(width: width, alignment: .center)
         }
     }
     

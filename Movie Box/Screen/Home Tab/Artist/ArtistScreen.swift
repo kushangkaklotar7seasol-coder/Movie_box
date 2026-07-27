@@ -20,7 +20,7 @@ struct ArtistScreen: View {
         ZStack {
             VStack {
                 DefaultDesign.Header(name: "Spotlight Artist")
-                
+                    .padding(.horizontal, 16)
                 
                 ScrollView(showsIndicators: false) {
                     VStack {
@@ -32,6 +32,9 @@ struct ArtistScreen: View {
                                         DefaultDesign.PersonPoster(url: person.profilePath ?? "", name: person.name)
                                             .onAppear() {
                                                 loadMoreIfNeeded(currentItem: index)
+                                            }
+                                            .onTapGesture {
+                                                Router.shared.push(.artistDetail(artistId: person.id))
                                             }
                                     }
                                 }

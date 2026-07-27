@@ -36,6 +36,9 @@ struct HomeScreen: View {
                                     ForEach(array.indices, id: \.self) { index in
                                         let person = array[index]
                                         DefaultDesign.PersonPoster(url: person.profilePath ?? "", name: person.name)
+                                            .onTapGesture {
+                                                Router.shared.push(.artistDetail(artistId: person.id))
+                                            }
                                     }
                                 }
                                 .padding(.horizontal, 16)
@@ -235,6 +238,11 @@ class HomeDesign {
                         .overlay {
                             RoundedRectangle(cornerRadius: 24)
                                 .strokeBorder(.whiteColour.opacity(0.1))
+                        }
+                        .onTapGesture {
+                            if discover.id == 0 {
+                                Router.shared.push(.compass)
+                            }
                         }
                     }
                 }

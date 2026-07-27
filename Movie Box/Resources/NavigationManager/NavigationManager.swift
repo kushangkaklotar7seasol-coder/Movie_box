@@ -9,6 +9,28 @@ import Foundation
 internal import Combine
 import SwiftUI
 
+@ViewBuilder
+func destination(for route: Route) -> some View {
+    switch route {
+    case .language(let isShowBackButton):
+        LanguageScreen(viewModel: LanguageViewModel(isShowBack: isShowBackButton))
+    case .intro:
+        IntroScreen()
+    case .tab:
+        TabBarScreen()
+    case .home:
+        HomeScreen()
+    case .artist(let artistDetail):
+        ArtistScreen(viewModel: ArtistViewModel(celebrity: artistDetail))
+    case .movieList(let mediaBunch):
+        MovieListScreen(viewModel: MovieListViewModel(moviesBunch: mediaBunch))
+    case .artistDetail(let id):
+        ArtistDetail(viewModel: ArtistDetailViewModel(celebrityId: id))
+    case .compass:
+        CompassScreen()
+    }
+}
+
 enum Route: Hashable {
     case language(isShowBackButton: Bool)
     case intro
@@ -17,6 +39,8 @@ enum Route: Hashable {
     case home
     case artist(artistDetail: CelebrityResponse?)
     case movieList(movieBunch: MediaBunch?)
+    case artistDetail(artistId: Int)
+    case compass
 }
 
 final class Router: ObservableObject {
