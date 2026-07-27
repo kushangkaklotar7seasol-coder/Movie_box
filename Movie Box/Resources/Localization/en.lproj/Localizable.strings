@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  Movie Box
+
+  Created by Kushang kaklotar on 24/07/26.
+  
+*/
+
+// MARK: - Language Screen -
+"CHOOSE_LANGUAGE" = "Choose Language";
+"DONE" = "Done";
+
+// MARK: - Intro Screen -
+"PAGE1_TITLE" = "Discover Stories";
+"PAGE1_INFO" = "Explore thousands of movies across every genre, from timeless classics to today's hits.";
+"PAGE2_TITLE" = "Made Just for You";
+"PAGE2_INFO" = "Get personalized recommendations based on your interests and discover your next movie.";
+"PAGE3_TITLE" = "Watch Without Limits";
+"PAGE3_INFO" = "Stream anytime on any device or download your favorites for offline entertainment.";
+
+"NEXT" = "Next";
+"GET_STATED" = "Get Started";
