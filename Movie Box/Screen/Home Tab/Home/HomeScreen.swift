@@ -12,7 +12,6 @@ internal import Combine
 struct HomeScreen: View {
     @StateObject var viewModel = HomeViewModel()
     
-    
     var body: some View {
         ZStack {
             VStack {
@@ -25,7 +24,7 @@ struct HomeScreen: View {
                         HomeDesign.QuickDiscover(viewModel: viewModel)
                         
                         if let array = viewModel.celebrity?.results {
-                            DefaultDesign.SectionHeader(name: "Spotlight Artist") {
+                            DefaultDesign.SectionHeader(name: Strings.sportLightArtist) {
                                 Router.shared.push(.artist(artistDetail: viewModel.celebrity))
                             }
                             .padding(.horizontal, 16)
@@ -69,7 +68,7 @@ class HomeDesign {
         var body: some View {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Welcome back,")
+                    Text(Strings.welcomeBack)
                         .font(.system(size: 14, weight: .regular))
                         .foregroundColor(.grayColour)
                     
@@ -81,7 +80,7 @@ class HomeDesign {
                 Spacer()
                 
                 Button {
-                    print("Search Clicked")
+                    Router.shared.push(.search)
                 } label: {
                     Image("ic_search")
                         .resizable()
@@ -203,13 +202,12 @@ class HomeDesign {
         var body: some View {
             VStack {
                 HStack {
-                    Text("Quick Discover")
+                    Text(Strings.quickDiscover)
                         .font(.system(size: 18, weight: .semibold))
                         .foregroundColor(.whiteColour)
                     
                     Spacer()
                 }
-                
                 
                 LazyVGrid(columns: columns, spacing: 10) {
                     ForEach(viewModel.discover.indices, id: \.self) { index in

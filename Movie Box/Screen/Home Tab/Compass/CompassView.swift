@@ -150,7 +150,6 @@ struct CompassView: View {
 
     var body: some View {
         ZStack {
-            
             VStack(spacing: 28) {
                 headerSection
                 dialSection
@@ -177,7 +176,7 @@ struct CompassView: View {
             HStack(spacing: 6) {
                 Text(CompassManager.longDirection(for: compass.heading))
                 Text("•")
-                Text(compass.isCalibrated ? "High Precision" : "Calibrating…")
+                Text(compass.isCalibrated ? Strings.highPrecision : Strings.calibrating)
             }
             .font(.system(size: 15, weight: .medium))
             .foregroundColor(.gray)
@@ -329,8 +328,8 @@ struct CompassView: View {
 
     private var coordinateCards: some View {
         HStack(spacing: 14) {
-            coordinateCard(title: "Latitude", value: formatted(compass.latitude, isLat: true))
-            coordinateCard(title: "Longitude", value: formatted(compass.longitude, isLat: false))
+            coordinateCard(title: Strings.latitude, value: formatted(compass.latitude, isLat: true))
+            coordinateCard(title: Strings.longtitude, value: formatted(compass.longitude, isLat: false))
         }
     }
 

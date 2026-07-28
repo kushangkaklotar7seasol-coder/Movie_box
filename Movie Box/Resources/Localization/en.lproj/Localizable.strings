@@ -17,6 +17,68 @@
 "PAGE2_INFO" = "Get personalized recommendations based on your interests and discover your next movie.";
 "PAGE3_TITLE" = "Watch Without Limits";
 "PAGE3_INFO" = "Stream anytime on any device or download your favorites for offline entertainment.";
-
 "NEXT" = "Next";
 "GET_STATED" = "Get Started";
+
+// MARK: - Home Screen -
+"WELCOME_BACK" = "Welcome back,";
+"QUICK_DISCOVER" = "Quick Discover";
+"COMPASS" = "Compass";
+"PHOTO_EDIT" = "Photo Editor";
+"EDIT_PHOTO" = "Edit Photos";
+"NAV_TOOL" = "Navigation Tool";
+"PHOTO_CLEANER" = "Photo Cleaner";
+"FIND_DUBLICATE" = "Find Duplicates";
+"SOUND_METER" = "Sound Meter";
+"MEASURE_NOICE" = "Measure Noise";
+"SPOTLIGHT_ARTIST" = "Spotlight Artist";
+"NEW_RELEASE" = "New Release";
+
+// MARK: - Compass Screen -
+"HIGH_PRECISION" = "High Precision";
+"CALIBRATING" = "Calibrating…";
+"LATITUDE" = "Latitude";
+"LONGITUDE" = "Longitude";
+
+// MARK: - Photo Cleaner Screen -
+"DUBLICATE_PHOTO_FOUND" = "Duplicate Photos Found";
+"GROUP" = "Group";
+"NO_DUBLICATE_PIC" = "No Dublicate Media found";
+"NO_DUBLICATE_PIC_INFO" = "No dublicate item found on your phone...";
+"SCANING" = "Scanning...";
+"PERMISSION_NOTE" = "We don't have permission to check your photo library.....";
+"DELETE_MEDIA" = "Delete Selected Media";
+
+// MARK: - Sound Meter Screen -
+"DECIBELS" = "DECIBELS (dB)";
+"AVG" = "AVERAGE";
+"MIN" = "MINIMUM";
+"MAX" = "MAXIMUM";
+
+// MARK: - Artist Detail -
+"BIOGRAPHY" = "Biography";
+"MOVIE" = "Movies";
+"TVSHOW" = "TV Shows";
+"BIRTHDAY" = "Birthday";
+"BIRTHPLACE" = "Birthplace";
+"AGE" = "Age";
+"DEPARTMENT" = "Department";
+"PERSONAL_INFO" = "Personal info";
+
+// MARK: - Search Screen -
+"SEARCH_MEDIA" = "Search Movies & TV Shows";
+"NEWEARCH_PLACEHOLDER" = "Find your favorite movies or series by searching for a title, actor, or genre.";
+"NO_SEARCH_DATA" = "No data found";
+"NO_SEARCH_DATA_FOUND" = "No data found for";
+"TOP_RATED" = "Top Rated";
+"MOST_POPULAR" = "Most Popular";
+"ARRIVING_TODAY" = "Airing Today";
+"SEE_ALL" = "See All";
+
+// MARK: - Movie Detail screen -
+"TOP_CAST" = "Top Cast";
+"CORE_CREW" = "Core Crew";
+"STATUS" = "Status";
+"LANGUAGE" = "Language";
+"RUNTIME" = "Runtime";
+"REVENUE" = "Revenue";

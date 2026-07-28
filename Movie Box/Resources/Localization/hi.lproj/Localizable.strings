@@ -5,5 +5,61 @@
   Created by Kushang kaklotar on 24/07/26.
   
 */
+// MARK: - Language Screen -
 "CHOOSE_LANGUAGE" = "भाषा चुनें";
 "DONE" = "पूर्ण";
+
+// MARK: - Intro Screen -
+"PAGE1_TITLE" = "कहानियां खोजें";
+"PAGE1_INFO" = "कालातीत क्लासिक्स से लेकर आज की हिट फिल्मों तक, हर जॉनर में हजारों मूवीज़ एक्सप्लोर करें।";
+"PAGE2_TITLE" = "सिर्फ आपके लिए बनाया गया";
+"PAGE2_INFO" = "अपनी रुचियों के आधार पर व्यक्तिगत सुझाव पाएं और अपनी अगली मूवी खोजें।";
+"PAGE3_TITLE" = "बिना किसी सीमा के देखें";
+"PAGE3_INFO" = "किसी भी डिवाइस पर कभी भी स्ट्रीम करें या ऑफलाइन एंटरटेनमेंट के लिए अपनी पसंदीदा चीज़ें डाउनलोड करें।";
+"NEXT" = "अगला";
+"GET_STATED" = "शुरू करें";
+
+// MARK: - Home Screen -
+"WELCOME_BACK" = "वापसी पर स्वागत है,";
+"QUICK_DISCOVER" = "क्विक डिस्कवर";
+"COMPASS" = "कंपास";
+"PHOTO_EDIT" = "फोटो एडिटर";
+"EDIT_PHOTO" = "फोटो एडिट करें";
+"NAV_TOOL" = "नेविगेशन टूल";
+"PHOTO_CLEANER" = "फोटो क्लीनर";
+"FIND_DUBLICATE" = "डुप्लीकेट खोजें";
+"SOUND_METER" = "साउंड मीटर";
+"MEASURE_NOICE" = "शोर मापें";
+"SPOTLIGHT_ARTIST" = "स्पॉटलाइट आर्टिस्ट";
+"NEW_RELEASE" = "नई रिलीज़";
+
+// MARK: - Compass Screen -
+"HIGH_PRECISION" = "उच्च सटीकता";
+"CALIBRATING" = "कैलिब्रेट हो रहा है…";
+"LATITUDE" = "अक्षांश";
+"LONGITUDE" = "देशांतर";
+
+// MARK: - Photo Cleaner Screen -
+"DUBLICATE_PHOTO_FOUND" = "डुप्लीकेट फोटो मिलीं";
+"GROUP" = "समूह";
+"NO_DUBLICATE_PIC" = "कोई डुप्लीकेट मीडिया नहीं मिला";
+"NO_DUBLICATE_PIC_INFO" = "आपके फोन पर कोई डुप्लीकेट आइटम नहीं मिला...";
+"SCANING" = "स्कैन हो रहा है...";
+"PERMISSION_NOTE" = "हमारे पास आपकी फोटो लाइब्रेरी जांचने की अनुमति नहीं है.....";
+"DELETE_MEDIA" = "चयनित मीडिया हटाएं";
+
+// MARK: - Sound Meter Screen -
+"DECIBELS" = "डेसिबल (dB)";
+"AVG" = "औसत";
+"MIN" = "न्यूनतम";
+"MAX" = "अधिकतम";
+
+// MARK: - Artist Detail -
+"BIOGRAPHY" = "जीवनी";
+"MOVIE" = "मूवीज़";
+"TVSHOW" = "टीवी शो";
+"BIRTHDAY" = "जन्मदिन";
+"BIRTHPLACE" = "जन्मस्थान";
+"AGE" = "उम्र";
+"DEPARTMENT" = "विभाग";
+"PERSONAL_INFO" = "व्यक्तिगत जानकारी";

@@ -13,44 +13,48 @@ struct CustomSegmentedControl: View {
     var onSelect: ((Int) -> Void)? = nil
     
     var body: some View {
-//        GeometryReader { geo in
-//            let segmentWidth = geo.size.width / CGFloat(options.count)
-//            
-//            ZStack(alignment: .leading) {
-//                Rectangle()
-//                    .fill(.borderColour)
-//                
-//                RoundedRectangle(cornerRadius: 10)
-//                    .fill(
-//                        LinearGradient(colors: [.lightYellowColour, .orangeColour], startPoint: .top, endPoint: .bottom)
-//                    )
-//                    .frame(width: segmentWidth - 12, height: 50 - 7)
-//                    .offset(x: segmentWidth * CGFloat(preselectedIndex) + 6, y: 0)
-//                
-//                HStack() {
-//                    ForEach(options.indices, id: \.self) { index in
-//                        Text(options[index])
-//                            .fontWeight(.medium)
-//                            .foregroundColor(
-//                                preselectedIndex == index ? .whiteColour : .grayColour
-//                            )
-//                            .frame(width: segmentWidth)
-//                            .contentShape(Rectangle())
-//                            .onTapGesture {
-//                                withAnimation(.interactiveSpring(
-//                                    response: 0.4,
-//                                    dampingFraction: 0.8,
-//                                    blendDuration: 0.6
-//                                )) {
-//                                    preselectedIndex = index
-//                                    onSelect?(index)
-//                                }
-//                            }
-//                    }
-//                }
-//            }
-//        }
-//        .frame(height: 55)
-//        .clipShape(RoundedRectangle(cornerRadius: 14))
+        GeometryReader { geo in
+            let segmentWidth = geo.size.width / CGFloat(options.count)
+            
+            ZStack(alignment: .leading) {
+                Rectangle()
+                    .fill(.clear)
+                
+                RoundedRectangle(cornerRadius: 50)
+                    .fill(
+                        LinearGradient(colors: [.cyanColour, .greenColour], startPoint: .top, endPoint: .bottom)
+                    )
+                    .frame(width: segmentWidth - 12, height: 50 - 7)
+                    .offset(x: segmentWidth * CGFloat(preselectedIndex) + 6, y: 0)
+                
+                HStack() {
+                    ForEach(options.indices, id: \.self) { index in
+                        Text(options[index])
+                            .fontWeight(.medium)
+                            .foregroundColor(
+                                preselectedIndex == index ? .whiteColour : .grayColour
+                            )
+                            .frame(width: segmentWidth)
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                withAnimation(.interactiveSpring(
+                                    response: 0.4,
+                                    dampingFraction: 0.8,
+                                    blendDuration: 0.6
+                                )) {
+                                    preselectedIndex = index
+                                    onSelect?(index)
+                                }
+                            }
+                    }
+                }
+            }
+        }
+        .frame(height: 55)
+        .clipShape(RoundedRectangle(cornerRadius: 55))
+        .overlay {
+            RoundedRectangle(cornerRadius: 55)
+                .strokeBorder(.grayColour, lineWidth: 0.5)
+        }
     }
 }

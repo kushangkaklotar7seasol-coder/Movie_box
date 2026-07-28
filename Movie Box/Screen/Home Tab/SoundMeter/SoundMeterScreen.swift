@@ -13,11 +13,38 @@ struct SoundMeterScreen: View {
     var body: some View {
         ZStack {
             VStack {
-                DefaultDesign.Header(name: "Sound Meter")
+                DefaultDesign.Header(name: Strings.soundMeter)
+                    .padding(.horizontal, 16)
                 
-                CircularProgressView(progress: Double(viewModel.decibels))
+                VStack {
+                    Gauge(value: Double(viewModel.decibels), in: 0...194) {
+                        VStack {
+                            Text("\(viewModel.decibels)")
+                                .font(.system(size: 7, weight: .medium))
+                                .foregroundColor(.whiteColour)
+                            
+                            Text(Strings.decibles)
+                                .font(.system(size: 4, weight: .semibold))
+                                .foregroundColor(.grayColour)
+                        }
+                    }
+                    .gaugeStyle(.accessoryCircularCapacity)
+                    .tint(.greenColour)
+                    .scaleEffect(5)
+                    .frame(width: screenWidth, height: screenWidth)
+                }
                 
-                Text("\(viewModel.decibels) DB")
+                Spacer()
+                
+                VStack {
+                    SoundMeterDesign.information(Key: Strings.avg, value: "\(viewModel.averageDB)", colour: .whiteColour)
+                    
+                    HStack {
+                        SoundMeterDesign.information(Key: Strings.min, value: "\(viewModel.lowestDB)", colour: .greenColour)
+                        SoundMeterDesign.information(Key: Strings.max, value: "\(viewModel.highestDB)", colour: .red)
+                    }
+                }
+                .padding(.horizontal, 16)
                 
                 Spacer()
             }
@@ -31,27 +58,36 @@ struct SoundMeterScreen: View {
     SoundMeterScreen()
 }
 
-struct CircularProgressView: View {
-    let progress: Double
-    var lineWidth: CGFloat = 20
-    var trackColor: Color = Color(.systemGray6)
-    var progressColor: Color = .blue
+class SoundMeterDesign {
     
-    var body: some View {
-        ZStack {
-            // Background track ring
-            Circle()
-                .stroke(trackColor, lineWidth: lineWidth)
-            
-            // Filling progress ring
-            Circle()
-                .trim(from: 0.0, to: CGFloat(min(progress, 1.0)))
-                .stroke(
-                    progressColor,
-                    style: StrokeStyle(lineWidth: lineWidth, lineCap: .round, lineJoin: .round)
-                )
-                // Rotates the circle start point from 3 o'clock to 12 o'clock
-                .rotationEffect(Angle(degrees: -90))
+    struct information: View {
+        let Key: String
+        let value: String
+        let colour: Color
+        
+        var body: some View {
+            HStack {
+                Spacer()
+                
+                VStack(spacing: 5) {
+                    Text(Key)
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(.whiteColour)
+                    
+                    Text(value)
+                        .font(.system(size: 16, weight: .regular))
+                        .foregroundColor(colour)
+                }
+                
+                Spacer()
+            }
+            .padding()
+            .background(.backgroundColour)
+            .cornerRadius(18)
+            .overlay {
+                RoundedRectangle(cornerRadius: 18)
+                    .strokeBorder(.whiteColour.opacity(0.1))
+            }
         }
     }
 }

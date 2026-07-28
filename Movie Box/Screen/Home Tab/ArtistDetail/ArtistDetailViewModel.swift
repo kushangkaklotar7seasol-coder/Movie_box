@@ -31,20 +31,20 @@ class ArtistDetailViewModel: ObservableObject {
                 self.celebrityDetail = response
                 
                 if let birthDay = self.celebrityDetail?.birthday {
-                    self.personalDetail.append(PersonalDetail(id: 0, name: "Birthday", value: birthDay))
+                    self.personalDetail.append(PersonalDetail(id: 0, name: Strings.birthday, value: birthDay))
                 }
                 
                 if let placeBirth = self.celebrityDetail?.placeOfBirth {
-                    self.personalDetail.append(PersonalDetail(id: 1, name: "Birthplace", value: placeBirth))
+                    self.personalDetail.append(PersonalDetail(id: 1, name: Strings.birthPlace, value: placeBirth))
                 }
                 
                 if let bornYear = self.celebrityDetail?.birthday?.prefix(4) {
                     let currentYear = Calendar.current.component(.year, from: Date())
-                    self.personalDetail.append(PersonalDetail(id: 2, name: "Birthplace", value: "\(currentYear - (Int(bornYear) ?? 0))"))
+                    self.personalDetail.append(PersonalDetail(id: 2, name: Strings.age, value: "\(currentYear - (Int(bornYear) ?? 0))"))
                 }
                 
                 if let department = self.celebrityDetail?.knownForDepartment {
-                    self.personalDetail.append(PersonalDetail(id: 3, name: "Department", value: department))
+                    self.personalDetail.append(PersonalDetail(id: 3, name: Strings.department, value: department))
                 }
                 
                 self.moviesAPI()

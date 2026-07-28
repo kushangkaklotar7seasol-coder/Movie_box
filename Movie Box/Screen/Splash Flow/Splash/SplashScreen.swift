@@ -121,7 +121,7 @@ class DefaultDesign {
     
     struct SectionHeader: View {
         var name: String = ""
-        var buttonName: String = "See All"
+        var buttonName: String = Strings.seeAll
         var onClick: (()->Void)?
         
         var body: some View {
@@ -183,7 +183,6 @@ class DefaultDesign {
     
     struct MovieCard: View {
         var movies: MediaItem
-        var numbersOfCard = 2
         var isShowLike = true
         var onLike: ((MediaItem) -> Void)?
         
@@ -267,6 +266,10 @@ class DefaultDesign {
                 }
             }
             .frame(width: width, alignment: .center)
+            .onTapGesture {
+                Router.shared.push(.movieDetail(movieId: movies.id, isMovie: movies.title != nil ? true : false))
+//                movieDetail
+            }
         }
     }
     

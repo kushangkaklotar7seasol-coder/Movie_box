@@ -19,7 +19,7 @@ struct ArtistScreen: View {
     var body: some View {
         ZStack {
             VStack {
-                DefaultDesign.Header(name: "Spotlight Artist")
+                DefaultDesign.Header(name: Strings.sportLightArtist)
                     .padding(.horizontal, 16)
                 
                 ScrollView(showsIndicators: false) {

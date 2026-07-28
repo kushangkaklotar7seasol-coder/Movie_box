@@ -32,6 +32,14 @@ func destination(for route: Route) -> some View {
         PhotoCleanerScreen()
     case .soundMeter:
         SoundMeterScreen()
+    case .search:
+        SearchScreen()
+    case .categoryList(let mediaBunch):
+        CategoryListScreen(viewModel: CategoryListViewModel(media: mediaBunch))
+    case .movieDetail(let movieId, let isMovie):
+        MovieDetailScreen(viewModel: MovieDetailViewModel(movieId: movieId, isMovie: isMovie))
+    case .poster(let poster):
+        PosterScreen(viewModel: PosterViewModel(images: poster))
     }
 }
 
@@ -47,6 +55,10 @@ enum Route: Hashable {
     case compass
     case photoCleaner
     case soundMeter
+    case search
+    case categoryList(movieBunch: MediaBunch?)
+    case movieDetail(movieId: Int, isMovie: Bool)
+    case poster(posters: [MovieImage])
 }
 
 final class Router: ObservableObject {

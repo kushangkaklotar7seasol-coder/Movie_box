@@ -43,7 +43,7 @@ struct ArtistDetail: View {
                         if viewModel.celebrityDetail?.biography != "" {
                             VStack(spacing: 12) {
                                 HStack {
-                                    Text("Biography")
+                                    Text(Strings.biography)
                                         .font(.system(size: 18, weight: .semibold))
                                     
                                     Spacer()
@@ -56,11 +56,18 @@ struct ArtistDetail: View {
                         }
                         
                         if !viewModel.personalDetail.isEmpty {
+                            HStack {
+                                Text(Strings.personalInfo)
+                                    .font(.system(size: 18, weight: .semibold))
+                                
+                                Spacer()
+                            }
+                            
                             MovieDetailDesign.PersonalDetailView(personalDetail: viewModel.personalDetail)
                         }
                         
                         if let movies = viewModel.movieCredits?.cast{
-                            DefaultDesign.SectionHeader(name: "Movies", onClick: {
+                            DefaultDesign.SectionHeader(name: Strings.movie, onClick: {
                                 viewModel.type = 0
                                 viewModel.isViewAllSheet = true
                             })
@@ -78,7 +85,7 @@ struct ArtistDetail: View {
                         }
                         
                         if let series = viewModel.seriesCredits?.cast{
-                            DefaultDesign.SectionHeader(name: "TV Shows", onClick: {
+                            DefaultDesign.SectionHeader(name: Strings.tvShow, onClick: {
                                 viewModel.type = 1
                                 viewModel.isViewAllSheet = true
                             })
@@ -96,6 +103,8 @@ struct ArtistDetail: View {
                         }
                     }
                 }
+                
+                
             }
         }
         .defaultPage()
@@ -120,7 +129,6 @@ struct ArtistDetail: View {
                 .padding(.horizontal, 16)
                 
                 if let series = viewModel.type == 0 ? viewModel.movieCredits?.cast : viewModel.seriesCredits?.cast {
-                    
                     ScrollView(showsIndicators: false) {
                         LazyVGrid(columns: self.columns, spacing: 10) {
                             ForEach(series.indices, id: \.self) { index in
@@ -232,12 +240,6 @@ class MovieDetailDesign {
         
         var body: some View {
             VStack(spacing: 12) {
-                HStack {
-                    Text("Personal info")
-                        .font(.system(size: 18, weight: .semibold))
-                    
-                    Spacer()
-                }
                 
                 LazyVGrid(columns: self.columns, spacing: 10) {
                     ForEach(personalDetail, id: \.id) { detail in

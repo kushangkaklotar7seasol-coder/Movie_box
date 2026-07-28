@@ -727,7 +727,7 @@ struct MovieImages: Codable {
  
 // MARK: - MovieImage
  
-struct MovieImage: Codable {
+struct MovieImage: Codable, Hashable {
     let aspectRatio: Double
     let height: Int
     let iso3166_1: String?

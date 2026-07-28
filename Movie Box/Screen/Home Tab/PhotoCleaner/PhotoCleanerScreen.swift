@@ -14,13 +14,13 @@ struct PhotoCleanerScreen: View {
     var body: some View {
         ZStack {
             VStack {
-                DefaultDesign.Header(name: "Photo Cleaner")
+                DefaultDesign.Header(name: Strings.photoCleaner)
                     .padding(.horizontal, 16)
                 
                 if !viewModel.duplicateGroups.isEmpty {
                     let totalDubPhotos = viewModel.duplicateGroups.reduce(0) { $0 + $1.count }
                     
-                    Text("\(totalDubPhotos - viewModel.duplicateGroups.count) Duplicate Photos Found")
+                    Text("\(totalDubPhotos - viewModel.duplicateGroups.count) \(Strings.dublicatePhotoFound)")
                         .padding()
                         .font(.system(size: 18, weight: .bold))
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -38,9 +38,10 @@ struct PhotoCleanerScreen: View {
                         VStack {
                             ForEach(viewModel.duplicateGroups.indices, id: \.self) { groupIndex in
                                 let group = viewModel.duplicateGroups[groupIndex]
+                                let isSelected = viewModel.isAllSelected(in: group)
                                 
                                 HStack {
-                                    Text("Group \(groupIndex + 1)")
+                                    Text("\(Strings.group) \(groupIndex + 1)")
                                         .font(.system(size: 14, weight: .medium))
                                     
                                     Spacer()
@@ -48,7 +49,7 @@ struct PhotoCleanerScreen: View {
                                     Button {
                                         viewModel.toggleSelectAll(for: group)
                                     } label: {
-                                        Image(viewModel.isAllSelected(in: group) ? "ic_check" : "ic_uncheck")
+                                        Image(isSelected ? "ic_check" : "ic_uncheck")
                                             .resizable()
                                             .frame(width: 20, height: 20, alignment: .center)
                                         
@@ -78,10 +79,10 @@ struct PhotoCleanerScreen: View {
                 } else {
                     Spacer()
                     
-                    Text("No Dublicate Media found")
+                    Text(Strings.noDublicate)
                         .font(.system(size: 21, weight: .semibold))
                     
-                    Text("No dublicate item found on your phone...")
+                    Text(Strings.noDublicateInfo)
                         .font(.system(size: 17, weight: .regular))
                         .foregroundColor(.grayColour)
                     
@@ -95,11 +96,11 @@ struct PhotoCleanerScreen: View {
                 if viewModel.isScanning {
                     ProgressView(value: viewModel.progress)
                         .padding()
-                    Text("Scanning... \(Int(viewModel.progress * 100))%")
-                }
-                
-                if !viewModel.hasPermission {
-                    Text("We don't have permission to check your photo library.....")
+                    Text("\(Strings.scaning) \(Int(viewModel.progress * 100))%")
+                    
+                } else if !viewModel.hasPermission {
+                    
+                    Text(Strings.permissionNote)
                         .font(.system(size: 18, weight: .bold))
                         .multilineTextAlignment(.center)
                 }
@@ -113,7 +114,7 @@ struct PhotoCleanerScreen: View {
                                 viewModel.removeDeletedAssetsFromGroups()
                             })
                         } label: {
-                            Text("Delete Selected Files")
+                            Text(Strings.deleteMedia)
                                 .padding()
                                 .font(.system(size: 18, weight: .semibold))
                                 .frame(maxWidth: .infinity)

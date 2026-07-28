@@ -11,7 +11,7 @@ struct CompassScreen: View {
     var body: some View {
         ZStack {
             VStack {
-                DefaultDesign.Header(name: "Compass")
+                DefaultDesign.Header(name: Strings.compass)
                     .padding(.horizontal, 16)
                 
                 Spacer()
