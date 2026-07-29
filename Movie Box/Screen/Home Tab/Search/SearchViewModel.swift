@@ -6,8 +6,8 @@
 //
 
 import Foundation
-internal import Combine
-internal import UIKit
+import Combine
+import UIKit
 
 class SearchViewModel: ObservableObject {
     @Published var searchTextField: String = ""

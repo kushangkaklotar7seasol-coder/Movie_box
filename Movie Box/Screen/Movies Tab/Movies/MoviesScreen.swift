@@ -20,7 +20,7 @@ struct MoviesScreen: View {
                     Spacer()
                     
                     Button {
-                        
+                        Router.shared.push(.liked)
                     } label: {
                         Image("ic_unlike")
                             .resizable()

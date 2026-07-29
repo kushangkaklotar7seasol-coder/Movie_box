@@ -6,7 +6,7 @@
 //
 
 import Foundation
-internal import UIKit
+import UIKit
 
 let appName = "Movie Box"
 
@@ -25,7 +25,7 @@ public let SECRET = "vXrpX8YzuuevUDdnQG6GxfVs0or6v91bwk0CJEsX"
 // MARK: - Supporting class
 //let locationManager = LocationManager()
 //
-//let database = SQLiteManager.shared
+let database = SQLiteManager.shared
 
 var isYoutubeEnabled = false
 

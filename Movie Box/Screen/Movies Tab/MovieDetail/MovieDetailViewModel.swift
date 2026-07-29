@@ -6,7 +6,7 @@
 //
 
 import Foundation
-internal import Combine
+import Combine
 
 class MovieDetailViewModel: ObservableObject {
     
@@ -21,21 +21,13 @@ class MovieDetailViewModel: ObservableObject {
     
     @Published var isLiked = false
     
-    @Published var selectedCelebrityId: Int?
-    @Published var isShowCastDetails = false
-    
-    @Published var isShowPoster = false
-    @Published var isShowVideo = false
-    
     @Published var posterIndex: Int = 0
-    @Published var isShowPosterDetail = false
-    
-    @Published var isShowAllCast = false
     
     @Published var isYoutubeVideo = false
     @Published var youtubeUrl = ""
     
-    @Published var isShowPreview = true
+    @Published var isShowPreview = false
+    @Published var isShowAllCast = false
     
     var movieId: Int?
     @Published var isMovie: Bool?
@@ -44,11 +36,11 @@ class MovieDetailViewModel: ObservableObject {
     init(movieId: Int = 1368337, isMovie: Bool = true) {
         self.movieId = movieId
         self.isMovie = isMovie
-//        if isMovie {
-//            self.movieDetails()
-//        } else {
-//            self.seriesDetails()
-//        }
+        if isMovie {
+            self.movieDetails()
+        } else {
+            self.seriesDetails()
+        }
     }
     
     // MARK: - API Call's
@@ -56,7 +48,7 @@ class MovieDetailViewModel: ObservableObject {
         if Utility.isInternetAvailable() {
             MovieDetailService.shared.movieDetail(id: self.movieId ?? 0) { statusCode, response in
                 self.movieDetail = response
-//                self.isLiked = database.isMovieLiked(id: self.movieId ?? 0)
+                self.isLiked = database.isMovieLiked(id: self.movieId ?? 0)
                 
                 if let status = self.movieDetail?.status {
                     self.personalInformation.append(PersonalDetail(id: 0, name: "Status", value: status))
@@ -71,7 +63,7 @@ class MovieDetailViewModel: ObservableObject {
                 }
                 
                 if let revenue = self.movieDetail?.revenue, revenue != 0 {
-                    self.personalInformation.append(PersonalDetail(id: 2, name: "Revenue", value: "\(revenue)"))
+                    self.personalInformation.append(PersonalDetail(id: 3, name: "Revenue", value: "\(revenue)"))
                 }
                 
                 self.movieVideoAPI()
@@ -142,7 +134,7 @@ class MovieDetailViewModel: ObservableObject {
             MovieDetailService.shared.seriesDetail(id: self.movieId ?? 0) { statusCode, response in
                 print(response)
                 self.movieDetail = response
-//                self.isLiked = database.isMovieLiked(id: self.movieId ?? 0)
+                self.isLiked = database.isMovieLiked(id: self.movieId ?? 0)
                 
                 if let status = self.movieDetail?.status {
                     self.personalInformation.append(PersonalDetail(id: 0, name: "Status", value: status))
@@ -229,17 +221,17 @@ class MovieDetailViewModel: ObservableObject {
     
     func manageLike() {
         if self.isLiked {
-//            database.removeMovie(id: movieId ?? 0)
+            database.removeMovie(id: movieId ?? 0)
         } else {
-//            database.addMovie(MediaItem(adult: false, backdropPath: "", genreIds: [], id: movieId ?? 0, originalLanguage: "", overview: "", popularity: 0.0, posterPath: movieDetail?.posterPath, softcore: false, voteAverage: movieDetail?.voteAverage ?? 0.0, voteCount: 0, title: movieDetail?.title, originalTitle: "", releaseDate: "", video: false, name: movieDetail?.title, originalName: "", firstAirDate: movieDetail?.releaseDate, originCountry: [], character: "", creditId: "", episodeCount: 0, firstCreditAirDate: "", isMovie: self.isMovie ?? true ? 1 : 0))
+            database.addMovie(MediaItem(adult: false, backdropPath: "", genreIds: [], id: movieId ?? 0, originalLanguage: "", overview: "", popularity: 0.0, posterPath: movieDetail?.posterPath, softcore: false, voteAverage: movieDetail?.voteAverage ?? 0.0, voteCount: 0, title: movieDetail?.title, originalTitle: "", releaseDate: "", video: false, name: movieDetail?.title, originalName: "", firstAirDate: movieDetail?.releaseDate, originCountry: [], character: "", creditId: "", episodeCount: 0, firstCreditAirDate: "", isMovie: self.isMovie ?? true ? 1 : 0))
         }
         self.isLiked.toggle()
     }
     
     func translatedText() -> String {
-        return ""
-        
-        // \(Strings.shareText1) \(self.movieDetail?.name ?? self.movieDetail?.title ?? "")
-        // \(Strings.shareText2)
+        return """
+         \(Strings.shareText1) \(self.movieDetail?.name ?? self.movieDetail?.title ?? "")
+         \(Strings.shareText2)
+        """
     }
 }

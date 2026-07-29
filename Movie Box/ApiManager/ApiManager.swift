@@ -1,5 +1,5 @@
 import Alamofire
-internal import UIKit
+import UIKit
 import Foundation
 //import ObjectMapper
 

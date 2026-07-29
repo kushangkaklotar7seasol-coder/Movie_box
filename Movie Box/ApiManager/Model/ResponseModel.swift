@@ -758,7 +758,7 @@ struct MovieVideos: Codable {
  
 // MARK: - Video
  
-struct Video: Codable, Identifiable {
+struct Video: Codable, Identifiable, Hashable {
     let iso639_1: String
     let iso3166_1: String
     let name: String

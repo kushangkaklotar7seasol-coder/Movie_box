@@ -20,3 +20,12 @@ struct PersonalDetail {
     var name: String
     var value: String
 }
+
+struct Notes: Codable, Identifiable, Hashable {
+    var id = UUID()
+    var createdDate: Date
+    var editDate: Date
+    var name: String
+    var notes: String
+    var isPined: Bool
+}

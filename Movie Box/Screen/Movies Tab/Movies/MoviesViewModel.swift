@@ -6,7 +6,7 @@
 //
 
 import Foundation
-internal import Combine
+import Combine
 
 class MoviesViewModel: ObservableObject {
     @Published var selectedIndex = 0

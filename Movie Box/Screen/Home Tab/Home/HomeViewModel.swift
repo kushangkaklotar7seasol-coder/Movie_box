@@ -6,7 +6,7 @@
 //
 
 import Foundation
-internal import Combine
+import Combine
 
 class HomeViewModel: ObservableObject {
     @Published var topRatedMovie: [Movie] = []

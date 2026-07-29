@@ -101,4 +101,12 @@ class Strings {
     static var revenue: String { "REVENUE".localized() }
     static var poster: String { "POSTER".localized() }
     static var videos: String { "VIDEOS".localized() }
+    static var shareText1: String { "SHARE_TEXT1".localized() }
+    static var shareText2: String { "SHARE_TEXT2".localized() }
+    
+    // MARK: - Favorite -
+    static var favourite: String { "FAVORITE".localized() }
+    static var noFavourite: String { "NO_FAVORITE".localized() }
+    static var noFavouriteMovie: String { "NO_MOVIE_TAGLINE".localized() }
+    static var noFavouriteSeries: String { "NO_SERIES_TAGLINE".localized() }
 }

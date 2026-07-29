@@ -50,6 +50,10 @@ struct PosterScreen: View {
             .padding(.horizontal, 16)
         }
         .defaultPage()
+        .sheet(isPresented: $viewModel.isShowPosterDetail) {
+            PhotoPreviewSheet(images: viewModel.images,
+                              selectedPosterIndex: viewModel.posterIndex)
+        }
     }
 }
 

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-internal import Combine
+import Combine
 import SwiftUI
 
 @ViewBuilder
@@ -40,6 +40,14 @@ func destination(for route: Route) -> some View {
         MovieDetailScreen(viewModel: MovieDetailViewModel(movieId: movieId, isMovie: isMovie))
     case .poster(let poster):
         PosterScreen(viewModel: PosterViewModel(images: poster))
+    case .videoList(let video):
+        VideosScreen(viewModel: VideoViewModel(videos: video))
+    case .liked:
+        LikedScreen()
+    case .addNote(let notes):
+        AddNotesScreen(viewModel: AddNotesViewModel(oldNote: notes))
+    case .pinedNotes:
+        PinedNotesScreen()
     }
 }
 
@@ -59,6 +67,10 @@ enum Route: Hashable {
     case categoryList(movieBunch: MediaBunch?)
     case movieDetail(movieId: Int, isMovie: Bool)
     case poster(posters: [MovieImage])
+    case videoList(video: [Video])
+    case liked
+    case addNote(notes: Notes?)
+    case pinedNotes
 }
 
 final class Router: ObservableObject {

@@ -11,6 +11,11 @@ import WebKit
 
 struct MovieDetailScreen: View {
     @StateObject var viewModel: MovieDetailViewModel
+    let columns = [
+        GridItem(.flexible(), spacing: 10),
+        GridItem(.flexible(), spacing: 10),
+        GridItem(.flexible(), spacing: 10)
+    ]
     
     var body: some View {
         ZStack {
@@ -18,6 +23,12 @@ struct MovieDetailScreen: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     ZStack {
                         KFImage(URL(string: imageUrl+"\(viewModel.movieDetail?.posterPath ?? "")"))
+                            .placeholder({ progress in
+                                let placeHolderImage = "ic_noImage"
+                                Image(placeHolderImage)
+                                    .resizable()
+                                    .scaledToFill()
+                            })
                             .resizable()
                             .scaledToFill()
                             .frame(width: screenWidth, height: screenWidth)
@@ -27,7 +38,6 @@ struct MovieDetailScreen: View {
                     .background()
                     
                     ZStack {
-                        
                         VStack(spacing: 0) {
                             MovieDetail.GeneralInfo(viewModel: viewModel)
                             
@@ -65,6 +75,7 @@ struct MovieDetailScreen: View {
                                 
                                 
                                 MovieDetailDesign.PersonalDetailView(personalDetail: viewModel.personalInformation)
+                                    .padding(.top, 16)
                             }
                             
                             
@@ -77,7 +88,7 @@ struct MovieDetailScreen: View {
                                     Spacer()
                                     
                                     Button {
-                                        
+                                        viewModel.isShowAllCast = true
                                     } label: {
                                         Text("See All")
                                             .foregroundColor(.greenColour)
@@ -92,8 +103,7 @@ struct MovieDetailScreen: View {
                                         ForEach(cast, id: \.id) { cast in
                                             DefaultDesign.PersonPoster(url: imageUrl+"\(cast.profilePath ?? "")", name: cast.name)
                                                 .onTapGesture {
-                                                    viewModel.selectedCelebrityId = cast.id
-                                                    viewModel.isShowCastDetails = true
+                                                    Router.shared.push(.artistDetail(artistId: cast.id))
                                                 }
                                         }
                                     }
@@ -129,8 +139,7 @@ struct MovieDetailScreen: View {
                                             .background(.backgroundColour)
                                             .cornerRadius(14)
                                             .onTapGesture {
-                                                viewModel.selectedCelebrityId = crew.id
-                                                viewModel.isShowCastDetails = true
+                                                Router.shared.push(.artistDetail(artistId: crew.id))
                                             }
                                         }
                                     }
@@ -164,7 +173,7 @@ struct MovieDetailScreen: View {
                                             ZStack {
                                                 KFImage.url(URL(string: imageUrl+array[index].filePath))
                                                     .placeholder({ progress in
-                                                        let placeHolderImage = "img_noimage"
+                                                        let placeHolderImage = "ic_noImage"
                                                         Image(placeHolderImage)
                                                             .resizable()
                                                             .scaledToFill()
@@ -177,7 +186,7 @@ struct MovieDetailScreen: View {
                                             .cornerRadius(24)
                                             .onTapGesture {
                                                 viewModel.posterIndex = index
-                                                viewModel.isShowPosterDetail = true
+                                                viewModel.isShowPreview = true
                                             }
                                         }
                                     }
@@ -185,7 +194,6 @@ struct MovieDetailScreen: View {
                                 }
                                 .padding(.top, 10)
                             }
-                            
                             
                             if let video = viewModel.movieVideo?.results, !video.isEmpty {
                                 HStack {
@@ -196,7 +204,7 @@ struct MovieDetailScreen: View {
                                     Spacer()
                                     
                                     Button {
-                                        
+                                        Router.shared.push(.videoList(video: video))
                                     } label: {
                                         Text("See All")
                                             .foregroundColor(.greenColour)
@@ -212,7 +220,7 @@ struct MovieDetailScreen: View {
                                             ZStack {
                                                 KFImage.url(URL(string: "https://img.youtube.com/vi/\(video.key)/hqdefault.jpg"))
                                                     .placeholder({ progress in
-                                                        let placeHolderImage = "img_noimage"
+                                                        let placeHolderImage = "ic_noImage"
                                                         Image(placeHolderImage)
                                                             .resizable()
                                                             .scaledToFill()
@@ -252,6 +260,20 @@ struct MovieDetailScreen: View {
                 }
             }
             .edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                
+                HStack {
+                    DefaultDesign.SmallButton(image: "ic_arrow_left", onClick: {
+                        Router.shared.pop()
+                    })
+                    
+                    Spacer()
+                }
+                .padding(.horizontal, 16)
+                
+                Spacer()
+            }
         }
         .defaultPage()
         .sheet(isPresented: $viewModel.isYoutubeVideo) {
@@ -267,32 +289,53 @@ struct MovieDetailScreen: View {
             }
         }
         .sheet(isPresented: $viewModel.isShowPreview) {
+            PhotoPreviewSheet(images: viewModel.movieImage?.posters ?? [], selectedPosterIndex: viewModel.posterIndex)
+        }
+        .sheet(isPresented: $viewModel.isShowAllCast) {
             VStack {
-                ZStack {
+             
+                HStack {
+                    Text("\(viewModel.movieDetail?.title ?? viewModel.movieDetail?.name ?? "")")
+                        .font(.system(size: 20, weight: .semibold))
                     
-                }
-                
-                HStack(spacing: 24) {
+                    Spacer()
+                    
                     Button {
-                        
+                        viewModel.isShowAllCast = false
                     } label: {
-                        Image("")
+                        Image("ic_cancel")
                             .resizable()
-                            .frame(width: 44, height: 44, alignment: .center)
+                            .frame(width: 30, height: 30, alignment: .center)
                     }
-                    
-                    Button {
-                        
-                    } label: {
-                        Image("")
-                            .resizable()
-                            .frame(width: 44, height: 44, alignment: .center)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                
+                if let cast = viewModel.movieCredits?.cast, !cast.isEmpty {
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack {
+                            LazyVGrid(columns: self.columns, spacing: 10) {
+                                ForEach(cast, id: \.id) { cast in
+                                    DefaultDesign.PersonPoster(url: imageUrl+"\(cast.profilePath ?? "")", name: cast.name)
+                                        .onTapGesture {
+                                            viewModel.isShowAllCast = false
+                                            Router.shared.push(.artistDetail(artistId: cast.id))
+                                        }
+                                }
+                            }
+                        }
+                        .padding(.horizontal)
                     }
                 }
             }
-            .presentationDetents([.fraction(0.9)])
-            .presentationBackground(.backgroundColour)
         }
+//        .customSheetView($viewModel.isShowPreview,config:
+//                            CustomSheetConfig(customSheetCornerRadius: 20,
+//                                              customSheetBlueEffect: 20)) {
+//            
+//            PhotoPreviewSheet(images: viewModel.movieImage?.posters ?? [],
+//                              selectedPosterIndex: viewModel.posterIndex)
+//        }
     }
 }
 
@@ -335,15 +378,15 @@ class MovieDetail {
                     Spacer()
                     
                     Button {
-                        
+                        viewModel.manageLike()
                     } label: {
-                        Image("ic_unlike_clear")
+                        Image(viewModel.isLiked ? "ic_like_clear" : "ic_unlike_clear")
                             .resizable()
                             .frame(width: 24, height: 24)
                     }
                     
                     Button {
-                        
+                        Utility.shareText(viewModel.translatedText())
                     } label: {
                         Image("ic_share_clear")
                             .resizable()
@@ -356,6 +399,75 @@ class MovieDetail {
             .padding(.vertical, 24)
             .padding(.horizontal, 16)
 
+        }
+    }
+}
+
+struct PhotoPreviewSheet: View {
+    @State var scrollPosition: Int? = 0
+    @State var selectedIndex: Int = 0
+    
+    var images: [MovieImage] = []
+    var selectedPosterIndex: Int
+    
+    var body: some View {
+        VStack {
+            ZStack {
+                ScrollView(.horizontal) {
+                    LazyHStack(spacing: 0) {
+                        ForEach(images.indices, id: \.self) { index in
+                            let item = images[index]
+                            KFImage(URL(string: imageUrl+"\(item.filePath)"))
+                                .resizable()
+                                .scaledToFill()
+                                .frame(maxWidth: screenWidth-50)
+                                .clipped()
+                        }
+                    }
+                    .scrollTargetLayout()
+                }
+                .scrollIndicators(.hidden)
+                .scrollTargetBehavior(.paging)
+                .scrollPosition(id: $scrollPosition)
+                .ignoresSafeArea()
+                .onChange(of: scrollPosition) { _, newValue in
+                    if let newValue {
+                        selectedIndex = newValue
+                    }
+                }
+            }
+            .frame(maxWidth: screenWidth-50)
+            .frame(maxHeight: screenHeight-200)
+            .background()
+            .cornerRadius(24)
+            .padding(20)
+            .onAppear() {
+                DispatchQueue.main.async {
+                    selectedIndex = selectedPosterIndex
+                    scrollPosition = selectedPosterIndex
+                }
+            }
+            
+            HStack(spacing: 24) {
+                DefaultDesign.SmallButton(image: "ic_arrow_left") {
+                    if selectedIndex > 0 {
+                        selectedIndex -= 1
+//                        withAnimation(.easeInOut(duration: 0.35)) {
+                            scrollPosition = selectedIndex
+//                        }
+                    }
+                }
+                
+                DefaultDesign.SmallButton(image: "ic_arrow_right") {
+                    if selectedIndex < images.count - 1 {
+                        selectedIndex += 1
+//                        withAnimation(.easeInOut(duration: 0.35)) {
+                            scrollPosition = selectedIndex
+//                        }
+                    }
+                }
+            }
+            .padding(.bottom, 24)
         }
     }
 }

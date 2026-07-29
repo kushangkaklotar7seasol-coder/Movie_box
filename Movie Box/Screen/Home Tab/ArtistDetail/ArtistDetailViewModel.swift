@@ -6,7 +6,7 @@
 //
 
 import Foundation
-internal import Combine
+import Combine
 
 class ArtistDetailViewModel: ObservableObject {
     @Published var personalDetail: [PersonalDetail] = []

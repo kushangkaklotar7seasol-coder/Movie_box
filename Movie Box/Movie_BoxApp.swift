@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-internal import Combine
+import Combine
 
 @main
 struct Movie_BoxApp: App {
@@ -27,6 +27,7 @@ struct Movie_BoxApp: App {
                 .environment(\.locale, Locale(identifier: localization.selectedLanguage))
                 .environmentObject(localization)
             }
+            .toastManager()
         }
     }
 }

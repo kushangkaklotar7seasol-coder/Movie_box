@@ -62,6 +62,8 @@ struct ArtistDetail: View {
                                 
                                 Spacer()
                             }
+                            .padding(.top, 16)
+                            .padding(.horizontal, 16)
                             
                             MovieDetailDesign.PersonalDetailView(personalDetail: viewModel.personalDetail)
                         }
@@ -198,6 +200,12 @@ class MovieDetailDesign {
         var body: some View {
             ZStack {
                 KFImage(URL(string: imageUrl+(viewModel.celebrityDetail?.profilePath ?? "")))
+                    .placeholder({ progress in
+                        let placeHolderImage = "ic_noImage"
+                        Image(placeHolderImage)
+                            .resizable()
+                            .scaledToFill()
+                    })
                     .resizable()
                     .scaledToFill()
                     .frame(width: screenWidth, height: 400)
@@ -263,7 +271,7 @@ class MovieDetailDesign {
                     }
                 }
             }
-            .padding(.top, 16)
+//            .padding(.top, 16)
             .padding(.horizontal, 16)
 
         }

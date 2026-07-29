@@ -155,7 +155,7 @@ class DefaultDesign {
             VStack(spacing: 8) {
                 ZStack {
                     ZStack {
-                        DefaultDesign.ImageView(url: imageUrl+url, width: width-10, height: width-10)
+                        DefaultDesign.ImageView(url: imageUrl+url, width: width-10, height: width-10, placeholderImage: "ic_noImage")
                     }
                     .frame(maxWidth: width, maxHeight: width)
                     .background(.whiteColour)
@@ -185,6 +185,7 @@ class DefaultDesign {
         var movies: MediaItem
         var isShowLike = true
         var onLike: ((MediaItem) -> Void)?
+        @State var isLiked: Bool = false
         
         var width: CGFloat {
             return (screenWidth-40)/2.2
@@ -237,13 +238,25 @@ class DefaultDesign {
                             
                             Spacer()
                             
-                            Button(){
+//                            Button(){
+//                                
+//                            } label: {
+//                                Image()
+//                                    .resizable()
+//                                    .frame(width: 28, height: 28, alignment: .center)
                                 
-                            } label: {
-                                Image("ic_unlike")
-                                    .resizable()
-                                    .frame(width: 28, height: 28, alignment: .center)
-                            }
+                                DefaultDesign.SmallButton(image: self.isLiked ? "ic_like_clear" : "ic_unlike_clear", onClick: {
+                                    if self.isLiked {
+                                        database.removeMovie(id: movies.id)
+                                    } else {
+                                        database.addMovie(movies)
+                                    }
+                                    
+                                    self.isLiked.toggle()
+                                    
+                                    onLike?(self.movies)
+                                })
+//                            }
                         }
                         .padding(8)
                     }
@@ -269,6 +282,9 @@ class DefaultDesign {
             .onTapGesture {
                 Router.shared.push(.movieDetail(movieId: movies.id, isMovie: movies.title != nil ? true : false))
 //                movieDetail
+            }
+            .onAppear() {
+                self.isLiked = database.isMovieLiked(id: movies.id)
             }
         }
     }
@@ -327,6 +343,29 @@ class DefaultDesign {
                     .resizable()
                     .frame(width: 44, height: 44, alignment: .center)
             }
+        }
+    }
+    
+    struct SmallButton: View {
+        var image: String
+        var onClick: (()->Void)?
+        
+        var body: some View {
+            Button {
+                self.onClick?()
+            } label: {
+                Image(image)
+                    .resizable()
+                    .frame(width: 24, height: 24, alignment: .center)
+                    .padding(10)
+                    .background(.whiteColour.opacity(0.1))
+                    .cornerRadius(22)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 22)
+                            .strokeBorder(.whiteColour.opacity(0.2), lineWidth: 1)
+                    }
+            }
+
         }
     }
 }

@@ -6,10 +6,10 @@
 //
 
 import Foundation
-internal import Combine
+import Combine
 import Photos
 import CryptoKit
-internal import UIKit
+import UIKit
 
 class PhotoCleaerViewModel: ObservableObject {
     @Published var duplicateGroups: [[PHAsset]] = []

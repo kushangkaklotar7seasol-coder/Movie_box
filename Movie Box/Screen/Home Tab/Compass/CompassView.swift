@@ -17,8 +17,8 @@
 //
 
 import SwiftUI
-internal import CoreLocation
-internal import Combine
+import CoreLocation
+import Combine
 
 // MARK: - CompassManager
 // Wraps CLLocationManager, publishes true/magnetic heading + coordinates,

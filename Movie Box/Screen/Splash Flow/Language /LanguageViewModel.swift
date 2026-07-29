@@ -6,7 +6,7 @@
 //
 
 import Foundation
-internal import Combine
+import Combine
 
 class LanguageViewModel: ObservableObject {
     @Published var isShowBack: Bool

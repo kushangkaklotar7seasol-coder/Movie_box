@@ -6,7 +6,7 @@
 //
 
 import Foundation
-internal import Combine
+import Combine
 
 class PosterViewModel: ObservableObject {
     @Published var images: [MovieImage] = []

@@ -82,3 +82,11 @@
 "LANGUAGE" = "Language";
 "RUNTIME" = "Runtime";
 "REVENUE" = "Revenue";
+"SHARE_TEXT1" = "Hey! Check out";
+"SHARE_TEXT2" = "thought you'd like this one 🎬";
+
+// MARK: - Like -
+"FAVORITE" = "Favorite";
+"NO_FAVORITE" = "Nothing Here Yet";
+"NO_MOVIE_TAGLINE" = "Your favorite movies will appear here.";
+"NO_SERIES_TAGLINE" = "Your favorite TV shows will appear here.";

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-internal import UIKit
+import UIKit
 
 class Utility {
     static let shared = Utility()

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-internal import Combine
+import Combine
 
 class IntroViewModel: ObservableObject {
     @Published var information: [OnBordingInfo] = [OnBordingInfo(id: 0, image: "img_intro_1", name: Strings.page1Title, info: Strings.page1Info),

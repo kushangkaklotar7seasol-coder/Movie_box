@@ -6,7 +6,7 @@
 //
 
 import Foundation
-internal import Combine
+import Combine
 
 class MovieListViewModel: ObservableObject {
     @Published var moviesBunch: MediaBunch?

@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Kingfisher
-internal import Combine
+import Combine
 
 struct HomeScreen: View {
     @StateObject var viewModel = HomeViewModel()

@@ -7,7 +7,7 @@
 
 import Foundation
 import Alamofire
-internal import UIKit
+import UIKit
 
 class WallpaperService {
     

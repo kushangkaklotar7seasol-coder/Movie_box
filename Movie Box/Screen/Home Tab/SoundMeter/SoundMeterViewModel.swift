@@ -6,7 +6,7 @@
 //
 
 import Foundation
-internal import Combine
+import Combine
 import AVFoundation
 import SwiftUI
 
@@ -18,7 +18,7 @@ class SoundMeterViewModel: ObservableObject {
     @Published var lowestDB: Int = 0
     @Published var averageDB: Int = 0
     
-    var dbMeter: [Int] = [70, 72, 68, 40, 66, 72, 72, 55, 69, 71]
+    var dbMeter: [Int] = []
     
     init() {
         self.requestMicrophonePermission()
