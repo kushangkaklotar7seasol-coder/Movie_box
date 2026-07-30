@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		97A0AEFC301B4FA70086A0E6 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 97A0AEFB301B4FA70086A0E6 /* CropViewController */; };
+		97A0AEFE301B4FA70086A0E6 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 97A0AEFD301B4FA70086A0E6 /* TOCropViewController */; };
 		97AF043F30131D4700771939 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 97AF043E30131D4700771939 /* Alamofire */; };
 		97AF044230131D6500771939 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 97AF044130131D6500771939 /* Kingfisher */; };
 /* End PBXBuildFile section */
@@ -30,6 +32,8 @@
 			files = (
 				97AF044230131D6500771939 /* Kingfisher in Frameworks */,
 				97AF043F30131D4700771939 /* Alamofire in Frameworks */,
+				97A0AEFE301B4FA70086A0E6 /* TOCropViewController in Frameworks */,
+				97A0AEFC301B4FA70086A0E6 /* CropViewController in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +78,8 @@
 			packageProductDependencies = (
 				97AF043E30131D4700771939 /* Alamofire */,
 				97AF044130131D6500771939 /* Kingfisher */,
+				97A0AEFB301B4FA70086A0E6 /* CropViewController */,
+				97A0AEFD301B4FA70086A0E6 /* TOCropViewController */,
 			);
 			productName = "Movie Box";
 			productReference = 97AF041630131AD500771939 /* Movie Box.app */;
@@ -107,6 +113,7 @@
 			packageReferences = (
 				97AF043D30131D4700771939 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				97AF044030131D6500771939 /* XCRemoteSwiftPackageReference "kingfisher" */,
+				97A0AEFA301B4FA70086A0E6 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 97AF041730131AD500771939 /* Products */;
@@ -272,14 +279,13 @@
 				DEVELOPMENT_TEAM = 5U9WLTG3BL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app needs access to your location to provide location-based services.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to the microphone to monitor sound levels.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to find duplicate photos and videos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -288,12 +294,16 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.moviebox.app.Movie-Box";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -307,14 +317,13 @@
 				DEVELOPMENT_TEAM = 5U9WLTG3BL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app needs access to your location to provide location-based services.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to the microphone to monitor sound levels.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to find duplicate photos and videos";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -323,12 +332,16 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.moviebox.app.Movie-Box";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -356,6 +369,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		97A0AEFA301B4FA70086A0E6 /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TimOliver/TOCropViewController";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.0;
+			};
+		};
 		97AF043D30131D4700771939 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -375,6 +396,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		97A0AEFB301B4FA70086A0E6 /* CropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97A0AEFA301B4FA70086A0E6 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = CropViewController;
+		};
+		97A0AEFD301B4FA70086A0E6 /* TOCropViewController */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97A0AEFA301B4FA70086A0E6 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
+			productName = TOCropViewController;
+		};
 		97AF043E30131D4700771939 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 97AF043D30131D4700771939 /* XCRemoteSwiftPackageReference "Alamofire" */;

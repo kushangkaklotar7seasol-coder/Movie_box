@@ -39,6 +39,22 @@
 "CALIBRATING" = "Calibrating…";
 "LATITUDE" = "Latitude";
 "LONGITUDE" = "Longitude";
+"DIR_N" = "North";
+"DIR_NNE" = "North-Northeast";
+"DIR_NE" = "Northeast";
+"DIR_ENE" = "East-Northeast";
+"DIR_E" = "East";
+"DIR_ESE" = "East-Southeast";
+"DIR_SE" = "Southeast";
+"DIR_SSE" = "South-Southeast";
+"DIR_S" = "South";
+"DIR_SSW" = "South-Southwest";
+"DIR_SW" = "Southwest";
+"DIR_WSW" = "West-Southwest";
+"DIR_W" = "West";
+"DIR_WNW" = "West-Northwest";
+"DIR_NW" = "Northwest";
+"DIR_NNW" = "North-Northwest";
 
 // MARK: - Photo Cleaner Screen -
 "DUBLICATE_PHOTO_FOUND" = "Duplicate Photos Found";
@@ -48,12 +64,23 @@
 "SCANING" = "Scanning...";
 "PERMISSION_NOTE" = "We don't have permission to check your photo library.....";
 "DELETE_MEDIA" = "Delete Selected Media";
+"SELECT_ALL" = "Select All";
+"REMOVE_ALL" = "Remove All";
+"PHOTO_ACCESS" = "Photos app Access Needed";
+"ALLOW_PHOTO_ACCESS" = "Please allow Photos access in Settings to use this feature.";
 
 // MARK: - Sound Meter Screen -
 "DECIBELS" = "DECIBELS (dB)";
 "AVG" = "AVERAGE";
 "MIN" = "MINIMUM";
 "MAX" = "MAXIMUM";
+"STOP" = "Stop";
+"START" = "Start";
+"RESTART" = "Reset";
+"MICROPHONE_ACCESS" = "Microphone Access Needed";
+"OPEN_SETTINGS" = "Open Settings";
+"ALLOW_MICROPHONE_ACCESS" = "Please allow microphone access in Settings to use this feature.";
+"CANCEL" = "Cancel";
 
 // MARK: - Artist Detail -
 "BIOGRAPHY" = "Biography";
@@ -84,9 +111,45 @@
 "REVENUE" = "Revenue";
 "SHARE_TEXT1" = "Hey! Check out";
 "SHARE_TEXT2" = "thought you'd like this one 🎬";
+"OVERVIEW" = "Overview";
+"MOVIE_INFO" = "Movie info";
+"CREW" = "Crew";
+"POSTERS" = "Posters";
+"VIDEOS" = "Videos";
+"SEASON" = "Season";
+"POSTER" = "Poster";
 
 // MARK: - Like -
 "FAVORITE" = "Favorite";
 "NO_FAVORITE" = "Nothing Here Yet";
 "NO_MOVIE_TAGLINE" = "Your favorite movies will appear here.";
 "NO_SERIES_TAGLINE" = "Your favorite TV shows will appear here.";
+
+// MARK: - Notes -
+"NOTES" = "Notes";
+"ADD_NOTES" = "Add Notes";
+"EDIT_NOTES" = "Edit Notes";
+"DELETE_NOTES" = "Delete Notes";
+"NO" = "No";
+"DELETE" = "Delete";
+"DELETE_INFO" = "Are you sure, you wants to delete this note?";
+
+// MARK: - Add Note -
+"NOTE_TITLE" = "Note Title";
+"START_TYPING" = "Start typing...";
+"UPDATE_NOTE" = "Update Note";
+"SAVE_NOTE" = "Save Note";
+
+// MARK: - Pinned Notes -
+"PINNED_NOTES" = "Pinned Notes";
+"UNPIN" = "Unpin";
+"PIN" = "Pin";
+"SHARE" = "Share";
+
+// MARK: - Setting -
+"SETTING" = "Setting";
+"SHARE_APP" = "Share App";
+"RATE_US" = "Rate Us";
+"PRIVECY_POLICY" = "Privacy Policy";
+"TERMS_USE" = "Terms of Use";
+"ABOUT_US" = "About Us";

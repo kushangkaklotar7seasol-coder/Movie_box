@@ -18,7 +18,7 @@ struct PosterScreen: View {
     var body: some View {
         ZStack {
             VStack {
-                DefaultDesign.Header(name: "Poster")
+                DefaultDesign.Header(name: Strings.posters)
                 
                 ScrollView(showsIndicators: false) {
                     LazyVGrid(columns: columns) {

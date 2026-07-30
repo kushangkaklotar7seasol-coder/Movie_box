@@ -51,19 +51,19 @@ class MovieDetailViewModel: ObservableObject {
                 self.isLiked = database.isMovieLiked(id: self.movieId ?? 0)
                 
                 if let status = self.movieDetail?.status {
-                    self.personalInformation.append(PersonalDetail(id: 0, name: "Status", value: status))
+                    self.personalInformation.append(PersonalDetail(id: 0, name: Strings.status, value: status))
                 }
                 
                 if let language = self.movieDetail?.spokenLanguages.first?.englishName {
-                    self.personalInformation.append(PersonalDetail(id: 1, name: "Language", value: language))
+                    self.personalInformation.append(PersonalDetail(id: 1, name: Strings.language, value: language))
                 }
                 
                 if let runtime = self.movieDetail?.runtime, runtime != 0 {
-                    self.personalInformation.append(PersonalDetail(id: 2, name: "Runtime", value: "\(runtime)"))
+                    self.personalInformation.append(PersonalDetail(id: 2, name: Strings.runtime, value: "\(runtime)"))
                 }
                 
                 if let revenue = self.movieDetail?.revenue, revenue != 0 {
-                    self.personalInformation.append(PersonalDetail(id: 3, name: "Revenue", value: "\(revenue)"))
+                    self.personalInformation.append(PersonalDetail(id: 3, name: Strings.revenue, value: "\(revenue)"))
                 }
                 
                 self.movieVideoAPI()
@@ -137,23 +137,23 @@ class MovieDetailViewModel: ObservableObject {
                 self.isLiked = database.isMovieLiked(id: self.movieId ?? 0)
                 
                 if let status = self.movieDetail?.status {
-                    self.personalInformation.append(PersonalDetail(id: 0, name: "Status", value: status))
+                    self.personalInformation.append(PersonalDetail(id: 0, name: Strings.status, value: status))
                 }
                 
                 if let language = self.movieDetail?.spokenLanguages.first?.englishName {
-                    self.personalInformation.append(PersonalDetail(id: 1, name: "Language", value: language))
+                    self.personalInformation.append(PersonalDetail(id: 1, name: Strings.language, value: language))
                 }
                 
                 if let runtime = self.movieDetail?.runtime, runtime != 0 {
-                    self.personalInformation.append(PersonalDetail(id: 2, name: "Runtime", value: "\(runtime)"))
+                    self.personalInformation.append(PersonalDetail(id: 2, name: Strings.runtime, value: "\(runtime)"))
                 }
                 
                 if let revenue = self.movieDetail?.revenue, revenue != 0 {
-                    self.personalInformation.append(PersonalDetail(id: 3, name: "Revenue", value: "\(revenue)"))
+                    self.personalInformation.append(PersonalDetail(id: 3, name: Strings.revenue, value: "\(revenue)"))
                 }
                 
                 if let season = self.movieDetail?.seasons?.count {
-                    self.personalInformation.append(PersonalDetail(id: 4, name: "Season", value: "\(season > 1 ? season-1 : season)"))
+                    self.personalInformation.append(PersonalDetail(id: 4, name: Strings.season, value: "\(season > 1 ? season-1 : season)"))
                 }
                 
                 self.seriesVideoAPI()

@@ -17,6 +17,7 @@ struct MoviesScreen: View {
                 HStack {
                     Text(Strings.movie)
                         .font(.system(size: 22, weight: .semibold))
+                    
                     Spacer()
                     
                     Button {
@@ -83,7 +84,7 @@ struct MoviesScreen: View {
                 Spacer()
             }
         }
-        .defaultPage()
+        .defaultPage(false)
     }
 }
 

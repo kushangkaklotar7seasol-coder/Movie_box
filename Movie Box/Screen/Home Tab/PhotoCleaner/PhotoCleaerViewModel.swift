@@ -17,10 +17,12 @@ class PhotoCleaerViewModel: ObservableObject {
     @Published var isScanning = false
     @Published var progress: Double = 0
     @Published var hasPermission = false
+    @Published var isShowPermissionAlert = false
     
     init() {
         self.requestPermission { granted in
             self.hasPermission = granted
+            self.isShowPermissionAlert = !granted
             
             if granted {
                 self.scanForDuplicates()

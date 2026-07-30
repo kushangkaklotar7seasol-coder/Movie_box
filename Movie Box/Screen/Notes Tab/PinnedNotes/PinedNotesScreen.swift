@@ -13,7 +13,7 @@ struct PinedNotesScreen: View {
     var body: some View {
         ZStack {
             VStack {
-                DefaultDesign.Header(name: "Pinned Notes")
+                DefaultDesign.Header(name: Strings.pinnedNotes)
                     .padding(.horizontal, 16)
                 
                 PinedNotesDesign.NotesGridView(viewModel: viewModel)
@@ -23,14 +23,14 @@ struct PinedNotesScreen: View {
         .onAppear() {
             viewModel.loadNotes()
         }
-        .alert("Delete Notes", isPresented: $viewModel.isShowDeleteAlert) {
-            Button("No", role: .cancel) { }
+        .alert(Strings.deleteNotes, isPresented: $viewModel.isShowDeleteAlert) {
+            Button(Strings.no, role: .cancel) { }
             
-            Button("Delete") {
+            Button(Strings.delete) {
                 viewModel.deleteNote(viewModel.deletableNotesId)
             }
         } message: {
-            Text("Are you sure, you wants to delete this note?")
+            Text(Strings.deleteInfo)
         }
     }
 }
@@ -94,7 +94,7 @@ class PinedNotesDesign {
                                         .resizable()
                                         .frame(width: 10, height: 10, alignment: .center)
                                     
-                                    Text("Unpin")
+                                    Text(Strings.unPin)
                                 }
                             }
                         } else {
@@ -111,7 +111,7 @@ class PinedNotesDesign {
                                         .resizable()
                                         .frame(width: 10, height: 10, alignment: .center)
                                     
-                                    Text("Pin")
+                                    Text(Strings.pin)
                                 }
                             }
                         }
@@ -124,7 +124,7 @@ class PinedNotesDesign {
                                     .resizable()
                                     .frame(width: 10, height: 10, alignment: .center)
                                 
-                                Text("Share")
+                                Text(Strings.share)
                             }
                         }
                         
@@ -137,7 +137,7 @@ class PinedNotesDesign {
                                     .resizable()
                                     .frame(width: 10, height: 10, alignment: .center)
                                 
-                                Text("Delete")
+                                Text(Strings.delete)
                             }
                         }
                         

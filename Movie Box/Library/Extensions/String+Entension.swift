@@ -56,6 +56,22 @@ class Strings {
     static var calibrating: String { "CALIBRATING".localized() }
     static var latitude: String { "LATITUDE".localized() }
     static var longtitude: String { "LONGITUDE".localized() }
+    static var north: String { "DIR_N".localized() }
+    static var northNorthest: String { "DIR_NNE".localized() }
+    static var northest: String { "DIR_NE".localized() }
+    static var easthNorthest: String { "DIR_ENE".localized() }
+    static var east: String { "DIR_E".localized() }
+    static var eastSouthest: String { "DIR_ESE".localized() }
+    static var southest: String { "DIR_SE".localized() }
+    static var southSouthest: String { "DIR_SSE".localized() }
+    static var south: String { "DIR_S".localized() }
+    static var southSouthwest: String { "DIR_SSW".localized() }
+    static var southWest: String { "DIR_SW".localized() }
+    static var westSouthWest: String { "DIR_WSW".localized() }
+    static var west: String { "DIR_W".localized() }
+    static var westNorthWest: String { "DIR_WNW".localized() }
+    static var northWest: String { "DIR_NW".localized() }
+    static var northNorthWest: String { "DIR_NNW".localized() }
     
     // MARK: - Photo Cleaner Screen -
     static var dublicatePhotoFound: String { "DUBLICATE_PHOTO_FOUND".localized() }
@@ -65,12 +81,23 @@ class Strings {
     static var scaning: String { "SCANING".localized() }
     static var permissionNote: String { "PERMISSION_NOTE".localized() }
     static var deleteMedia: String { "DELETE_MEDIA".localized() }
+    static var selectAll: String { "SELECT_ALL".localized() }
+    static var removeAll: String { "REMOVE_ALL".localized() }
+    static var photoAccess: String { "PHOTO_ACCESS".localized() }
+    static var allowPhotoAccess: String { "ALLOW_PHOTO_ACCESS".localized() }
     
     // MARK: - Media Meter Screen -
     static var decibles: String { "DECIBELS".localized() }
     static var avg: String { "AVG".localized() }
     static var min: String { "MIN".localized() }
     static var max: String { "MAX".localized() }
+    static var stop: String { "STOP".localized() }
+    static var start: String { "START".localized() }
+    static var restart: String { "RESTART".localized() }
+    static var openSettings: String { "OPEN_SETTINGS".localized() }
+    static var microphoneAccess: String { "MICROPHONE_ACCESS".localized() }
+    static var allowMicrohoneAccess: String { "ALLOW_MICROPHONE_ACCESS".localized() }
+    static var cancel: String { "CANCEL".localized() }
     
     // MARK: - Actor Detail -
     static var biography: String { "BIOGRAPHY".localized() }
@@ -103,10 +130,42 @@ class Strings {
     static var videos: String { "VIDEOS".localized() }
     static var shareText1: String { "SHARE_TEXT1".localized() }
     static var shareText2: String { "SHARE_TEXT2".localized() }
+    static var season: String { "SEASON".localized() }
+    static var overview: String { "OVERVIEW".localized() }
+    static var movieInfo: String { "MOVIE_INFO".localized() }
+    static var crew: String { "CREW".localized() }
+    static var posters: String { "POSTERS".localized() }
     
     // MARK: - Favorite -
     static var favourite: String { "FAVORITE".localized() }
     static var noFavourite: String { "NO_FAVORITE".localized() }
     static var noFavouriteMovie: String { "NO_MOVIE_TAGLINE".localized() }
     static var noFavouriteSeries: String { "NO_SERIES_TAGLINE".localized() }
+    
+    // MARK: - Notes -
+    static var notes: String { "NOTES".localized() }
+    static var addNotes: String { "ADD_NOTES".localized() }
+    static var editNotes: String { "EDIT_NOTES".localized() }
+    static var deleteNotes: String { "DELETE_NOTES".localized() }
+    static var no: String { "NO".localized() }
+    static var delete: String { "DELETE".localized() }
+    static var deleteInfo: String { "DELETE_INFO".localized() }
+    static var unPin: String { "UNPIN".localized() }
+    static var pin: String { "PIN".localized() }
+    static var share: String { "SHARE".localized() }
+    
+    // MARK: - Add Note -
+    static var noteTitle: String { "NOTE_TITLE".localized() }
+    static var startTyping: String { "START_TYPING".localized() }
+    static var updateNote: String { "UPDATE_NOTE".localized() }
+    static var saveNote: String { "SAVE_NOTE".localized() }
+    static var pinnedNotes: String { "PINNED_NOTES".localized() }
+    
+    // MARK: - Setting -
+    static var setting: String { "SETTING".localized() }
+    static var shareApp: String { "SHARE_APP".localized() }
+    static var rateUs: String { "RATE_US".localized() }
+    static var privecyPolicy: String { "PRIVECY_POLICY".localized() }
+    static var termaUse: String { "TERMS_USE".localized() }
+    static var aboutUs: String { "ABOUT_US".localized() }
 }

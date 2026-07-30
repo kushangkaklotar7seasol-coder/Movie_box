@@ -151,7 +151,7 @@ class HomeDesign {
                         .frame(width: cardWidth)
                         .animation(.spring(response: 0.38, dampingFraction: 0.72), value: isSelected)
                         .onTapGesture {
-                            print(movie.title)
+                            Router.shared.push(.movieDetail(movieId: movie.id, isMovie: true))
                         }
                     }
                 }
@@ -169,8 +169,10 @@ class HomeDesign {
             .frame(height: 300)
             .onAppear() {
                 DispatchQueue.main.async {
-                    self.selectedIndex = 250
-                    self.scrollPosition = 250
+                    if scrollPosition == 0 {
+                        self.selectedIndex = 250
+                        self.scrollPosition = 250
+                    }
                 }
             }
             .onReceive(timer) { _ in
@@ -241,7 +243,7 @@ class HomeDesign {
                             if discover.id == 0 {
                                 Router.shared.push(.compass)
                             } else if discover.id == 1 {
-                                print("Photo editor")
+                                Router.shared.push(.photoEdit)
                             } else if discover.id == 2 {
                                 Router.shared.push(.photoCleaner)
                             } else if discover.id == 3 {

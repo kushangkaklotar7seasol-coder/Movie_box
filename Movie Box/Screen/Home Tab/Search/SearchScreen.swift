@@ -57,7 +57,6 @@ struct SearchScreen: View {
                                     }
                                 }
                                 .padding(.vertical, 20)
-                                
                             }
                             .scrollDismissesKeyboard(.immediately)
                         } else {

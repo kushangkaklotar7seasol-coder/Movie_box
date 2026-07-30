@@ -14,9 +14,12 @@ class SoundMeterViewModel: ObservableObject {
     private var audioEngine = AVAudioEngine()
     @Published var decibels: Int = 0
     @Published var isPermission: Bool = false
+    @Published var isShowPermissionAlert: Bool = false
     @Published var highestDB: Int = 0
     @Published var lowestDB: Int = 0
     @Published var averageDB: Int = 0
+    
+    @Published var isStarted: Bool = false
     
     var dbMeter: [Int] = []
     
@@ -28,9 +31,7 @@ class SoundMeterViewModel: ObservableObject {
         AVAudioSession.sharedInstance().requestRecordPermission { granted in
             DispatchQueue.main.async {
                 self.isPermission = granted
-                if granted {
-                    self.startMonitoring()
-                }
+                self.isShowPermissionAlert = !granted
             }
         }
     }
@@ -46,7 +47,10 @@ class SoundMeterViewModel: ObservableObject {
     func startMonitoring() {
         let inputNode = audioEngine.inputNode
         let format = inputNode.outputFormat(forBus: 0)
-        
+        self.dbMeter = []
+        self.highestDB = 0
+        self.lowestDB = 0
+        self.averageDB = 0
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { buffer, _ in
             let level = self.getSoundLevel(buffer: buffer)
             DispatchQueue.main.async {
@@ -56,10 +60,13 @@ class SoundMeterViewModel: ObservableObject {
         }
         
         try? audioEngine.start()
+        self.isStarted = true
     }
     
     func stopMonitoring() {
         audioEngine.stop()
+        self.decibels = 0
+        self.isStarted = false
         audioEngine.inputNode.removeTap(onBus: 0)
     }
     

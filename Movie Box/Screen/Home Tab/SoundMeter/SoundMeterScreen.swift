@@ -16,25 +16,28 @@ struct SoundMeterScreen: View {
                 DefaultDesign.Header(name: Strings.soundMeter)
                     .padding(.horizontal, 16)
                 
-                VStack {
+                ZStack {
                     Gauge(value: Double(viewModel.decibels), in: 0...194) {
-                        VStack {
-                            Text("\(viewModel.decibels)")
-                                .font(.system(size: 7, weight: .medium))
-                                .foregroundColor(.whiteColour)
-                            
-                            Text(Strings.decibles)
-                                .font(.system(size: 4, weight: .semibold))
-                                .foregroundColor(.grayColour)
-                        }
+                        
                     }
                     .gaugeStyle(.accessoryCircularCapacity)
                     .tint(.greenColour)
                     .scaleEffect(5)
                     .frame(width: screenWidth, height: screenWidth)
+                    
+                    VStack {
+                        VStack {
+                            Text("\(viewModel.decibels)")
+                                .font(.system(size: 40, weight: .medium))
+                                .foregroundColor(.whiteColour)
+                            
+                            Text(Strings.decibles)
+                                .font(.system(size: 24, weight: .semibold))
+                                .foregroundColor(.grayColour)
+                        }
+                    }
+                    .frame(width: screenWidth, height: screenWidth)
                 }
-                
-                Spacer()
                 
                 VStack {
                     SoundMeterDesign.information(Key: Strings.avg, value: "\(viewModel.averageDB)", colour: .whiteColour)
@@ -47,10 +50,61 @@ struct SoundMeterScreen: View {
                 .padding(.horizontal, 16)
                 
                 Spacer()
+                
+                HStack {
+                    Button {
+                        if viewModel.isStarted {
+                            viewModel.stopMonitoring()
+                        } else {
+                            if viewModel.isPermission {
+                                viewModel.startMonitoring()
+                            } else {
+                                viewModel.isShowPermissionAlert = true
+                            }
+                        }
+                    } label: {
+                        Text(viewModel.isStarted ? Strings.stop : Strings.start)
+                            .font(.system(size: 18, weight: .semibold))
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(
+                                LinearGradient(colors: [viewModel.isStarted ? . clear : .cyanColour, viewModel.isStarted ? . clear : .greenColour], startPoint: .top, endPoint: .bottom)
+                            )
+                            .cornerRadius(14)
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 14)
+                                    .strokeBorder(
+                                        LinearGradient(colors: [.cyanColour, .greenColour], startPoint: .top, endPoint: .bottom)
+                                    )
+                            }
+                    }
+                    
+                    DefaultDesign.FullScreenButton(name: Strings.restart, onClick: {
+                        viewModel.dbMeter = []
+                        viewModel.highestDB = 0
+                        viewModel.lowestDB = 0
+                        viewModel.averageDB = 0
+                        viewModel.stopMonitoring()
+                    })
+                }
+                .padding(.bottom, 10)
+                .padding(.horizontal, 16)
             }
             .padding(.horizontal, 16)
         }
         .defaultPage()
+        .alert(Strings.microphoneAccess, isPresented: $viewModel.isShowPermissionAlert) {
+            Button(Strings.cancel, role: .cancel) {
+                Router.shared.pop()
+            }
+            Button(Strings.openSettings) {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
+            }
+        } message: {
+            Text(Strings.allowMicrohoneAccess)
+        }
     }
 }
 

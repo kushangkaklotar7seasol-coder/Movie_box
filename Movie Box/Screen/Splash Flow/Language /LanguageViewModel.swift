@@ -32,6 +32,10 @@ class LanguageViewModel: ObservableObject {
     // MARK: - Button Click Action -
     func onDoneButtonClick(){
         UserdefaultManager.shared.saveLanguage(self.selectedLanguage ?? LanguageItem(code: "en"))
-        Router.shared.push(.intro)
+        if self.isShowBack {
+            Router.shared.pop()
+        } else {
+            Router.shared.push(.intro)
+        }
     }
 }

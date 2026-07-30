@@ -53,7 +53,7 @@ struct PhotoCleanerScreen: View {
                                             .resizable()
                                             .frame(width: 20, height: 20, alignment: .center)
                                         
-                                        Text("Select All")
+                                        Text(viewModel.isAllSelected(in: group) ? Strings.removeAll : Strings.selectAll)
                                             .font(.system(size: 14, weight: .medium))
                                             .foregroundColor(.grayColour)
                                     }
@@ -76,17 +76,6 @@ struct PhotoCleanerScreen: View {
                         }
                         .padding(.bottom, 100)
                     }
-                } else {
-                    Spacer()
-                    
-                    Text(Strings.noDublicate)
-                        .font(.system(size: 21, weight: .semibold))
-                    
-                    Text(Strings.noDublicateInfo)
-                        .font(.system(size: 17, weight: .regular))
-                        .foregroundColor(.grayColour)
-                    
-                    Spacer()
                 }
                 
                 Spacer()
@@ -100,9 +89,32 @@ struct PhotoCleanerScreen: View {
                     
                 } else if !viewModel.hasPermission {
                     
-                    Text(Strings.permissionNote)
-                        .font(.system(size: 18, weight: .bold))
-                        .multilineTextAlignment(.center)
+                    VStack {
+                        Text(Strings.allowPhotoAccess)
+                            .font(.system(size: 18, weight: .bold))
+                            .multilineTextAlignment(.center)
+                        
+                        Button(Strings.openSettings) {
+                            if let url = URL(string: UIApplication.openSettingsURLString) {
+                                UIApplication.shared.open(url)
+                            }
+                        }
+                        .padding()
+                        .background(.whiteColour.opacity(0.2))
+                        .cornerRadius(24)
+                    }
+                    
+                } else if viewModel.duplicateGroups.isEmpty {
+                    Spacer()
+                    
+                    Text(Strings.noDublicate)
+                        .font(.system(size: 21, weight: .semibold))
+                    
+                    Text(Strings.noDublicateInfo)
+                        .font(.system(size: 17, weight: .regular))
+                        .foregroundColor(.grayColour)
+                    
+                    Spacer()
                 }
                 
                 if !viewModel.selectedAssetIds.isEmpty {
@@ -131,6 +143,18 @@ struct PhotoCleanerScreen: View {
         }
         .defaultPage()
         .edgesIgnoringSafeArea(.bottom)
+        .alert(Strings.photoAccess, isPresented: $viewModel.isShowPermissionAlert) {
+            Button(Strings.cancel, role: .cancel) {
+                Router.shared.pop()
+            }
+            Button(Strings.openSettings) {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
+            }
+        } message: {
+            Text(Strings.allowPhotoAccess)
+        }
     }
 }
 

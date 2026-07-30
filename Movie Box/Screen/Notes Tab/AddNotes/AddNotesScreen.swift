@@ -13,12 +13,12 @@ struct AddNotesScreen: View {
     var body: some View {
         ZStack {
             VStack(spacing: 10) {
-                DefaultDesign.Header(name: "Add Notes")
+                DefaultDesign.Header(name: viewModel.isEdit ? Strings.editNotes : Strings.addNotes)
                 
                 TextField(
                     "",
                     text: $viewModel.nameTextField,
-                    prompt: Text("Note Title")
+                    prompt: Text(Strings.noteTitle)
                         .font(.system(size: 30, weight: .bold))
                         .foregroundStyle(.whiteColour.opacity(0.2))
                         .font(.subheadline)
@@ -27,7 +27,7 @@ struct AddNotesScreen: View {
                 
                 ZStack(alignment: .topLeading) {
                     if viewModel.notesTextEditor.isEmpty {
-                        Text("Start typing...")
+                        Text(Strings.startTyping)
                             .font(.system(size: 16, weight: .regular))
                             .foregroundStyle(.whiteColour.opacity(0.4))
                             .padding(.top, 10)
@@ -37,7 +37,7 @@ struct AddNotesScreen: View {
                         .scrollContentBackground(.hidden)
                 }
                 
-                DefaultDesign.FullScreenButton(name: "Save", onClick: {
+                DefaultDesign.FullScreenButton(name: viewModel.isEdit ? Strings.updateNote : Strings.saveNote, onClick: {
                     if viewModel.nameTextField != "" || viewModel.notesTextEditor != "" {
                         if viewModel.isEdit {
                             viewModel.editNote()
@@ -50,6 +50,10 @@ struct AddNotesScreen: View {
             .padding(.horizontal, 16)
         }
         .defaultPage()
+        .contentShape(Rectangle())
+        .onTapGesture {
+            Utility.closeKeyboard()
+        }
     }
 }
 

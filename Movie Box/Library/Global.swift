@@ -38,3 +38,12 @@ final class SwipeBackManager {
 // MARK: - Default message -
 
 let noInternet = "Please check you're internet connection!"
+
+struct AppInfo {
+    static let privacyPolicy       = "https://evanrozario.blogspot.com/2026/07/privacy-policy.html"
+    static let termsOfUse          = "https://evanrozario.blogspot.com/2026/07/terms-conditions.html"
+    static let shareApp            = "https://apps.apple.com/app/id\(appID)"
+    static let appLink             = "https://itunes.apple.com/app/id\(appID)"
+    static let rateApp             = "https://apps.apple.com/app/id\(appID)?action=write-review"
+    static var appID               = "6793888974"
+}

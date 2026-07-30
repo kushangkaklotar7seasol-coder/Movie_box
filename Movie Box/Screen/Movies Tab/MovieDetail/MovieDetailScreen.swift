@@ -54,7 +54,7 @@ struct MovieDetailScreen: View {
                                 .padding(.horizontal, 16)
                             }
                             if let overView = viewModel.movieDetail?.overview, overView != "" {
-                                Text("Overview")
+                                Text(Strings.overview)
                                     .font(.system(size: 18, weight: .semibold))
                                     .padding(.horizontal, 16)
                                     .foregroundColor(.whiteColour)
@@ -66,7 +66,7 @@ struct MovieDetailScreen: View {
                             }
                             
                             if !viewModel.personalInformation.isEmpty {
-                                Text("Movie info")
+                                Text(Strings.movieInfo)
                                     .font(.system(size: 18, weight: .semibold))
                                     .padding(.horizontal, 16)
                                     .foregroundColor(.whiteColour)
@@ -81,7 +81,7 @@ struct MovieDetailScreen: View {
                             
                             if let cast = viewModel.movieCredits?.cast, !cast.isEmpty {
                                 HStack {
-                                    Text("Top Cast")
+                                    Text(Strings.topCast)
                                         .font(.system(size: 18, weight: .semibold))
                                         .foregroundColor(.whiteColour)
                                     
@@ -90,7 +90,7 @@ struct MovieDetailScreen: View {
                                     Button {
                                         viewModel.isShowAllCast = true
                                     } label: {
-                                        Text("See All")
+                                        Text(Strings.seeAll)
                                             .foregroundColor(.greenColour)
                                             .font(.system(size: 13, weight: .semibold))
                                     }
@@ -114,7 +114,7 @@ struct MovieDetailScreen: View {
                             
                             
                             if let crew = viewModel.movieCredits?.crew, !crew.isEmpty {
-                                Text("Crew")
+                                Text(Strings.crew)
                                     .font(.system(size: 18, weight: .semibold))
                                     .padding(.horizontal, 16)
                                     .foregroundColor(.whiteColour)
@@ -150,7 +150,7 @@ struct MovieDetailScreen: View {
                             if let array = viewModel.movieImage?.posters, !array.isEmpty {
                                 
                                 HStack {
-                                    Text("Posters")
+                                    Text(Strings.posters)
                                         .font(.system(size: 18, weight: .semibold))
                                         .foregroundColor(.whiteColour)
                                     
@@ -159,7 +159,7 @@ struct MovieDetailScreen: View {
                                     Button {
                                         Router.shared.push(.poster(posters: array))
                                     } label: {
-                                        Text("See All")
+                                        Text(Strings.seeAll)
                                             .foregroundColor(.greenColour)
                                             .font(.system(size: 13, weight: .semibold))
                                     }
@@ -197,7 +197,7 @@ struct MovieDetailScreen: View {
                             
                             if let video = viewModel.movieVideo?.results, !video.isEmpty {
                                 HStack {
-                                    Text("Videos")
+                                    Text(Strings.videos)
                                         .font(.system(size: 18, weight: .semibold))
                                         .foregroundColor(.whiteColour)
                                     
@@ -206,7 +206,7 @@ struct MovieDetailScreen: View {
                                     Button {
                                         Router.shared.push(.videoList(video: video))
                                     } label: {
-                                        Text("See All")
+                                        Text(Strings.seeAll)
                                             .foregroundColor(.greenColour)
                                             .font(.system(size: 13, weight: .semibold))
                                     }

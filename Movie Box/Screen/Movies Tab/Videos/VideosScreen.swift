@@ -15,7 +15,7 @@ struct VideosScreen: View {
     var body: some View {
         ZStack {
             VStack {
-                DefaultDesign.Header(name: "Video")
+                DefaultDesign.Header(name: Strings.videos)
                 
                 ScrollView {
                     ForEach(viewModel.videos.indices, id: \.self) { index in

@@ -5,6 +5,7 @@
   Created by Kushang kaklotar on 24/07/26.
   
 */
+
 // MARK: - Language Screen -
 "CHOOSE_LANGUAGE" = "भाषा चुनें";
 "DONE" = "पूर्ण";
@@ -38,6 +39,22 @@
 "CALIBRATING" = "कैलिब्रेट हो रहा है…";
 "LATITUDE" = "अक्षांश";
 "LONGITUDE" = "देशांतर";
+"DIR_N" = "उत्तर";
+"DIR_NNE" = "उत्तर-उत्तरपूर्व";
+"DIR_NE" = "उत्तरपूर्व";
+"DIR_ENE" = "पूर्व-उत्तरपूर्व";
+"DIR_E" = "पूर्व";
+"DIR_ESE" = "पूर्व-दक्षिणपूर्व";
+"DIR_SE" = "दक्षिणपूर्व";
+"DIR_SSE" = "दक्षिण-दक्षिणपूर्व";
+"DIR_S" = "दक्षिण";
+"DIR_SSW" = "दक्षिण-दक्षिणपश्चिम";
+"DIR_SW" = "दक्षिणपश्चिम";
+"DIR_WSW" = "पश्चिम-दक्षिणपश्चिम";
+"DIR_W" = "पश्चिम";
+"DIR_WNW" = "पश्चिम-उत्तरपश्चिम";
+"DIR_NW" = "उत्तरपश्चिम";
+"DIR_NNW" = "उत्तर-उत्तरपश्चिम";
 
 // MARK: - Photo Cleaner Screen -
 "DUBLICATE_PHOTO_FOUND" = "डुप्लीकेट फोटो मिलीं";
@@ -47,12 +64,21 @@
 "SCANING" = "स्कैन हो रहा है...";
 "PERMISSION_NOTE" = "हमारे पास आपकी फोटो लाइब्रेरी जांचने की अनुमति नहीं है.....";
 "DELETE_MEDIA" = "चयनित मीडिया हटाएं";
+"SELECT_ALL" = "सभी चुनें";
+"REMOVE_ALL" = "सभी हटाएं";
 
 // MARK: - Sound Meter Screen -
 "DECIBELS" = "डेसिबल (dB)";
 "AVG" = "औसत";
 "MIN" = "न्यूनतम";
 "MAX" = "अधिकतम";
+"STOP" = "रोकें";
+"START" = "शुरू करें";
+"RESTART" = "रीसेट करें";
+"MICROPHONE_ACCESS" = "माइक्रोफ़ोन एक्सेस आवश्यक";
+"OPEN_SETTINGS" = "सेटिंग्स खोलें";
+"ALLOW_MICROPHONE_ACCESS" = "इस फीचर का उपयोग करने के लिए कृपया सेटिंग्स में माइक्रोफ़ोन एक्सेस की अनुमति दें।";
+"CANCEL" = "रद्द करें";
 
 // MARK: - Artist Detail -
 "BIOGRAPHY" = "जीवनी";
@@ -63,3 +89,64 @@
 "AGE" = "उम्र";
 "DEPARTMENT" = "विभाग";
 "PERSONAL_INFO" = "व्यक्तिगत जानकारी";
+
+// MARK: - Search Screen -
+"SEARCH_MEDIA" = "मूवीज़ और टीवी शो खोजें";
+"NEWEARCH_PLACEHOLDER" = "टाइटल, एक्टर या जॉनर खोजकर अपनी पसंदीदा मूवीज़ या सीरीज़ खोजें।";
+"NO_SEARCH_DATA" = "कोई डेटा नहीं मिला";
+"NO_SEARCH_DATA_FOUND" = "इसके लिए कोई डेटा नहीं मिला";
+"TOP_RATED" = "टॉप रेटेड";
+"MOST_POPULAR" = "सबसे लोकप्रिय";
+"ARRIVING_TODAY" = "आज प्रसारित हो रहा है";
+"SEE_ALL" = "सभी देखें";
+
+// MARK: - Movie Detail screen -
+"TOP_CAST" = "मुख्य कलाकार";
+"CORE_CREW" = "मुख्य क्रू";
+"STATUS" = "स्थिति";
+"LANGUAGE" = "भाषा";
+"RUNTIME" = "अवधि";
+"REVENUE" = "राजस्व";
+"SHARE_TEXT1" = "अरे! इसे देखो";
+"SHARE_TEXT2" = "सोचा तुम्हें यह पसंद आएगा 🎬";
+"OVERVIEW" = "अवलोकन";
+"MOVIE_INFO" = "मूवी जानकारी";
+"CREW" = "क्रू";
+"POSTERS" = "पोस्टर";
+"VIDEOS" = "वीडियो";
+"SEASON" = "सीज़न";
+"POSTER" = "पोस्टर";
+
+// MARK: - Like -
+"FAVORITE" = "पसंदीदा";
+"NO_FAVORITE" = "अभी तक कुछ नहीं है";
+"NO_MOVIE_TAGLINE" = "आपकी पसंदीदा मूवीज़ यहां दिखाई देंगी।";
+"NO_SERIES_TAGLINE" = "आपके पसंदीदा टीवी शो यहां दिखाई देंगे।";
+
+// MARK: - Notes -
+"NOTES" = "नोट्स";
+"ADD_NOTES" = "नोट्स जोड़ें";
+"DELETE_NOTES" = "नोट्स हटाएं";
+"NO" = "नहीं";
+"DELETE" = "हटाएं";
+"DELETE_INFO" = "क्या आप वाकई इस नोट को हटाना चाहते हैं?";
+
+// MARK: - Add Note -
+"NOTE_TITLE" = "नोट शीर्षक";
+"START_TYPING" = "टाइप करना शुरू करें...";
+"UPDATE_NOTE" = "नोट अपडेट करें";
+"SAVE_NOTE" = "नोट सेव करें";
+
+// MARK: - Pinned Notes -
+"PINNED_NOTES" = "पिन किए गए नोट्स";
+"UNPIN" = "अनपिन करें";
+"PIN" = "पिन करें";
+"SHARE" = "शेयर करें";
+
+// MARK: - Setting -
+"SETTING" = "सेटिंग";
+"SHARE_APP" = "ऐप शेयर करें";
+"RATE_US" = "हमें रेट करें";
+"PRIVECY_POLICY" = "गोपनीयता नीति";
+"TERMS_USE" = "उपयोग की शर्तें";
+"ABOUT_US" = "हमारे बारे में";

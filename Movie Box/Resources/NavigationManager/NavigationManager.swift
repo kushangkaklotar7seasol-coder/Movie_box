@@ -32,6 +32,8 @@ func destination(for route: Route) -> some View {
         PhotoCleanerScreen()
     case .soundMeter:
         SoundMeterScreen()
+    case .photoEdit:
+        PhotoEditScreen()
     case .search:
         SearchScreen()
     case .categoryList(let mediaBunch):
@@ -63,6 +65,7 @@ enum Route: Hashable {
     case compass
     case photoCleaner
     case soundMeter
+    case photoEdit
     case search
     case categoryList(movieBunch: MediaBunch?)
     case movieDetail(movieId: Int, isMovie: Bool)

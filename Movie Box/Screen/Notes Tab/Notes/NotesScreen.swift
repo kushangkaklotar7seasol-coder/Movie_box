@@ -18,7 +18,7 @@ struct NotesScreen: View {
         ZStack {
             VStack {
                 HStack {
-                    Text("Notes")
+                    Text(Strings.notes)
                         .font(.system(size: 22, weight: .semibold))
                     Spacer()
                     
@@ -49,7 +49,7 @@ struct NotesScreen: View {
                             .resizable()
                             .frame(width: 20, height: 20, alignment: .center)
                         
-                        Text("Add Notes")
+                        Text(Strings.addNotes)
                     }
                     .padding()
                     .background(
@@ -65,14 +65,14 @@ struct NotesScreen: View {
         .onAppear() {
             viewModel.loadNotes()
         }
-        .alert("Delete Notes", isPresented: $viewModel.isShowDeleteAlert) {
-            Button("No", role: .cancel) { }
+        .alert(Strings.deleteNotes, isPresented: $viewModel.isShowDeleteAlert) {
+            Button(Strings.no, role: .cancel) { }
             
-            Button("Delete") {
+            Button(Strings.delete) {
                 viewModel.deleteNote(viewModel.deletableNotesId)
             }
         } message: {
-            Text("Are you sure, you wants to delete this note?")
+            Text(Strings.deleteInfo)
         }
     }
 }
@@ -135,7 +135,7 @@ struct NotesGridView: View {
                                     .resizable()
                                     .frame(width: 10, height: 10, alignment: .center)
                                 
-                                Text("Unpin")
+                                Text(Strings.unPin)
                             }
                         }
                     } else {
@@ -152,7 +152,7 @@ struct NotesGridView: View {
                                     .resizable()
                                     .frame(width: 10, height: 10, alignment: .center)
                                 
-                                Text("Pin")
+                                Text(Strings.pin)
                             }
                         }
                     }
@@ -165,7 +165,7 @@ struct NotesGridView: View {
                                 .resizable()
                                 .frame(width: 10, height: 10, alignment: .center)
                             
-                            Text("Share")
+                            Text(Strings.share)
                         }
                     }
                     
@@ -178,7 +178,7 @@ struct NotesGridView: View {
                                 .resizable()
                                 .frame(width: 10, height: 10, alignment: .center)
                             
-                            Text("Delete")
+                            Text(Strings.delete)
                         }
                     }
                     
