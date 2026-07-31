@@ -17,7 +17,6 @@ struct PhotoEditScreen: View {
                 DefaultDesign.Header(name: "Photo Editor")
                     .padding(.horizontal, 16)
                 
-                
                 VStack(spacing: 10) {
                     ZStack {
                         if viewModel.isPhtoAvailable {
@@ -45,25 +44,25 @@ struct PhotoEditScreen: View {
                     .cornerRadius(24)
                     .padding(.horizontal, 16)
                     
-                    if viewModel.isShowFiltes {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(viewModel.filters, id: \.self) { filter in
-                                    VStack {
-                                        if let image = viewModel.originalImage {
-                                            FilterThumbnailView(image: image, filterName: filter, isSelected: viewModel.selectedFilter == filter)
-                                                .onTapGesture {
-                                                    viewModel.selectedFilter = filter
-                                                    viewModel.selectedImage = viewModel.applyFilter(image, filter: filter)
-                                                }
-                                        }
-                                    }
-                                }
-                            }
-                            .padding(.horizontal, 18)
-                            .padding(.top, 5)
-                        }
-                    }
+//                    if viewModel.isShowFiltes {
+//                        ScrollView(.horizontal, showsIndicators: false) {
+//                            HStack {
+//                                ForEach(viewModel.filters, id: \.self) { filter in
+//                                    VStack {
+//                                        if let image = viewModel.originalImage {
+//                                            FilterThumbnailView(image: image, filterName: filter, isSelected: viewModel.selectedFilter == filter)
+//                                                .onTapGesture {
+//                                                    viewModel.selectedFilter = filter
+//                                                    viewModel.selectedImage = viewModel.applyFilter(image, filter: filter)
+//                                                }
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                            .padding(.horizontal, 18)
+//                            .padding(.top, 5)
+//                        }
+//                    }
                     
                     if viewModel.isPhtoAvailable {
                         ZStack {
@@ -79,45 +78,68 @@ struct PhotoEditScreen: View {
                                     }
                                 PhotoEditDesign.btn(image: "ic_crop", name: "Crop", isSelected: false)
                             }
+                            .padding(.bottom, 30)
                             
-                            VStack {
-                                Spacer()
-                                
-                                HStack {
-                                    Button {
-                                        
-                                    } label: {
-                                        Image("")
-                                            .resizable()
-                                            .frame(width: 30, height: 30, alignment: .center)
-                                    }
-                                }
-                                ScrollView(.horizontal, showsIndicators: false) {
+                            if viewModel.isShowFiltes {
+                                let filtarableImage = viewModel.originalImage
+                                VStack {
                                     HStack {
-                                        ForEach(viewModel.filters, id: \.self) { filter in
-                                            VStack {
-                                                if let image = viewModel.originalImage {
-                                                    FilterThumbnailView(image: image, filterName: filter, isSelected: viewModel.selectedFilter == filter)
-                                                        .onTapGesture {
-                                                            viewModel.selectedFilter = filter
-                                                            viewModel.selectedImage = viewModel.applyFilter(image, filter: filter)
-                                                        }
+                                        Button {
+                                            viewModel.isShowFiltes = false
+                                        } label: {
+                                            Image("ic_cancel_clear")
+                                                .resizable()
+                                                .frame(width: 25, height: 25, alignment: .center)
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                        Text("Filter")
+                                            .font(.system(size: 16, weight: .medium))
+                                            .foregroundColor(.grayColour)
+                                        
+                                        Spacer()
+                                        
+                                        Button {
+                                            viewModel.isShowFiltes = false
+                                        } label: {
+                                            Image("ic_right_green")
+                                                .resizable()
+                                                .frame(width: 25, height: 25, alignment: .center)
+                                        }
+                                    }
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 8)
+                                    
+                                    ScrollView(.horizontal, showsIndicators: false) {
+                                        HStack {
+                                            ForEach(viewModel.filters, id: \.self) { filter in
+                                                VStack {
+                                                    if let image = viewModel.originalImage {
+                                                        FilterThumbnailView(image: image, filterName: filter, isSelected: viewModel.selectedFilter == filter)
+                                                            .onTapGesture {
+                                                                viewModel.selectedFilter = filter
+                                                                viewModel.selectedImage = viewModel.applyFilter(image, filter: filter)
+                                                            }
+                                                    }
                                                 }
                                             }
                                         }
+                                        .padding(.horizontal, 18)
+                                        .padding(.top, 5)
                                     }
-                                    .padding(.horizontal, 18)
-                                    .padding(.top, 5)
                                 }
+                                .padding(.bottom, 50)
+                                .background(.backgroundColour)
+                                .clipShape(.rect(topLeadingRadius: 20, topTrailingRadius: 20))
                             }
-                            .frame(width: screenWidth, height: 150, alignment: .center)
-                            .background(.backgroundColour)
                         }
                     }
                 }
             }
         }
         .defaultPage()
+        .edgesIgnoringSafeArea(.bottom)
         .onChange(of: viewModel.selectedItem) { _, newItem in
             Task {
                 if let newItem {
@@ -185,7 +207,6 @@ struct FilterThumbnailView: View {
     let image: UIImage
     let filterName: String
     let isSelected: Bool
-    
     
     @State private var thumbnailImage: UIImage?
     
