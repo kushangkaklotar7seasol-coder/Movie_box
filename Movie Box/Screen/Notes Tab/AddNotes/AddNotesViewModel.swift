@@ -24,6 +24,16 @@ class AddNotesViewModel: ObservableObject {
         self.notesTextEditor = oldNote?.notes ?? ""
     }
     
+    func onSaveButton() {
+        if self.nameTextField != "" || self.notesTextEditor != "" {
+            if self.isEdit {
+                self.editNote()
+            } else {
+                self.addNote()
+            }
+        }
+    }
+    
     func addNote() {
         let newNote = Notes(
             createdDate: Date(),

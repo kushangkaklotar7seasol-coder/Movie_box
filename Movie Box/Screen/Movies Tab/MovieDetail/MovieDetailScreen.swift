@@ -22,7 +22,7 @@ struct MovieDetailScreen: View {
             VStack {
                 ScrollView(.vertical, showsIndicators: false) {
                     ZStack {
-                        KFImage(URL(string: imageUrl+"\(viewModel.movieDetail?.posterPath ?? "")"))
+                        KFImage(URL(string: imageUrl+"\(viewModel.movieDetail?.backdropPath ?? "")"))
                             .placeholder({ progress in
                                 let placeHolderImage = "ic_noImage"
                                 Image(placeHolderImage)
@@ -378,6 +378,7 @@ class MovieDetail {
                     Spacer()
                     
                     Button {
+                        Utility.addHaptics()
                         viewModel.manageLike()
                     } label: {
                         Image(viewModel.isLiked ? "ic_like_clear" : "ic_unlike_clear")

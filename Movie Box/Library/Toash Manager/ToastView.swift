@@ -94,62 +94,6 @@ final class Toast: ObservableObject {
     }
 }
 
-//struct ToastView: View {
-//    let toast: ToastItem
-//    let onDismiss: () -> Void
-//    
-//    var body: some View {
-//        HStack(spacing: 12) {
-//            Image(systemName: toast.type.icon)
-//                .font(.system(size: 20))
-//                .foregroundColor(.white)
-//            
-//            Text(toast.message)
-//                .font(.system(size: 14, weight: .medium))
-//                .foregroundColor(.white)
-//                .multilineTextAlignment(.leading)
-//            
-//            Spacer()
-//            
-//            Button(action: onDismiss) {
-//                Image(systemName: "xmark")
-//                    .font(.system(size: 12, weight: .bold))
-//                    .foregroundColor(.white.opacity(0.7))
-//            }
-//        }
-//        .padding(.horizontal, 16)
-//        .padding(.vertical, 12)
-//        .background(
-//            RoundedRectangle(cornerRadius: 12)
-//                .fill(toast.type.color)
-//                .shadow(color: .black.opacity(0.2), radius: 8, x: 0, y: 4)
-//        )
-//        .padding(.horizontal, 16)
-//    }
-//}
-//
-//// MARK: - Toast Modifier
-//struct ToastModifier: ViewModifier {
-//    @ObservedObject var manager = Toast.shared
-//    
-//    func body(content: Content) -> some View {
-//        ZStack {
-//            content
-//            
-//            if let toast = manager.currentToast {
-//                VStack {
-//                    ToastView(toast: toast) {
-//                        manager.dismiss()
-//                    }
-//                    .transition(.move(edge: .top).combined(with: .opacity))
-//                    .animation(.spring(response: 0.4, dampingFraction: 0.8), value: manager.currentToast)
-//                    
-//                    Spacer()
-//                }
-//            }
-//        }
-//    }
-//}
 // MARK: - Toast View
 struct ToastView: View {
     let toast: ToastItem
@@ -167,7 +111,7 @@ struct ToastView: View {
                 .foregroundColor(.white)
                 .multilineTextAlignment(.leading)
             
-            Spacer()
+//            Spacer()
             
             Button(action: onDismiss) {
                 Image(systemName: "xmark")

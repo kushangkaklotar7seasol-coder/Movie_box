@@ -12,10 +12,10 @@ class HomeViewModel: ObservableObject {
     @Published var topRatedMovie: [Movie] = []
     @Published var celebrity: CelebrityResponse?
     @Published var moviesBunch: MediaBunch?
-    @Published var discover: [OnBordingInfo] = [OnBordingInfo(id: 0, image: "ic_compas", name: Strings.compass, info: Strings.navTool),
-                                                OnBordingInfo(id: 1, image: "ic_photo_edit", name: Strings.photoEdit, info: Strings.editPhoto),
-                                                OnBordingInfo(id: 2, image: "ic_photo_cleander", name: Strings.photoCleaner, info: Strings.findDublicate),
-                                                OnBordingInfo(id: 3, image: "ic_sound_meter", name: Strings.soundMeter, info: Strings.mesureNoice)]
+    @Published var discover: [OnBordingInfo] = [OnBordingInfo(id: 0, image: "ic_compas", name: "COMPASS", info: "NAV_TOOL"),
+                                                OnBordingInfo(id: 1, image: "ic_photo_edit", name: "EDIT_PHOTO", info: "EDIT_PHOTO"),
+                                                OnBordingInfo(id: 2, image: "ic_photo_cleander", name: "PHOTO_CLEANER", info: "FIND_DUBLICATE"),
+                                                OnBordingInfo(id: 3, image: "ic_sound_meter", name: "FIND_DUBLICATE", info: "MEASURE_NOICE")]
     init() {
         self.topRatedMovieAPI()
     }
@@ -51,7 +51,7 @@ class HomeViewModel: ObservableObject {
     func newReleaseAPI() {
         if Utility.isInternetAvailable() {
             DiscoverService.shared.newReleaseAPI { statusCode, response in
-                self.moviesBunch = MediaBunch(id: 0, name: Strings.newRelease, type: .NewRelesesMovie, media: response)
+                self.moviesBunch = MediaBunch(id: 0, name: "NEW_RELEASE", type: .NewRelesesMovie, media: response)
             } failure: { error in
                 print(error)
             }

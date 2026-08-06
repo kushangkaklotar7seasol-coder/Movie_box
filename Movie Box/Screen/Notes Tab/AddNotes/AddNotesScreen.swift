@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddNotesScreen: View {
     @StateObject var viewModel: AddNotesViewModel
+    @FocusState private var isNotesFocused: Bool
     
     var body: some View {
         ZStack {
@@ -24,6 +25,11 @@ struct AddNotesScreen: View {
                         .font(.subheadline)
                 )
                 .font(.system(size: 30, weight: .bold))
+                .focused($isNotesFocused)
+//                .submitLabel(.done)
+//                .onSubmit {
+//                    viewModel.onSaveButton()
+//                }
                 
                 ZStack(alignment: .topLeading) {
                     if viewModel.notesTextEditor.isEmpty {
@@ -35,17 +41,28 @@ struct AddNotesScreen: View {
                     
                     TextEditor(text: $viewModel.notesTextEditor)
                         .scrollContentBackground(.hidden)
+                        .submitLabel(.done)
+                        .focused($isNotesFocused)
+                        .toolbar {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                Spacer()
+                                if viewModel.nameTextField != "" || viewModel.notesTextEditor != "" {
+                                    Button(viewModel.isEdit ? Strings.updateNote : Strings.saveNote) {
+                                        isNotesFocused = false
+                                        Utility.closeKeyboard()
+                                        viewModel.onSaveButton()
+                                    }
+                                    .fontWeight(.bold)
+                                }
+                            }
+                        }
                 }
                 
-                DefaultDesign.FullScreenButton(name: viewModel.isEdit ? Strings.updateNote : Strings.saveNote, onClick: {
-                    if viewModel.nameTextField != "" || viewModel.notesTextEditor != "" {
-                        if viewModel.isEdit {
-                            viewModel.editNote()
-                        } else {
-                            viewModel.addNote()
-                        }
-                    }
-                })
+                if !isNotesFocused {
+                    DefaultDesign.FullScreenButton(name: viewModel.isEdit ? Strings.updateNote : Strings.saveNote, onClick: {
+                        viewModel.onSaveButton()
+                    })
+                }
             }
             .padding(.horizontal, 16)
         }
@@ -54,6 +71,7 @@ struct AddNotesScreen: View {
         .onTapGesture {
             Utility.closeKeyboard()
         }
+        .ignoresSafeArea(.keyboard, edges: .bottom)
     }
 }
 

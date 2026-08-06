@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingScreen: View {
     @StateObject var viewModel = SettingViewModel()
+    @EnvironmentObject var localization: LocalizationManager
     
     var body: some View {
         ZStack {
@@ -27,7 +28,7 @@ struct SettingScreen: View {
                                     .resizable()
                                     .frame(width: 24, height: 24, alignment: .center)
                                 
-                                Text(item.name)
+                                Text(item.name.localized())
                                 
                                 Spacer()
                             }
@@ -45,11 +46,13 @@ struct SettingScreen: View {
                     }
                     .padding(.top)
                 }
+                .id(localization.selectedLanguage)
                 
             }
             .padding(.horizontal, 16)
         }
         .defaultPage(false)
+        .id(localization.selectedLanguage)
     }
 }
 

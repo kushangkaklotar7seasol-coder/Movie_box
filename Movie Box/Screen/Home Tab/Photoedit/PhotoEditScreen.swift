@@ -1,9 +1,3 @@
-//
-//  PhotoEditScreen.swift
-//  Movie Box
-//
-//  Created by Kushang kaklotar on 27/07/26.
-//
 import SwiftUI
 import _PhotosUI_SwiftUI
 
@@ -13,7 +7,7 @@ struct PhotoEditScreen: View {
     var body: some View {
         ZStack {
             VStack {
-                DefaultDesign.Header(name: "Photo Editor")
+                DefaultDesign.Header(name: Strings.photoEdit)
                     .padding(.horizontal, 16)
 
                 VStack(spacing: 10) {
@@ -30,7 +24,7 @@ struct PhotoEditScreen: View {
                                 matching: .images,
                                 photoLibrary: .shared()
                             ) {
-                                Text("Select a photo for edit")
+                                Text(Strings.selectPhoto)
                                     .padding()
                                     .foregroundColor(.blackColour)
                                     .background(.blackColour.opacity(0.2))
@@ -46,48 +40,58 @@ struct PhotoEditScreen: View {
                     if viewModel.isPhtoAvailable {
                         ZStack {
                             HStack {
-                                PhotoEditDesign.btn(image: "ic_crop", name: "Crop", isSelected: false)
+                                PhotoEditDesign.btn(image: "ic_crop", name: Strings.crop, isSelected: false)
                                     .onTapGesture {
                                         viewModel.isShowCropper = true
                                     }
-                                PhotoEditDesign.btn(image: "ic_filter", name: "Filter", isSelected: viewModel.isShowFiltes)
+                                PhotoEditDesign.btn(image: "ic_filter", name: Strings.filter, isSelected: viewModel.isShowFiltes)
                                     .onTapGesture {
                                         withAnimation(.easeInOut(duration: 0.3)) {
                                             viewModel.openFilterPanel()
                                         }
                                     }
                                 
-                                PhotoEditDesign.btn(image: "ic_adjust", name: "Adjust", isSelected: false)
+                                PhotoEditDesign.btn(image: "ic_adjust", name: Strings.adjust, isSelected: false)
                                     .onTapGesture {
                                         withAnimation(.easeInOut(duration: 0.3)) {
                                             viewModel.openAdjustPanel()
                                         }
                                     }
+//                                PhotoEditDesign.btn(image: "ic_cancel_clear", name: "Reset", isSelected: false)
+//                                    .onTapGesture {
+//                                        viewModel.resetToOriginal()
+//                                    }
                             }
                             .padding(.bottom, 30)
                             
                             if viewModel.isShowFiltes {
                                 PhotoEditDesign.FilterBottomview(viewModel: viewModel)
-                                    .background(
-                                        Color.backgroundColour
-                                            .clipShape(.rect(topLeadingRadius: 20, topTrailingRadius: 20))
-                                            .ignoresSafeArea(edges: .bottom)
-                                    )
+                                    .transition(.move(edge: .bottom).combined(with: .opacity))
                             }
-                            
+
                             if viewModel.isShowAdjust {
                                 PhotoEditDesign.AdjustBottomView(viewModel: viewModel)
-                                    .background(
-                                        Color.backgroundColour
-                                            .clipShape(.rect(topLeadingRadius: 20, topTrailingRadius: 20))
-                                            .ignoresSafeArea(edges: .bottom)
-                                    )
+                                    .transition(.move(edge: .bottom).combined(with: .opacity))
                             }
                         }
-                        
                     }
                 }
             }
+
+//            VStack {
+//                Spacer()
+//
+//                if viewModel.isShowFiltes {
+//                    PhotoEditDesign.FilterBottomview(viewModel: viewModel)
+//                        .transition(.move(edge: .bottom).combined(with: .opacity))
+//                }
+//
+//                if viewModel.isShowAdjust {
+//                    PhotoEditDesign.AdjustBottomView(viewModel: viewModel)
+//                        .transition(.move(edge: .bottom).combined(with: .opacity))
+//                }
+//            }
+//            .edgesIgnoringSafeArea(.bottom)
         }
         .defaultPage()
         .onChange(of: viewModel.selectedItem) { _, newItem in
@@ -107,7 +111,7 @@ struct PhotoEditScreen: View {
                 ImageCropperView(
                     image: originalImage,
                     onCropped: { cropped in
-                        viewModel.selectedImage = cropped
+                        viewModel.applyCrop(cropped)
                         viewModel.isShowCropper = false
                     },
                     onCancelled: {
@@ -169,7 +173,7 @@ class PhotoEditDesign {
 
                     Spacer()
 
-                    Text("Filter")
+                    Text(Strings.filter)
                         .font(.system(size: 16, weight: .medium))
                         .foregroundColor(.grayColour)
 
@@ -189,22 +193,30 @@ class PhotoEditDesign {
                 .padding(.vertical, 8)
 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
+                    LazyHStack {
                         ForEach(viewModel.filters, id: \.self) { filter in
-                            if let image = viewModel.tempOriginalImage {
-                                FilterThumbnailView(image: image, filterName: filter, isSelected: viewModel.selectedFilter == filter)
-                                    .onTapGesture {
-                                        viewModel.selectedFilter = filter
-                                        viewModel.selectedImage = viewModel.applyFilter(image, filter: filter)
-                                    }
+                            VStack {
+                                if let image = viewModel.tempOriginalImage {
+                                    FilterThumbnailView(image: image, filterName: filter, isSelected: viewModel.selectedFilter == filter)
+                                        .onTapGesture {
+                                            viewModel.selectedFilter = filter
+                                            viewModel.selectedImage = viewModel.applyFilter(image, filter: filter)
+                                        }
+                                }
                             }
                         }
                     }
+                    .frame(height: 95)
                     .padding(.horizontal, 18)
                     .padding(.top, 5)
                 }
             }
             .padding(.bottom, 50)
+            .background(
+                Color.backgroundColour
+                    .clipShape(.rect(topLeadingRadius: 20, topTrailingRadius: 20))
+                    .ignoresSafeArea(edges: .bottom)
+            )
         }
     }
 
@@ -227,7 +239,7 @@ class PhotoEditDesign {
 
                     Spacer()
 
-                    Text("Adjust")
+                    Text(Strings.adjust)
                         .font(.system(size: 16, weight: .medium))
                         .foregroundColor(.grayColour)
 
@@ -256,7 +268,7 @@ class PhotoEditDesign {
                         .onChange(of: viewModel.contrast) { oldValue, newValue in
                             viewModel.applyAdjustments()
                         }
-                        Text("\(viewModel.contrast)")
+//                        Text("\(viewModel.contrast)")
                     } else if selectedAdjustId == 1 {
                         CustomGradientSlider(
                             value: $viewModel.brightness,
@@ -266,7 +278,7 @@ class PhotoEditDesign {
                         .onChange(of: viewModel.brightness) { oldValue, newValue in
                             viewModel.applyAdjustments()
                         }
-                        Text("\(viewModel.brightness)")
+//                        Text("\(viewModel.brightness)")
                     } else if selectedAdjustId == 2 {
                         CustomGradientSlider(
                             value: $viewModel.dark,
@@ -276,7 +288,7 @@ class PhotoEditDesign {
                         .onChange(of: viewModel.dark) { _, _ in
                             viewModel.applyAdjustments()
                         }
-                        Text(String(format: "%.2f", viewModel.dark))
+//                        Text(String(format: "%.2f", viewModel.dark))
                     } else if selectedAdjustId == 3 {
                         CustomGradientSlider(
                             value: $viewModel.hueAngle,
@@ -286,7 +298,7 @@ class PhotoEditDesign {
                         .onChange(of: viewModel.hueAngle) { _, _ in
                             viewModel.applyAdjustments()
                         }
-                        Text(String(format: "%.2f", viewModel.hueAngle))
+//                        Text(String(format: "%.2f", viewModel.hueAngle))
                     } else if selectedAdjustId == 4 {
                         CustomGradientSlider(
                             value: $viewModel.saturation,
@@ -296,7 +308,7 @@ class PhotoEditDesign {
                         .onChange(of: viewModel.saturation) { _, _ in
                             viewModel.applyAdjustments()
                         }
-                        Text(String(format: "%.2f", viewModel.saturation))
+//                        Text(String(format: "%.2f", viewModel.saturation))
                     } else if selectedAdjustId == 5 {
                         CustomGradientSlider(
                             value: $viewModel.temp,
@@ -306,7 +318,7 @@ class PhotoEditDesign {
                         .onChange(of: viewModel.temp) { _, _ in
                             viewModel.applyAdjustments()
                         }
-                        Text(String(format: "%.2f", viewModel.temp))
+//                        Text(String(format: "%.2f", viewModel.temp))
                     } else if selectedAdjustId == 6 {
                         CustomGradientSlider(
                             value: $viewModel.vignette,
@@ -316,7 +328,7 @@ class PhotoEditDesign {
                         .onChange(of: viewModel.vignette) { _, _ in
                             viewModel.applyAdjustments()
                         }
-                        Text(String(format: "%.2f", viewModel.vignette))
+//                        Text(String(format: "%.2f", viewModel.vignette))
                     }
                 }
                 .padding(.horizontal, 16)
@@ -358,6 +370,12 @@ class PhotoEditDesign {
                 }
             }
             .padding(.bottom, 50)
+            .background(
+                Color.backgroundColour
+                    .clipShape(.rect(topLeadingRadius: 20, topTrailingRadius: 20))
+                    .ignoresSafeArea(edges: .bottom)
+            )
+
         }
     }
 }
@@ -378,7 +396,6 @@ struct FilterThumbnailView: View {
 
     var body: some View {
         VStack(spacing: 8) {
-            // Thumbnail Image with white border when selected
             ZStack {
                 if let thumbnail = thumbnailImage {
                     Image(uiImage: thumbnail)
@@ -404,8 +421,7 @@ struct FilterThumbnailView: View {
                         )
                 }
             }
-            
-            // Filter Name
+
             Text(filterName)
                 .foregroundColor(isSelected ? .white : .gray)
                 .font(.system(size: 12, weight: .medium))
@@ -437,72 +453,72 @@ struct FilterThumbnailView: View {
     private func applyFilter(_ image: UIImage, filter: String) -> UIImage {
         guard let ciImage = CIImage(image: image) else { return image }
 
-        let context = Self.sharedContext
+        let context = CIContext()
         var outputImage: CIImage?
 
         switch filter {
-        case "Original":
+        case Strings.original:
             return image
 
-        case "Sepia":
+        case Strings.sepia:
             let filter = CIFilter.sepiaTone()
             filter.inputImage = ciImage
             filter.intensity = 0.8
             outputImage = filter.outputImage
 
-        case "Mono":
+        case Strings.mono:
             let filter = CIFilter.photoEffectMono()
             filter.inputImage = ciImage
             outputImage = filter.outputImage
 
-        case "Noir":
+        case Strings.nori:
             let filter = CIFilter.photoEffectNoir()
             filter.inputImage = ciImage
             outputImage = filter.outputImage
 
-        case "Fade":
+        case Strings.fade:
             let filter = CIFilter.photoEffectFade()
             filter.inputImage = ciImage
             outputImage = filter.outputImage
 
-        case "Chrome":
+        case Strings.chrome:
             let filter = CIFilter.photoEffectChrome()
             filter.inputImage = ciImage
             outputImage = filter.outputImage
 
-        case "Vintage":
+        case Strings.vintage:
             let filter = CIFilter.photoEffectTransfer()
             filter.inputImage = ciImage
             outputImage = filter.outputImage
 
-        case "Dramatic":
+        case Strings.dramatic:
             let filter = CIFilter.photoEffectProcess()
             filter.inputImage = ciImage
             outputImage = filter.outputImage
 
-        case "Instant":
+        case Strings.instant:
             let filter = CIFilter.photoEffectInstant()
             filter.inputImage = ciImage
             outputImage = filter.outputImage
 
-        case "Tonal":
+        case Strings.tonal:
             let filter = CIFilter.photoEffectTonal()
             filter.inputImage = ciImage
             outputImage = filter.outputImage
 
-        case "Cool":
+        case Strings.cool:
             let filter = CIFilter.temperatureAndTint()
             filter.inputImage = ciImage
             filter.targetNeutral = CIVector(x: 6500, y: 0)
             outputImage = filter.outputImage
 
-        case "Warm":
+        case Strings.warm:
             let filter = CIFilter.temperatureAndTint()
             filter.inputImage = ciImage
             filter.targetNeutral = CIVector(x: 4500, y: 0)
             outputImage = filter.outputImage
 
-        case "Boost":
+        case Strings.boost:
             let filter = CIFilter.colorControls()
             filter.inputImage = ciImage
             filter.saturation = 1.3
@@ -510,7 +526,7 @@ struct FilterThumbnailView: View {
             filter.brightness = 0.05
             outputImage = filter.outputImage
 
-        case "Vivid":
+        case Strings.vivid:
             let filter = CIFilter.colorControls()
             filter.inputImage = ciImage
             filter.saturation = 1.5
@@ -518,7 +534,7 @@ struct FilterThumbnailView: View {
             filter.brightness = 0
             outputImage = filter.outputImage
 
-        case "Vivid Warm":
+        case Strings.vividWarm:
             let filter = CIFilter.colorControls()
             filter.inputImage = ciImage
             filter.saturation = 1.4
@@ -532,7 +548,7 @@ struct FilterThumbnailView: View {
                 outputImage = warmFilter.outputImage
             }
 
-        case "Vivid Cool":
+        case Strings.vividCool:
             let filter = CIFilter.colorControls()
             filter.inputImage = ciImage
             filter.saturation = 1.4
@@ -546,66 +562,66 @@ struct FilterThumbnailView: View {
                 outputImage = coolFilter.outputImage
             }
 
-        case "Process":
+        case Strings.process:
             let filter = CIFilter.photoEffectProcess()
             filter.inputImage = ciImage
             outputImage = filter.outputImage
 
-        case "Transfer":
+        case Strings.transfer:
             let filter = CIFilter.photoEffectTransfer()
             filter.inputImage = ciImage
             outputImage = filter.outputImage
 
-        case "Bloom":
+        case Strings.bloom:
             let filter = CIFilter.bloom()
             filter.inputImage = ciImage
             filter.intensity = 0.8
             filter.radius = 10
             outputImage = filter.outputImage
 
-        case "Gloom":
+        case Strings.gloom:
             let filter = CIFilter.gloom()
             filter.inputImage = ciImage
             filter.intensity = 0.8
             filter.radius = 10
             outputImage = filter.outputImage
 
-        case "Sharpen":
+        case Strings.sharpen:
             let filter = CIFilter.sharpenLuminance()
             filter.inputImage = ciImage
             filter.sharpness = 0.8
             outputImage = filter.outputImage
 
-        case "Crystallize":
+        case Strings.crystallize:
             let filter = CIFilter.crystallize()
             filter.inputImage = ciImage
             filter.radius = 15
             outputImage = filter.outputImage
 
-        case "Pixelate":
+        case Strings.pixelate:
             let filter = CIFilter.pixellate()
             filter.inputImage = ciImage
             filter.scale = 20
             outputImage = filter.outputImage
 
-        case "Comic":
+        case Strings.comic:
             let filter = CIFilter.comicEffect()
             filter.inputImage = ciImage
             outputImage = filter.outputImage
 
-        case "Edges":
+        case Strings.edges:
             let filter = CIFilter.edges()
             filter.inputImage = ciImage
             filter.intensity = 1.0
             outputImage = filter.outputImage
 
-        case "Posterize":
+        case Strings.posterize:
             let filter = CIFilter.colorPosterize()
             filter.inputImage = ciImage
             filter.levels = 6
             outputImage = filter.outputImage
 
-        case "Vignette":
+        case Strings.vignette:
             let filter = CIFilter.vignette()
             filter.inputImage = ciImage
             filter.intensity = 0.8

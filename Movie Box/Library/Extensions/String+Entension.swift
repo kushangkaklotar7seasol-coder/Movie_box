@@ -135,6 +135,8 @@ class Strings {
     static var movieInfo: String { "MOVIE_INFO".localized() }
     static var crew: String { "CREW".localized() }
     static var posters: String { "POSTERS".localized() }
+    static var showMore: String { "SHOW_MORE".localized() }
+    static var showLess: String { "SHOW_LESS".localized() }
     
     // MARK: - Favorite -
     static var favourite: String { "FAVORITE".localized() }
@@ -172,4 +174,45 @@ class Strings {
     static var privecyPolicy: String { "PRIVECY_POLICY".localized() }
     static var termaUse: String { "TERMS_USE".localized() }
     static var aboutUs: String { "ABOUT_US".localized() }
+    
+    // MARK: - Photo Edit -
+    static var selectPhoto: String { "SELECT_PHOTO".localized() }
+    static var crop: String { "CROP".localized() }
+    static var filter: String { "FILTER".localized() }
+    static var adjust: String { "ADJUST".localized() }
+    
+    static var contrast: String { "CONTRAST".localized() }
+    static var light: String { "LIGHT".localized() }
+    static var dark: String { "DARK".localized() }
+    static var hue: String { "HUE".localized() }
+    static var saturation: String { "SATURATION".localized() }
+    static var temp: String { "TEMP".localized() }
+    static var vignette: String { "VIGNETTE".localized() }
+    
+    static var original: String { "ORIGINAL".localized() }
+    static var sepia: String { "SEPIA".localized() }
+    static var mono: String { "MONO".localized() }
+    static var nori: String { "NORI".localized() }
+    static var fade: String { "FADE".localized() }
+    static var chrome: String { "CHROME".localized() }
+    static var vintage: String { "VINTAGE".localized() }
+    static var dramatic: String { "DRAMATIC".localized() }
+    static var cool: String { "COOL".localized() }
+    static var warm: String { "WARM".localized() }
+    static var boost: String { "BOOST".localized() }
+    static var vivid: String { "VIVID".localized() }
+    static var vividWarm: String { "VIVID_WARM".localized() }
+    static var vividCool: String { "VIVID_COOL".localized() }
+    static var process: String { "PROCESS".localized() }
+    static var transfer: String { "TRANSFER".localized() }
+    static var instant: String { "INSTANT".localized() }
+    static var tonal: String { "TONAL".localized() }
+    static var bloom: String { "BLOOM".localized() }
+    static var gloom: String { "GLOOM".localized() }
+    static var sharpen: String { "SHARPEN".localized() }
+    static var crystallize: String { "CRYSTALLIZE".localized() }
+    static var pixelate: String { "PIXELATE".localized() }
+    static var comic: String { "COMIC".localized() }
+    static var edges: String { "EDGES".localized() }
+    static var posterize: String { "POSTERIZE".localized() }
 }

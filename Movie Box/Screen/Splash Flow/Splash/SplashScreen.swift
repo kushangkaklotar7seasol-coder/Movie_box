@@ -126,7 +126,7 @@ class DefaultDesign {
         
         var body: some View {
             HStack {
-                Text(name)
+                Text(name.localized())
                     .font(.system(size: 18, weight: .semibold))
                     .foregroundColor(.whiteColour)
                 
@@ -135,7 +135,7 @@ class DefaultDesign {
                 Button {
                     self.onClick?()
                 } label: {
-                    Text(buttonName)
+                    Text(buttonName.lowercased())
                         .foregroundColor(.greenColour)
                         .font(.system(size: 13, weight: .semibold))
                 }
@@ -246,6 +246,7 @@ class DefaultDesign {
 //                                    .frame(width: 28, height: 28, alignment: .center)
                                 
                                 DefaultDesign.SmallButton(image: self.isLiked ? "ic_like_clear" : "ic_unlike_clear", onClick: {
+                                    Utility.addHaptics()
                                     if self.isLiked {
                                         database.removeMovie(id: movies.id)
                                     } else {
@@ -264,7 +265,6 @@ class DefaultDesign {
                 .frame(width: width, height: height, alignment: .center)
                 .background(.grayColour)
                 .cornerRadius(24)
-                
                 
                 Text((movies.title ?? movies.name) ?? "")
                     .font(.system(size: 14, weight: .medium))

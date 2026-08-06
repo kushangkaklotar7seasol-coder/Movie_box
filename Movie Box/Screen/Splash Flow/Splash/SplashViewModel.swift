@@ -20,16 +20,17 @@ class SplashViewModel: ObservableObject {
             let language = UserdefaultManager.shared.getLanguage()
             
             if language == nil {
-                Router.shared.push(.language(isShowBackButton: false))
+                Router.shared.updateRoot(.language(isShowBackButton: false))
                 return
             }
             
             if onBoarding == 0 {
-                Router.shared.push(.tab)
+//                Router.shared.push(.tab)
+                Router.shared.updateRoot(.tab)
                 return
             }
             
-            Router.shared.push(.intro)
+            Router.shared.updateRoot(.intro)
         }
     }
 }

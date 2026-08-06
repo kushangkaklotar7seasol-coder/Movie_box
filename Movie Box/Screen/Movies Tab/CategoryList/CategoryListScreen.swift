@@ -17,7 +17,7 @@ struct CategoryListScreen: View {
     var body: some View {
         ZStack {
             VStack {
-                DefaultDesign.Header(name: viewModel.media.name)
+                DefaultDesign.Header(name: viewModel.media.name.localized())
                 
                 ScrollView(showsIndicators: false) {
                     LazyVGrid(columns: columns) {

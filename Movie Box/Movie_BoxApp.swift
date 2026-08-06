@@ -17,7 +17,7 @@ struct Movie_BoxApp: App {
         WindowGroup {
             ZStack {
                 NavigationStack(path: $router.path) {
-                    SplashScreen()
+                    destination(for: router.rootRoute)
                         .toolbar(.hidden, for: .navigationBar)
                         .preferredColorScheme(.dark)
                         .navigationDestination(for: Route.self) { route in

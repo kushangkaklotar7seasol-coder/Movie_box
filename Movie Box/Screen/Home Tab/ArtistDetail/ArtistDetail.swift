@@ -184,7 +184,7 @@ class MovieDetailDesign {
                     )
 
                 if isTruncated {
-                    Button(isExpanded ? "Show less..." : "Show more...") {
+                    Button(isExpanded ? Strings.showLess : Strings.showMore) {
                         withAnimation {
                             isExpanded.toggle()
                         }

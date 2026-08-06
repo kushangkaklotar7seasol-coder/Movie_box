@@ -118,6 +118,8 @@
 "VIDEOS" = "Videos";
 "SEASON" = "Season";
 "POSTER" = "Poster";
+"SHOW_MORE" = "Show more...";
+"SHOW_LESS" = "Show less...";
 
 // MARK: - Like -
 "FAVORITE" = "Favorite";
@@ -157,3 +159,45 @@
 "PRIVECY_POLICY" = "Privacy Policy";
 "TERMS_USE" = "Terms of Use";
 "ABOUT_US" = "About Us";
+
+// MARK: - Photo Edit -
+"SELECT_PHOTO" = "Select a photo for edit";
+"CROP" = "Crop";
+"FILTER" = "Filter";
+"ADJUST" = "Adjust";
+
+"CONTRAST" = "Contrast";
+"LIGHT" = "Light";
+"DARK" = "Dark";
+"HUE" = "HUE";
+"SATURATION" = "Saturation";
+"TEMP" = "Temp";
+"VIGNETTE" = "Vignette";
+
+"ORIGINAL" = "Original";
+"SEPIA" = "Sepia";
+"MONO" = "Mono";
+"NORI" = "Noir";
+"FADE" = "Fade";
+"CHROME" = "Chrome";
+"VINTAGE" = "Vintage";
+"DRAMATIC" = "Dramatic";
+"COOL" = "Cool";
+"WARM" = "Warm";
+"BOOST" = "Boost";
+"VIVID" = "Vivid";
+"VIVID_WARM" = "Vivid Warm";
+"VIVID_COOL" = "Vivid Cool";
+"PROCESS" = "Process";
+"TRANSFER" = "Transfer";
+"INSTANT" = "Instant";
+"TONAL" = "Tonal";
+"BLOOM" = "Bloom";
+"GLOOM" = "Gloom";
+"SHARPEN" = "Sharpen";
+"CRYSTALLIZE" = "Crystallize";
+"PIXELATE" = "Pixelate";
+"COMIC" = "Comic";
+"EDGES" = "Edges";
+"POSTERIZE" = "Posterize";
+"VIGNETTE" = "Vignette";

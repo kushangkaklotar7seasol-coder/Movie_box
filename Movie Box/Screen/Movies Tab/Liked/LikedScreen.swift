@@ -17,7 +17,7 @@ struct LikedScreen: View {
     var body: some View {
         ZStack {
             VStack {
-                DefaultDesign.Header(name: "Favorite")
+                DefaultDesign.Header(name: Strings.favourite)
                 
                 CustomSegmentedControl(preselectedIndex: $viewModel.selectedIndex, options: [Strings.movie, Strings.tvShow])
                 

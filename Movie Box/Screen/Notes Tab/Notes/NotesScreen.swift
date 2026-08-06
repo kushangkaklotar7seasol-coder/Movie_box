@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NotesScreen: View {
     @StateObject var viewModel = NotesViewModel()
+    @EnvironmentObject var localization: LocalizationManager
     let columns = [
        GridItem(.flexible()),
        GridItem(.flexible())
@@ -33,9 +34,11 @@ struct NotesScreen: View {
                 .padding(.horizontal, 16)
                 
                 NotesGridView(viewModel: viewModel)
+                    .id(localization.selectedLanguage)
                 
                 Spacer()
             }
+            .id(localization.selectedLanguage)
             
             
             VStack {
@@ -75,6 +78,7 @@ struct NotesScreen: View {
             
         }
         .defaultPage(false)
+        .id(localization.selectedLanguage)
         .edgesIgnoringSafeArea(.bottom)
         .onAppear() {
             viewModel.loadNotes()
@@ -137,6 +141,8 @@ struct NotesGridView: View {
                 Menu {
                     if notes.isPined {
                         Button {
+                            Utility.addHaptics()
+                            
                             viewModel.editNote(Notes(id: notes.id,
                                                      createdDate: notes.createdDate,
                                                      editDate: notes.editDate,
@@ -154,6 +160,8 @@ struct NotesGridView: View {
                         }
                     } else {
                         Button {
+                            Utility.addHaptics()
+                            
                             viewModel.editNote(Notes(id: notes.id,
                                                      createdDate: notes.createdDate,
                                                      editDate: notes.editDate,

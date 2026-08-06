@@ -1,9 +1,3 @@
-//
-//  PhotoEditViewModel.swift
-//  Movie Box
-//
-//  Created by Kushang kaklotar on 30/07/26.
-//
 import Foundation
 import Combine
 import _PhotosUI_SwiftUI
@@ -24,10 +18,10 @@ class PhotoEditViewModel: ObservableObject {
 
     // MARK: - Filter state
     /// Bound to the UI while the filter sheet is open (live preview value).
-    @Published var selectedFilter: String = "Original"
+    @Published var selectedFilter: String = Strings.original
     /// The filter that has actually been saved/confirmed. This is what persists
     /// across opening/closing the sheet.
-    private(set) var appliedFilter: String = "Original"
+    private(set) var appliedFilter: String = Strings.original
     @Published var isShowFiltes: Bool = false
     /// Base image used while the filter sheet is open = original + committed adjustments
     /// (i.e. everything EXCEPT the filter, so filters never stack on top of each other).
@@ -58,20 +52,20 @@ class PhotoEditViewModel: ObservableObject {
 
     private let ciContext = CIContext(options: [.useSoftwareRenderer: false])
 
-    var adjustDetail: [PersonalDetail] = [PersonalDetail(id: 0, name: "Contrast", value: "ic_constrast"),
-                                          PersonalDetail(id: 1, name: "Light", value: "ic_light"),
-                                          PersonalDetail(id: 2, name: "Dark", value: "ic_dark"),
-                                          PersonalDetail(id: 3, name: "HUE", value: "ic_hue"),
-                                          PersonalDetail(id: 4, name: "Saturation", value: "ic_saturation"),
-                                          PersonalDetail(id: 5, name: "Temp", value: "ic_temp"),
-                                          PersonalDetail(id: 6, name: "Vignette", value: "ic_vignette")]
+    var adjustDetail: [PersonalDetail] = [PersonalDetail(id: 0, name: Strings.contrast, value: "ic_constrast"),
+                                          PersonalDetail(id: 1, name: Strings.light, value: "ic_light"),
+                                          PersonalDetail(id: 2, name: Strings.dark, value: "ic_dark"),
+                                          PersonalDetail(id: 3, name: Strings.hue, value: "ic_hue"),
+                                          PersonalDetail(id: 4, name: Strings.saturation, value: "ic_saturation"),
+                                          PersonalDetail(id: 5, name: Strings.temp, value: "ic_temp"),
+                                          PersonalDetail(id: 6, name: Strings.vignette, value: "ic_vignette")]
 
     let filters = [
-        "Original", "Sepia", "Mono", "Noir", "Fade", "Chrome",
-        "Vintage", "Dramatic", "Cool", "Warm", "Boost", "Vivid",
-        "Vivid Warm", "Vivid Cool", "Process", "Transfer", "Instant",
-        "Tonal", "Bloom", "Gloom", "Sharpen", "Crystallize",
-        "Pixelate", "Comic", "Edges", "Posterize", "Vignette"
+        Strings.original, Strings.sepia, Strings.mono, Strings.nori, Strings.fade, Strings.chrome,
+        Strings.vintage, Strings.dramatic, Strings.cool, Strings.warm, Strings.boost, Strings.vivid,
+        Strings.vividWarm, Strings.vividCool, Strings.process, Strings.transfer, Strings.instant,
+        Strings.tonal, Strings.bloom, Strings.gloom, Strings.sharpen, Strings.crystallize,
+        Strings.pixelate, Strings.comic, Strings.edges, Strings.posterize, Strings.vignette
     ]
 
     // MARK: - Initial photo load
@@ -79,8 +73,8 @@ class PhotoEditViewModel: ObservableObject {
     /// Call this ONCE right after the user picks a photo from PhotosPicker.
     func setInitialImage(_ image: UIImage) {
         originalImage = image
-        appliedFilter = "Original"
-        selectedFilter = "Original"
+        appliedFilter = Strings.original
+        selectedFilter = Strings.original
         committedAdjust = AdjustValues()
         pushLocalsFromCommitted()
         selectedImage = image
@@ -96,9 +90,9 @@ class PhotoEditViewModel: ObservableObject {
     }
 
     func cancelAdjust() {
+        isShowAdjust = false
         pushLocalsFromCommitted()
         render()
-        isShowAdjust = false
     }
 
     func saveAdjust() {
@@ -111,10 +105,30 @@ class PhotoEditViewModel: ObservableObject {
         render()
     }
 
+    // MARK: - Crop
+
+    /// Call this from the cropper's `onCropped` callback.
+    /// The cropped image becomes the new base (`originalImage`) for everything
+    /// that follows, so future filters/adjustments apply on top of the crop
+    /// instead of silently reverting to the pre-crop photo.
+    /// Filter/adjust values reset to neutral because the crop input already
+    /// had them baked into its pixels (it was made from `selectedImage`) —
+    /// keeping the old slider values would double-apply them.
+    func applyCrop(_ croppedImage: UIImage) {
+        originalImage = croppedImage
+        appliedFilter = Strings.original
+        selectedFilter = Strings.original
+        committedAdjust = AdjustValues()
+        pushLocalsFromCommitted()
+        selectedImage = croppedImage
+    }
+
     // MARK: - Filter panel
 
     func openFilterPanel() {
         if !isShowFiltes {
+            // Base = original + committed adjustments, WITHOUT any filter baked in,
+            // so filters never stack on top of a previous filter.
             tempOriginalImage = adjustedOriginal(with: committedAdjust)
             selectedFilter = appliedFilter
         }
@@ -136,8 +150,8 @@ class PhotoEditViewModel: ObservableObject {
 
     /// Wipes every filter/adjustment and goes back to the exact photo that was picked.
     func resetToOriginal() {
-        appliedFilter = "Original"
-        selectedFilter = "Original"
+        appliedFilter = Strings.original
+        selectedFilter = Strings.original
         committedAdjust = AdjustValues()
         pushLocalsFromCommitted()
         selectedImage = originalImage
@@ -241,68 +255,68 @@ class PhotoEditViewModel: ObservableObject {
        var outputImage: CIImage?
 
        switch filter {
-       case "Original":
+       case Strings.original:
            return image
 
-       case "Sepia":
+       case Strings.sepia:
            let filter = CIFilter.sepiaTone()
            filter.inputImage = ciImage
            filter.intensity = 0.8
            outputImage = filter.outputImage
 
-       case "Mono":
+       case Strings.mono:
            let filter = CIFilter.photoEffectMono()
            filter.inputImage = ciImage
            outputImage = filter.outputImage
 
-       case "Noir":
+       case Strings.nori:
            let filter = CIFilter.photoEffectNoir()
            filter.inputImage = ciImage
            outputImage = filter.outputImage
 
-       case "Fade":
+       case Strings.fade:
            let filter = CIFilter.photoEffectFade()
            filter.inputImage = ciImage
            outputImage = filter.outputImage
 
-       case "Chrome":
+       case Strings.chrome:
            let filter = CIFilter.photoEffectChrome()
            filter.inputImage = ciImage
            outputImage = filter.outputImage
 
-       case "Vintage":
+       case Strings.vintage:
            let filter = CIFilter.photoEffectTransfer()
            filter.inputImage = ciImage
            outputImage = filter.outputImage
 
-       case "Dramatic":
+       case Strings.dramatic:
            let filter = CIFilter.photoEffectProcess()
            filter.inputImage = ciImage
            outputImage = filter.outputImage
 
-       case "Instant":
+       case Strings.instant:
            let filter = CIFilter.photoEffectInstant()
            filter.inputImage = ciImage
            outputImage = filter.outputImage
 
-       case "Tonal":
+       case Strings.tonal:
            let filter = CIFilter.photoEffectTonal()
            filter.inputImage = ciImage
            outputImage = filter.outputImage
 
-       case "Cool":
+       case Strings.cool:
            let filter = CIFilter.temperatureAndTint()
            filter.inputImage = ciImage
            filter.targetNeutral = CIVector(x: 6500, y: 0)
            outputImage = filter.outputImage
 
-       case "Warm":
+       case Strings.warm:
            let filter = CIFilter.temperatureAndTint()
            filter.inputImage = ciImage
            filter.targetNeutral = CIVector(x: 4500, y: 0)
            outputImage = filter.outputImage
 
-       case "Boost":
+       case Strings.boost:
            let filter = CIFilter.colorControls()
            filter.inputImage = ciImage
            filter.saturation = 1.3
@@ -310,7 +324,7 @@ class PhotoEditViewModel: ObservableObject {
            filter.brightness = 0.05
            outputImage = filter.outputImage
 
-       case "Vivid":
+       case Strings.vivid:
            let filter = CIFilter.colorControls()
            filter.inputImage = ciImage
            filter.saturation = 1.5
@@ -318,7 +332,7 @@ class PhotoEditViewModel: ObservableObject {
            filter.brightness = 0
            outputImage = filter.outputImage
 
-       case "Vivid Warm":
+       case Strings.vividWarm:
            let filter = CIFilter.colorControls()
            filter.inputImage = ciImage
            filter.saturation = 1.4
@@ -332,7 +346,7 @@ class PhotoEditViewModel: ObservableObject {
                outputImage = warmFilter.outputImage
            }
 
-       case "Vivid Cool":
+       case Strings.vividCool:
            let filter = CIFilter.colorControls()
            filter.inputImage = ciImage
            filter.saturation = 1.4
@@ -346,66 +360,66 @@ class PhotoEditViewModel: ObservableObject {
                outputImage = coolFilter.outputImage
            }
 
-       case "Process":
+       case Strings.process:
            let filter = CIFilter.photoEffectProcess()
            filter.inputImage = ciImage
            outputImage = filter.outputImage
 
-       case "Transfer":
+       case Strings.transfer:
            let filter = CIFilter.photoEffectTransfer()
            filter.inputImage = ciImage
            outputImage = filter.outputImage
 
-       case "Bloom":
+       case Strings.bloom:
            let filter = CIFilter.bloom()
            filter.inputImage = ciImage
            filter.intensity = 0.8
            filter.radius = 10
            outputImage = filter.outputImage
 
-       case "Gloom":
+       case Strings.gloom:
            let filter = CIFilter.gloom()
            filter.inputImage = ciImage
            filter.intensity = 0.8
            filter.radius = 10
            outputImage = filter.outputImage
 
-       case "Sharpen":
+       case Strings.sharpen:
            let filter = CIFilter.sharpenLuminance()
            filter.inputImage = ciImage
            filter.sharpness = 0.8
            outputImage = filter.outputImage
 
-       case "Crystallize":
+       case Strings.crystallize:
            let filter = CIFilter.crystallize()
            filter.inputImage = ciImage
            filter.radius = 15
            outputImage = filter.outputImage
 
-       case "Pixelate":
+       case Strings.pixelate:
            let filter = CIFilter.pixellate()
            filter.inputImage = ciImage
            filter.scale = 20
            outputImage = filter.outputImage
 
-       case "Comic":
+       case Strings.comic:
            let filter = CIFilter.comicEffect()
            filter.inputImage = ciImage
            outputImage = filter.outputImage
 
-       case "Edges":
+       case Strings.edges:
            let filter = CIFilter.edges()
            filter.inputImage = ciImage
            filter.intensity = 1.0
            outputImage = filter.outputImage
 
-       case "Posterize":
+       case Strings.posterize:
            let filter = CIFilter.colorPosterize()
            filter.inputImage = ciImage
            filter.levels = 6
            outputImage = filter.outputImage
 
-       case "Vignette":
+       case Strings.vignette:
            let filter = CIFilter.vignette()
            filter.inputImage = ciImage
            filter.intensity = 0.8

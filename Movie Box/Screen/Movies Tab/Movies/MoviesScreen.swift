@@ -42,6 +42,7 @@ struct MoviesScreen: View {
                     }
                 }
                 .padding(.horizontal, 16)
+                .id(localization.selectedLanguage)
                 
                 if viewModel.selectedIndex == 0 {
                     ScrollView(showsIndicators: false) {
@@ -59,15 +60,14 @@ struct MoviesScreen: View {
                         }
                         .padding(.vertical, 24)
                         .padding(.bottom, 80)
+                        .id(localization.selectedLanguage)
                     }
-                    .id(localization.selectedLanguage)
                 } else {
                     ScrollView(showsIndicators: false) {
                         VStack(spacing: 24) {
                             ForEach(viewModel.seriesBunch, id: \.id) { item in
                                 DefaultDesign.MoviesBunch(moviedbunch: item, onViewMore: {_ in
                                     viewModel.selectedBunch = item
-//                                    viewModel.isShowCategoryScreen = true
                                     Router.shared.push(.categoryList(movieBunch: item))
                                 }, onMedia: { movie in
                                     viewModel.selectedMovie = movie
@@ -77,14 +77,15 @@ struct MoviesScreen: View {
                         }
                         .padding(.vertical, 24)
                         .padding(.bottom, 80)
+                        .id(localization.selectedLanguage)
                     }
-                    .id(localization.selectedLanguage)
                 }
                 
                 Spacer()
             }
         }
         .defaultPage(false)
+        .id(localization.selectedLanguage)
     }
 }
 

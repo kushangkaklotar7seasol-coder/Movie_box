@@ -36,8 +36,8 @@ struct LanguageScreen: View {
                     Spacer()
                     
                     Button {
-                        viewModel.onDoneButtonClick()
                         localization.changeLanguage(languageCode: viewModel.selectedLanguage?.code ?? "en")
+                        viewModel.onDoneButtonClick()
                     } label: {
                         Text(Strings.done)
                             .padding(.vertical, 8)

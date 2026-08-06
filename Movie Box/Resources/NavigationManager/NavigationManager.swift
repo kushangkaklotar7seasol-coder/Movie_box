@@ -16,6 +16,8 @@ func destination(for route: Route) -> some View {
         LanguageScreen(viewModel: LanguageViewModel(isShowBack: isShowBackButton))
     case .intro:
         IntroScreen()
+    case .splash:
+        SplashScreen()
     case .tab:
         TabBarScreen()
     case .home:
@@ -56,6 +58,7 @@ func destination(for route: Route) -> some View {
 enum Route: Hashable {
     case language(isShowBackButton: Bool)
     case intro
+    case splash
     
     case tab
     case home
@@ -79,7 +82,8 @@ enum Route: Hashable {
 final class Router: ObservableObject {
     static let shared = Router()
     @Published var path = NavigationPath()
-
+    @Published var rootRoute: Route = .splash
+    
     func push(_ route: Route) {
         path.append(route)
     }
@@ -93,6 +97,11 @@ final class Router: ObservableObject {
     func popToRoot() {
         path.removeLast(path.count)
     }
+    
+    func updateRoot(_ route: Route) {
+        path.removeLast(path.count)
+        rootRoute = route
+    }
 }
 
 extension UINavigationController: @retroactive UIGestureRecognizerDelegate {
@@ -103,7 +112,6 @@ extension UINavigationController: @retroactive UIGestureRecognizerDelegate {
     }
     
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        guard SwipeBackManager.shared.isEnabled else { return false }
         return viewControllers.count > 1
     }
 }

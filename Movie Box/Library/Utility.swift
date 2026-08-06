@@ -50,5 +50,10 @@ class Utility {
         
         rootViewController.present(activityVC, animated: true)
     }
+    
+    class func addHaptics(){
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
+    }
 }
 

@@ -18,7 +18,7 @@ struct MovieListScreen: View {
     var body: some View {
         ZStack {
             VStack {
-                DefaultDesign.Header(name: viewModel.moviesBunch?.name ?? "")
+                DefaultDesign.Header(name: viewModel.moviesBunch?.name.localized() ?? "")
                 
                 let array = viewModel.mediaItem
                 

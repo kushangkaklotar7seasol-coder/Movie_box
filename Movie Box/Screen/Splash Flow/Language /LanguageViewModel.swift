@@ -35,7 +35,7 @@ class LanguageViewModel: ObservableObject {
         if self.isShowBack {
             Router.shared.pop()
         } else {
-            Router.shared.push(.intro)
+            Router.shared.updateRoot(.intro)
         }
     }
 }

@@ -116,6 +116,8 @@
 "VIDEOS" = "वीडियो";
 "SEASON" = "सीज़न";
 "POSTER" = "पोस्टर";
+"SHOW_MORE" = "और दिखाएं...";
+"SHOW_LESS" = "कम दिखाएं...";
 
 // MARK: - Like -
 "FAVORITE" = "पसंदीदा";
@@ -126,10 +128,13 @@
 // MARK: - Notes -
 "NOTES" = "नोट्स";
 "ADD_NOTES" = "नोट्स जोड़ें";
+"EDIT_NOTES" = "नोट्स संपादित करें";
 "DELETE_NOTES" = "नोट्स हटाएं";
 "NO" = "नहीं";
 "DELETE" = "हटाएं";
 "DELETE_INFO" = "क्या आप वाकई इस नोट को हटाना चाहते हैं?";
+"NO_NOTES" = "अभी तक कोई नोट्स नहीं";
+"NO_NOTES_INFO" = "अपना पहला नोट बनाने के लिए नीचे दिए गए नोट जोड़ें बटन पर टैप करें।";
 
 // MARK: - Add Note -
 "NOTE_TITLE" = "नोट शीर्षक";
@@ -142,6 +147,8 @@
 "UNPIN" = "अनपिन करें";
 "PIN" = "पिन करें";
 "SHARE" = "शेयर करें";
+"NO_PINNED_NOTES" = "अभी तक कोई पिन किया गया नोट नहीं";
+"NO_PINNED_NOTES_INFO" = "इसे यहां जोड़ने के लिए किसी भी नोट पर पिन आइकन पर टैप करें।";
 
 // MARK: - Setting -
 "SETTING" = "सेटिंग";
@@ -150,3 +157,45 @@
 "PRIVECY_POLICY" = "गोपनीयता नीति";
 "TERMS_USE" = "उपयोग की शर्तें";
 "ABOUT_US" = "हमारे बारे में";
+
+// MARK: - Photo Edit -
+"SELECT_PHOTO" = "एडिट के लिए एक फोटो चुनें";
+"CROP" = "क्रॉप";
+"FILTER" = "फ़िल्टर";
+"ADJUST" = "समायोजित करें";
+
+"CONTRAST" = "कंट्रास्ट";
+"LIGHT" = "लाइट";
+"DARK" = "डार्क";
+"HUE" = "ह्यू";
+"SATURATION" = "सैचुरेशन";
+"TEMP" = "टेम्प";
+"VIGNETTE" = "विनेट";
+
+"ORIGINAL" = "ओरिजिनल";
+"SEPIA" = "सीपिया";
+"MONO" = "मोनो";
+"NORI" = "नॉयर";
+"FADE" = "फेड";
+"CHROME" = "क्रोम";
+"VINTAGE" = "विंटेज";
+"DRAMATIC" = "ड्रामैटिक";
+"COOL" = "कूल";
+"WARM" = "वार्म";
+"BOOST" = "बूस्ट";
+"VIVID" = "विविड";
+"VIVID_WARM" = "विविड वार्म";
+"VIVID_COOL" = "विविड कूल";
+"PROCESS" = "प्रोसेस";
+"TRANSFER" = "ट्रांसफर";
+"INSTANT" = "इंस्टेंट";
+"TONAL" = "टोनल";
+"BLOOM" = "ब्लूम";
+"GLOOM" = "ग्लूम";
+"SHARPEN" = "शार्पन";
+"CRYSTALLIZE" = "क्रिस्टलाइज़";
+"PIXELATE" = "पिक्सलेट";
+"COMIC" = "कॉमिक";
+"EDGES" = "एजेस";
+"POSTERIZE" = "पोस्टराइज़";
+"VIGNETTE" = "विनेट";

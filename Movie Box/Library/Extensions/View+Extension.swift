@@ -13,7 +13,7 @@ extension View {
         self
             .background (
                 ZStack {
-                    Image("img_background")
+                    Image(Device.isIpad ? "img_background_ipad" : "img_background")
                         .resizable()
                         .scaledToFill()
                         .frame(width: screenWidth, height: screenHeight, alignment: .center)
@@ -23,12 +23,17 @@ extension View {
             )
             .navigationBarBackButtonHidden(true)
             .foregroundColor(.whiteColour)
-            .onAppear() {
-                SwipeBackManager.shared.isEnabled = isSwapBack
-            }
     }
     
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+    
+    func shimmer() -> some View {
+        self
+            .background(
+                Color.gray.opacity(0.4)
+                    .modifier(ShimmerModifier())
+            )
     }
 }
