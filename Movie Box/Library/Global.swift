@@ -36,7 +36,6 @@ final class SwipeBackManager {
 }
 
 // MARK: - Default message -
-
 let noInternet = "Please check you're internet connection!"
 
 struct AppInfo {

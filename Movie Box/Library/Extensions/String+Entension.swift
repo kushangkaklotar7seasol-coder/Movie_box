@@ -153,6 +153,10 @@ class Strings {
     static var unPin: String { "UNPIN".localized() }
     static var pin: String { "PIN".localized() }
     static var share: String { "SHARE".localized() }
+    static var noNotes: String { "NO_NOTES".localized() }
+    static var noNotesInfo: String { "NO_NOTES_INFO".localized() }
+    static var noPinnedNotes: String { "NO_PINNED_NOTES".localized() }
+    static var noPinnedNotesInfo: String { "NO_PINNED_NOTES_INFO".localized() }
     
     // MARK: - Add Note -
     static var noteTitle: String { "NOTE_TITLE".localized() }

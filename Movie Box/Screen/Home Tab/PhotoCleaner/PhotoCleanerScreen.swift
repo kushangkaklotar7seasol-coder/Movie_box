@@ -107,12 +107,16 @@ struct PhotoCleanerScreen: View {
                 } else if viewModel.duplicateGroups.isEmpty {
                     Spacer()
                     
-                    Text(Strings.noDublicate)
-                        .font(.system(size: 21, weight: .semibold))
-                    
-                    Text(Strings.noDublicateInfo)
-                        .font(.system(size: 17, weight: .regular))
-                        .foregroundColor(.grayColour)
+                    VStack(spacing: 10) {
+                        Image("ic_nonotes")
+                        
+                        Text(Strings.noDublicate)
+                        
+                        Text(Strings.noDublicateInfo)
+                            .padding(.horizontal, 20)
+                            .foregroundColor(.grayColour)
+                    }
+                    .multilineTextAlignment(.center)
                     
                     Spacer()
                 }

@@ -59,6 +59,20 @@ struct NotesScreen: View {
                 }
             }
             .padding(.bottom, 110)
+            
+            if viewModel.allNotes.isEmpty {
+                VStack(spacing: 10) {
+                    Image("ic_nonotes")
+                    
+                    Text(Strings.noNotes)
+                    
+                    Text(Strings.noNotesInfo)
+                        .padding(.horizontal, 20)
+                        .foregroundColor(.grayColour)
+                }
+                .multilineTextAlignment(.center)
+            }
+            
         }
         .defaultPage(false)
         .edgesIgnoringSafeArea(.bottom)

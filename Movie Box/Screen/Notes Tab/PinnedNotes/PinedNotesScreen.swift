@@ -18,6 +18,19 @@ struct PinedNotesScreen: View {
                 
                 PinedNotesDesign.NotesGridView(viewModel: viewModel)
             }
+            
+            if viewModel.allNotes.isEmpty {
+                VStack(spacing: 10) {
+                    Image("ic_nonotes")
+                    
+                    Text(Strings.noPinnedNotes)
+                    
+                    Text(Strings.noPinnedNotesInfo)
+                        .padding(.horizontal, 20)
+                        .foregroundColor(.grayColour)
+                }
+                .multilineTextAlignment(.center)
+            }
         }
         .defaultPage()
         .onAppear() {
