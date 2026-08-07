@@ -17,6 +17,11 @@ struct SplashScreen: View {
                 .font(.system(size: 22, weight: .semibold))
         }
         .defaultPage()
+        .onAppear() {
+            viewModel.webservice_getJSON_api {
+                viewModel.navigationManager()
+            }
+        }
     }
 }
 
@@ -147,26 +152,32 @@ class DefaultDesign {
         var url: String = ""
         var name: String = ""
         
-        var width: CGFloat {
-            return 100
+        var posterSize: CGFloat {
+            if Device.isiPadPortrait {
+                return screenWidth/6
+            } else if Device.isLandscape {
+                return screenWidth/7
+            } else {
+                return screenWidth/4
+            }
         }
         
         var body: some View {
             VStack(spacing: 8) {
                 ZStack {
                     ZStack {
-                        DefaultDesign.ImageView(url: imageUrl+url, width: width-10, height: width-10, placeholderImage: "ic_noImage")
+                        DefaultDesign.ImageView(url: imageUrl+url, width: posterSize-10, height: posterSize-10, placeholderImage: "ic_noImage")
                     }
-                    .frame(maxWidth: width, maxHeight: width)
+                    .frame(maxWidth: posterSize, maxHeight: posterSize)
                     .background(.whiteColour)
-                    .cornerRadius((width-10)/2 )
+                    .cornerRadius((posterSize-10)/2 )
                     .padding()
                 }
-                .frame(width: width, height: width, alignment: .center)
+                .frame(width: posterSize, height: posterSize, alignment: .center)
                 .background(.clear)
-                .cornerRadius(width/2)
+                .cornerRadius(posterSize/2)
                 .overlay {
-                    RoundedRectangle(cornerRadius: width/2)
+                    RoundedRectangle(cornerRadius: posterSize/2)
                         .fill(.clear)
                         .strokeBorder(.whiteColour.opacity(0.2))
                 }
@@ -177,7 +188,7 @@ class DefaultDesign {
                     .lineLimit(1)
                     .multilineTextAlignment(.leading)
             }
-            .frame(width: width)
+            .frame(width: posterSize)
         }
     }
     
@@ -188,7 +199,14 @@ class DefaultDesign {
         @State var isLiked: Bool = false
         
         var width: CGFloat {
-            return (screenWidth-40)/2.2
+            
+            if Device.isiPadPortrait {
+                return screenWidth/4.5
+            } else if Device.isiPadLandscape {
+                return screenWidth/5.5
+            } else {
+                return screenWidth/2.5
+            }
         }
         
         var height: CGFloat {
@@ -312,7 +330,6 @@ class DefaultDesign {
                         }
                     }
                     .padding(.horizontal, 16)
-//                    .background()
                 }
             }
         }

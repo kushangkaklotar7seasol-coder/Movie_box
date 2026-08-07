@@ -9,11 +9,12 @@ import SwiftUI
 
 struct MovieListScreen: View {
     @StateObject var viewModel: MovieListViewModel
+    @State var refreshID = UUID()
     
-    let columns = [
-        GridItem(.flexible(), spacing: 15),
-        GridItem(.flexible(), spacing: 15)
-    ]
+    var columns: [GridItem] {
+        let count = Device.isiPadPortrait ? 4 : Device.isiPadLandscape ? 5 : 2
+        return Array(repeating: GridItem(.flexible(), spacing: 15), count: count)
+    }
     
     var body: some View {
         ZStack {
@@ -32,11 +33,15 @@ struct MovieListScreen: View {
                                 }
                         }
                     }
+                    .id(refreshID)
                 }
             }
             .padding(.horizontal, 16)
         }
         .defaultPage()
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            refreshID = UUID()
+        }
     }
     
     func loadMoreIfNeeded(currentItem: Int) {

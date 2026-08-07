@@ -27,6 +27,9 @@ class PhotoEditViewModel: ObservableObject {
     /// (i.e. everything EXCEPT the filter, so filters never stack on top of each other).
     var tempOriginalImage: UIImage?
 
+    @Published var showAlert: Bool = false
+    @Published var showSettingsAlert: Bool = false
+    
     // MARK: - Adjust state (bound to sliders = live preview values)
     @Published var isShowAdjust: Bool = false
     @Published var contrast: Double = 1.0
@@ -106,14 +109,6 @@ class PhotoEditViewModel: ObservableObject {
     }
 
     // MARK: - Crop
-
-    /// Call this from the cropper's `onCropped` callback.
-    /// The cropped image becomes the new base (`originalImage`) for everything
-    /// that follows, so future filters/adjustments apply on top of the crop
-    /// instead of silently reverting to the pre-crop photo.
-    /// Filter/adjust values reset to neutral because the crop input already
-    /// had them baked into its pixels (it was made from `selectedImage`) —
-    /// keeping the old slider values would double-apply them.
     func applyCrop(_ croppedImage: UIImage) {
         originalImage = croppedImage
         appliedFilter = Strings.original
@@ -124,7 +119,6 @@ class PhotoEditViewModel: ObservableObject {
     }
 
     // MARK: - Filter panel
-
     func openFilterPanel() {
         if !isShowFiltes {
             // Base = original + committed adjustments, WITHOUT any filter baked in,
@@ -248,6 +242,42 @@ class PhotoEditViewModel: ObservableObject {
         return UIImage(cgImage: cgImage, scale: inputImage.scale, orientation: inputImage.imageOrientation)
     }
 
+    func saveImageUsingPhotos(image: UIImage) {
+
+        PHPhotoLibrary.requestAuthorization(for: .readWrite) { newStatus in
+            DispatchQueue.main.async {
+                switch newStatus {
+                case .authorized, .limited:
+                    
+                    PHPhotoLibrary.shared().performChanges({
+                        PHAssetChangeRequest.creationRequestForAsset(from: image)
+                    }) { success, error in
+                        if success {
+                            print("Successfully saved to Photos library.")
+                            
+                            DispatchQueue.main.async {
+                                self.showAlert = true
+                            }
+                        } else if let error = error {
+                            print("Failed to save image: \(error.localizedDescription)")
+                        }
+                    }
+                    
+                case .denied, .restricted:
+                    print("Permission denied")
+                    self.showSettingsAlert = true
+                    
+                case .notDetermined:
+                    print("Permission not determined yet")
+                    self.showSettingsAlert = true
+                    
+                @unknown default:
+                    self.showSettingsAlert = true
+                }
+            }
+        }
+    }
+    
     func applyFilter(_ image: UIImage, filter: String) -> UIImage {
        guard let ciImage = CIImage(image: image) else { return image }
 

@@ -9,10 +9,15 @@ import SwiftUI
 
 struct CategoryListScreen: View {
     @StateObject var viewModel: CategoryListViewModel
-    let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
+//    let columns = [
+//        GridItem(.flexible()),
+//        GridItem(.flexible())
+//    ]
+    var columns: [GridItem] {
+        let count = Device.isiPadPortrait ? 4 : Device.isiPadLandscape ? 5 : 2
+        return Array(repeating: GridItem(.flexible(), spacing: 15), count: count)
+    }
+    @State var refreshID = UUID()
     
     var body: some View {
         ZStack {
@@ -32,11 +37,15 @@ struct CategoryListScreen: View {
                                 }
                         }
                     }
+                    .id(refreshID)
                 }
             }
             .padding(.horizontal, 16)
         }
         .defaultPage()
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            refreshID = UUID()
+        }
     }
     
     func loadMoreIfNeeded(currentItem: Int) {

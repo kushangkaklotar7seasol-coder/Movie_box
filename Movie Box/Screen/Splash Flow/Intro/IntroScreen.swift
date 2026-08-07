@@ -82,7 +82,7 @@ struct IntroScreen: View {
                         }
                     } else {
                         UserdefaultManager.shared.saveIntro(0)
-                        Router.shared.push(.tab)
+                        Router.shared.updateRoot(.tab)
                     }
                 }
                 .padding(.bottom,40)

@@ -55,5 +55,15 @@ class Utility {
         let generator = UIImpactFeedbackGenerator(style: .medium)
             generator.impactOccurred()
     }
+    
+    class func openAppPermissionSettings() {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(settingsUrl) {
+            UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+        }
+    }
 }
 

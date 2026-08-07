@@ -10,11 +10,16 @@ import SwiftUI
 struct ArtistScreen: View {
     @StateObject var viewModel: ArtistViewModel
     
-    let columns = [
-        GridItem(.flexible(), spacing: 15),
-        GridItem(.flexible(), spacing: 15),
-        GridItem(.flexible(), spacing: 15)
-    ]
+//    let columns = [
+//        GridItem(.flexible(), spacing: 15),
+//        GridItem(.flexible(), spacing: 15),
+//        GridItem(.flexible(), spacing: 15)
+//    ]
+    //isiPad ? (Device.isiPadLandscape ? 6 : 5) : 3
+    var columns: [GridItem] {
+        let count = Device.isiPadPortrait ? 5 : Device.isiPadLandscape ? 6 : 3
+        return Array(repeating: GridItem(.flexible(), spacing: 15), count: count)
+    }
     
     var body: some View {
         ZStack {

@@ -23,9 +23,21 @@ let imageUrl = "https://image.tmdb.org/t/p/w600_and_h900_face"
 public let ACCESS = "AKIA2FCATE7MLGSZBHML"
 public let SECRET = "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"
 
+// MARK: - Ads manager -
+let isPro = false
+var bannerId = ""
+var nativeId = ""
+var appopenId = ""
+var rewardId = ""
+var interstialId = ""
+var addButtonColor = ""
+var smallNativeBannerId = ""
+var adsCount = 0
+var adsPlus = 0
+var sholdShowAppOpenAd = true
+let isFirstLaunchKey = "isFirstLaunch"
+
 // MARK: - Supporting class
-//let locationManager = LocationManager()
-//
 let database = SQLiteManager.shared
 
 var isYoutubeEnabled = false
@@ -98,11 +110,19 @@ struct Device {
     }
     
     static var isiPadLandscape: Bool {
-        currentSize.width > currentSize.height
+        if isIpad {
+            return currentSize.width > currentSize.height
+        } else {
+            return false
+        }
     }
  
     static var isiPadPortrait: Bool {
-        currentSize.height > currentSize.width
+        if isIpad {
+            return currentSize.height > currentSize.width
+        } else {
+            return false
+        }
     }
     
     static var currentSize: CGSize {

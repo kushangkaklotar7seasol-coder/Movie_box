@@ -13,10 +13,11 @@ extension View {
         self
             .background (
                 ZStack {
-                    Image(Device.isIpad ? "img_background_ipad" : "img_background")
+                    Image("img_background")//Device.isIpad ? Device.isLandscape ? "img_background_ipad_landscape" : "img_background_ipad" :
                         .resizable()
                         .scaledToFill()
                         .frame(width: screenWidth, height: screenHeight, alignment: .center)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .clipped()
                         .edgesIgnoringSafeArea(.all)
                 }

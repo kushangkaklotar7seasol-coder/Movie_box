@@ -9,7 +9,6 @@ import Foundation
 
 var proxiUrl = "https://api-livevideocall.7seasol.in/proxy?url="
 let serverUrl = proxiUrl + "https://api.themoviedb.org/3/"
-var weatherAPIKey = ""
 
 //  MARK: - Home -
 let topRatedMovieUrl = serverUrl + "movie/top_rated"

@@ -3,13 +3,42 @@ import _PhotosUI_SwiftUI
 
 struct PhotoEditScreen: View {
     @StateObject var viewModel = PhotoEditViewModel()
-
+    
     var body: some View {
         ZStack {
             VStack {
-                DefaultDesign.Header(name: Strings.photoEdit)
-                    .padding(.horizontal, 16)
-
+                HStack {
+                    
+                    Button {
+                        Router.shared.pop()
+                    } label: {
+                        Image("ic_back")
+                            .resizable()
+                            .frame(width: 44, height: 44, alignment: .center)
+                    }
+                    
+                    Spacer()
+                    
+                    Text(Strings.photoEdit)
+                        .font(.system(size: 18, weight: .semibold))
+                    
+                    Spacer()
+                    
+                    Button {
+                        if let image = viewModel.selectedImage {
+                            viewModel.saveImageUsingPhotos(image:  image)
+                        }
+                    } label: {
+                        Image("ic_image_download")
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(!viewModel.isPhtoAvailable || viewModel.isShowFiltes || viewModel.isShowAdjust ? .grayColour : .whiteColour)
+                            .frame(width: 30, height: 30, alignment: .center)
+                    }
+                    .disabled(!viewModel.isPhtoAvailable || viewModel.isShowFiltes || viewModel.isShowAdjust ? true : false)
+                }
+                .padding(.horizontal, 16)
+                
                 VStack(spacing: 10) {
                     ZStack {
                         if viewModel.isPhtoAvailable {
@@ -44,6 +73,7 @@ struct PhotoEditScreen: View {
                                     .onTapGesture {
                                         viewModel.isShowCropper = true
                                     }
+                                
                                 PhotoEditDesign.btn(image: "ic_filter", name: Strings.filter, isSelected: viewModel.isShowFiltes)
                                     .onTapGesture {
                                         withAnimation(.easeInOut(duration: 0.3)) {
@@ -105,6 +135,19 @@ struct PhotoEditScreen: View {
                     }
                 }
             }
+        }
+        .alert(Strings.downloadSuccess, isPresented: $viewModel.showAlert) {
+            Button(Strings.ok) { }
+        } message: {
+            Text(Strings.checkPhotosApp)
+        }
+        .alert(Strings.permissionAccess, isPresented: $viewModel.showSettingsAlert) {
+            Button(Strings.cancel, role: .cancel) { }
+            Button(Strings.openSetting) {
+                Utility.openAppPermissionSettings()
+            }
+        } message: {
+            Text(Strings.photoDownloadAllow)
         }
         .fullScreenCover(isPresented: $viewModel.isShowCropper) {
             if let originalImage = viewModel.selectedImage {

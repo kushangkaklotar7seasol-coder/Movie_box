@@ -215,4 +215,11 @@ class Strings {
     static var comic: String { "COMIC".localized() }
     static var edges: String { "EDGES".localized() }
     static var posterize: String { "POSTERIZE".localized() }
+    
+    static var downloadSuccess: String { "DOWNLOAD_SUCCESS".localized() }
+    static var checkPhotosApp: String { "CHECK_PHOTO_APP".localized() }
+    static var permissionAccess: String { "PERMISSION_ACCESS".localized() }
+    static var openSetting: String { "OPEN_SETTING".localized() }
+    static var photoDownloadAllow: String { "ALLOW_PHOTO_DOWNLOAD".localized() }
+    static var ok: String { "OK".localized() }
 }
