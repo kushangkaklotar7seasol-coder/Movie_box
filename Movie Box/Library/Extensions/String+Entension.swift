@@ -166,6 +166,8 @@ class Strings {
     static var updateNote: String { "UPDATE_NOTE".localized() }
     static var saveNote: String { "SAVE_NOTE".localized() }
     static var pinnedNotes: String { "PINNED_NOTES".localized() }
+    static var update: String { "UPDATE".localized() }
+    static var save: String { "SAVE".localized() }
     
     // MARK: - Setting -
     static var setting: String { "SETTING".localized() }

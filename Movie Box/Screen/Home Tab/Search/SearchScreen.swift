@@ -46,11 +46,6 @@ struct SearchScreen: View {
                                 LazyVGrid(columns: columns) {
                                     ForEach(array.indices, id: \.self) { index in
                                         DefaultDesign.MovieCard(movies: array[index])
-                                            .onTapGesture {
-                                                Utility.closeKeyboard()
-                                                viewModel.selectedMovie = array[index]
-                                                viewModel.isShowmovieDetail = true
-                                            }
                                             .onAppear() {
                                                 self.loadMoreIfNeeded(currentItem: index)
                                             }
@@ -65,11 +60,6 @@ struct SearchScreen: View {
                                 LazyVGrid(columns: columns) {
                                     ForEach(array.indices, id: \.self) { index in
                                         DefaultDesign.MovieCard(movies: array[index])
-                                            .onTapGesture {
-                                                Utility.closeKeyboard()
-                                                viewModel.selectedMovie = array[index]
-                                                viewModel.isShowmovieDetail = true
-                                            }
                                             .onAppear() {
                                                 self.loadMoreIfNeeded(currentItem: index)
                                             }

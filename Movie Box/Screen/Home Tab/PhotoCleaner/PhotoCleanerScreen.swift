@@ -148,9 +148,7 @@ struct PhotoCleanerScreen: View {
         .defaultPage()
         .edgesIgnoringSafeArea(.bottom)
         .alert(Strings.photoAccess, isPresented: $viewModel.isShowPermissionAlert) {
-            Button(Strings.cancel, role: .cancel) {
-                Router.shared.pop()
-            }
+            Button(Strings.cancel, role: .cancel) { }
             Button(Strings.openSettings) {
                 if let url = URL(string: UIApplication.openSettingsURLString) {
                     UIApplication.shared.open(url)

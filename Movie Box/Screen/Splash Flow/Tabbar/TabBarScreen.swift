@@ -89,11 +89,15 @@ struct CustomTabBar: View {
         }
         .padding(4)
         .background(
-            ZStack { }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.whiteColour.opacity(0.5))
-            .blur(radius: 30)
+            ZStack {
+                Color.gray.opacity(0.1)
+                        .background(.ultraThinMaterial)
+            }
         )
         .cornerRadius(32)
+        .overlay {
+            RoundedRectangle(cornerRadius: 32)
+                .strokeBorder(.whiteColour.opacity(0.2))
+        }
     }
 }

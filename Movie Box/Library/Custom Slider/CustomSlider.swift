@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
- 
+
+
 struct CustomGradientSlider: View {
     @Binding var value: Double
     let bounds: ClosedRange<Double>
-    let step: Double
+    var step: Double? = nil // step ને ઓપ્શનલ બનાવ્યું
     
     let leftColor = LinearGradient(colors: [.grayColour, .grayColour], startPoint: .topLeading, endPoint: .bottomTrailing)
     let rightColor = LinearGradient(colors: [.cyanColour, .greenColour], startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -26,19 +27,19 @@ struct CustomGradientSlider: View {
             let activeWidth = max(0, min(totalWidth, percentage * totalWidth))
             
             ZStack(alignment: .leading) {
-                // 1. Right Side Track (જમણી બાજુનો બેકગ્રાઉન્ડ કલર)
-                Capsule()
-                    .fill(rightColor)
-                    .frame(height: trackHeight)
-                
-                // 2. Left Side Track (ડાબી બાજુનો એક્ટિવ કલર)
+                // 1. Right Side Track
                 Capsule()
                     .fill(leftColor)
+                    .frame(height: trackHeight)
+                
+                // 2. Left Side Track
+                Capsule()
+                    .fill(rightColor)
                     .frame(width: activeWidth, height: trackHeight)
                 
                 // 3. Thumb (Circle)
                 Circle()
-                    .fill(rightColor) // જો વર્તુળ પર અલગ કલર કે ગ્રેડિઅન્ટ મૂકવો હોય તો અહીં બદલી શકો છો
+                    .fill(rightColor)
                     .frame(width: thumbDiameter, height: thumbDiameter)
                     .offset(x: max(0, min(totalWidth - thumbDiameter, activeWidth - thumbDiameter / 2)))
             }
@@ -51,12 +52,19 @@ struct CustomGradientSlider: View {
                         let newPercentage = max(0, min(1, locationX / totalWidth))
                         let rawValue = bounds.lowerBound + Double(newPercentage) * (bounds.upperBound - bounds.lowerBound)
                         
-                        // Snap to step
-                        let steppedValue = (rawValue / step).rounded() * step
-                        let clampedValue = max(bounds.lowerBound, min(bounds.upperBound, steppedValue))
+                        let finalValue: Double
                         
-                        if value != clampedValue {
-                            value = clampedValue
+                        // ૧. જો step આપેલું હોય તો જ rounding કરવું
+                        if let step = step, step > 0 {
+                            let steppedValue = (rawValue / step).rounded() * step
+                            finalValue = max(bounds.lowerBound, min(bounds.upperBound, steppedValue))
+                        } else {
+                            // ૨. નહીંતર એકદમ સ્મૂથ (Continuous) વેલ્યૂ સેટ કરવી
+                            finalValue = max(bounds.lowerBound, min(bounds.upperBound, rawValue))
+                        }
+                        
+                        if value != finalValue {
+                            value = finalValue
                         }
                     }
             )

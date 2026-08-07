@@ -21,12 +21,9 @@ class MovieDetailViewModel: ObservableObject {
     
     @Published var isLiked = false
     
-    @Published var posterIndex: Int = 0
-    
     @Published var isYoutubeVideo = false
     @Published var youtubeUrl = ""
     
-    @Published var isShowPreview = false
     @Published var isShowAllCast = false
     
     var movieId: Int?

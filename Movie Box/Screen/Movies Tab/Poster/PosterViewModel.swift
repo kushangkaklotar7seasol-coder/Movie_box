@@ -10,8 +10,6 @@ import Combine
 
 class PosterViewModel: ObservableObject {
     @Published var images: [MovieImage] = []
-    @Published var posterIndex: Int = 0
-    @Published var isShowPosterDetail = false
     
     init(images: [MovieImage] = []) {
         self.images = images

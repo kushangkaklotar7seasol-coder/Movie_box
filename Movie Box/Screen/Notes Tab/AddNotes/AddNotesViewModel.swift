@@ -16,6 +16,7 @@ class AddNotesViewModel: ObservableObject {
     
     @Published var oldNote: Notes?
     @Published var isEdit: Bool = false
+    @Published var keyboardHeight: CGFloat = 0
     
     init(oldNote: Notes? = nil) {
         self.oldNote = oldNote

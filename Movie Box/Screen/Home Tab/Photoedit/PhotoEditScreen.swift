@@ -149,6 +149,15 @@ struct PhotoEditScreen: View {
         } message: {
             Text(Strings.photoDownloadAllow)
         }
+        .photosPicker(
+            isPresented: $viewModel.isShowPhotoPicker,
+            selection: $viewModel.selectedItem,
+            matching: .images,
+            photoLibrary: .shared()
+        )
+        .onAppear {
+            viewModel.isShowPhotoPicker = true
+        }
         .fullScreenCover(isPresented: $viewModel.isShowCropper) {
             if let originalImage = viewModel.selectedImage {
                 ImageCropperView(
@@ -306,72 +315,58 @@ class PhotoEditDesign {
                         CustomGradientSlider(
                             value: $viewModel.contrast,
                             bounds: 0.0...2.0,
-                            step: 0.1
                         )
                         .onChange(of: viewModel.contrast) { oldValue, newValue in
                             viewModel.applyAdjustments()
                         }
-//                        Text("\(viewModel.contrast)")
                     } else if selectedAdjustId == 1 {
                         CustomGradientSlider(
                             value: $viewModel.brightness,
-                            bounds: -0.5...0.5,
-                            step: 0.1
+                            bounds: -0.5...0.5
                         )
                         .onChange(of: viewModel.brightness) { oldValue, newValue in
                             viewModel.applyAdjustments()
                         }
-//                        Text("\(viewModel.brightness)")
                     } else if selectedAdjustId == 2 {
                         CustomGradientSlider(
                             value: $viewModel.dark,
                             bounds: -1.0...1.0,
-                            step: 0.05
                         )
                         .onChange(of: viewModel.dark) { _, _ in
                             viewModel.applyAdjustments()
                         }
-//                        Text(String(format: "%.2f", viewModel.dark))
                     } else if selectedAdjustId == 3 {
                         CustomGradientSlider(
                             value: $viewModel.hueAngle,
                             bounds: -3.14...3.14,
-                            step: 0.1
                         )
                         .onChange(of: viewModel.hueAngle) { _, _ in
                             viewModel.applyAdjustments()
                         }
-//                        Text(String(format: "%.2f", viewModel.hueAngle))
                     } else if selectedAdjustId == 4 {
                         CustomGradientSlider(
                             value: $viewModel.saturation,
                             bounds: -0.0...2.0,
-                            step: 0.1
                         )
                         .onChange(of: viewModel.saturation) { _, _ in
                             viewModel.applyAdjustments()
                         }
-//                        Text(String(format: "%.2f", viewModel.saturation))
                     } else if selectedAdjustId == 5 {
                         CustomGradientSlider(
                             value: $viewModel.temp,
                             bounds: 3000.0...10000.0,
-                            step: 0.1
                         )
                         .onChange(of: viewModel.temp) { _, _ in
                             viewModel.applyAdjustments()
                         }
-//                        Text(String(format: "%.2f", viewModel.temp))
                     } else if selectedAdjustId == 6 {
                         CustomGradientSlider(
                             value: $viewModel.vignette,
                             bounds: 0.0...2.0,
-                            step: 0.1
                         )
                         .onChange(of: viewModel.vignette) { _, _ in
                             viewModel.applyAdjustments()
                         }
-//                        Text(String(format: "%.2f", viewModel.vignette))
                     }
                 }
                 .padding(.horizontal, 16)

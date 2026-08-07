@@ -9,22 +9,17 @@ class PhotoEditViewModel: ObservableObject {
     @Published var isPhtoAvailable: Bool = false
     @Published var selectedItem: PhotosPickerItem? = nil
 
-    /// The pristine, never-modified photo the user picked. NEVER mutate this directly.
     @Published var originalImage: UIImage?
-    /// What's currently shown on screen (original + committed filter + committed adjustments).
     @Published var selectedImage: UIImage?
 
     @Published var isShowCropper: Bool = false
+    @Published var isShowPhotoPicker: Bool = false
 
     // MARK: - Filter state
-    /// Bound to the UI while the filter sheet is open (live preview value).
     @Published var selectedFilter: String = Strings.original
-    /// The filter that has actually been saved/confirmed. This is what persists
-    /// across opening/closing the sheet.
     private(set) var appliedFilter: String = Strings.original
+    
     @Published var isShowFiltes: Bool = false
-    /// Base image used while the filter sheet is open = original + committed adjustments
-    /// (i.e. everything EXCEPT the filter, so filters never stack on top of each other).
     var tempOriginalImage: UIImage?
 
     @Published var showAlert: Bool = false
@@ -40,7 +35,6 @@ class PhotoEditViewModel: ObservableObject {
     @Published var temp: Double = 6500.0
     @Published var vignette: Double = 0.0
 
-    /// Snapshot of the last SAVED adjust values. Restored on Cancel, updated on Save.
     private var committedAdjust = AdjustValues()
 
     struct AdjustValues {

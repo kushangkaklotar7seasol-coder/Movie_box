@@ -37,6 +37,10 @@ var adsPlus = 0
 var sholdShowAppOpenAd = true
 let isFirstLaunchKey = "isFirstLaunch"
 
+enum userdefaultKey {
+    static let hasShownConsent = "hasShownConsent"
+}
+
 // MARK: - Supporting class
 let database = SQLiteManager.shared
 

@@ -236,10 +236,12 @@ class HomeDesign {
                                 Text(discover.name.localized())
                                     .font(.system(size: 13, weight: .medium))
                                     .foregroundColor(.whiteColour)
+                                    .lineLimit(1)
                                 
                                 Text(discover.info.localized())
                                     .font(.system(size: 12, weight: .regular))
                                     .foregroundColor(.grayColour)
+                                    .lineLimit(1)
                             }
                             
                             Spacer()

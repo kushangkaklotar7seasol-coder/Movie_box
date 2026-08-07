@@ -223,6 +223,7 @@ struct NotesGridView: View {
                     .font(.system(size: 12, weight: .regular))
                     .foregroundColor(.grayColour)
                     .padding(.top, 6)
+                    .frame(maxHeight: screenHeight/2)
             }
         }
         .padding()

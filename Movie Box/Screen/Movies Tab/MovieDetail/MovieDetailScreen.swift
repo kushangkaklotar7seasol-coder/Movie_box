@@ -11,6 +11,8 @@ import WebKit
 
 struct MovieDetailScreen: View {
     @StateObject var viewModel: MovieDetailViewModel
+    var upperviewPadding: CGFloat = 30
+    
     let columns = [
         GridItem(.flexible(), spacing: 10),
         GridItem(.flexible(), spacing: 10),
@@ -33,6 +35,22 @@ struct MovieDetailScreen: View {
                             .scaledToFill()
                             .frame(width: screenWidth, height: screenWidth)
                             .clipped()
+                        
+                        if isYoutubeEnabled {
+                            VStack {
+                                Spacer()
+                                
+                                HStack(alignment: .center) {
+                                    DefaultDesign.SmallButton(image: "ic_play_empty", onClick: {
+                                        viewModel.isYoutubeVideo = true
+                                    })
+                                    
+                                    Text("Play Trailer")
+                                        .font(.system(size: 18, weight: .medium))
+                                }
+                                .padding(.bottom, upperviewPadding)
+                            }
+                        }
                     }
                     .frame(width: screenWidth, height: screenWidth, alignment: .center)
                     .background()
@@ -185,8 +203,7 @@ struct MovieDetailScreen: View {
                                             .background()
                                             .cornerRadius(24)
                                             .onTapGesture {
-                                                viewModel.posterIndex = index
-                                                viewModel.isShowPreview = true
+                                                Router.shared.push(.posterDetail(movies: viewModel.movieImage?.posters ?? [], index: index))
                                             }
                                         }
                                     }
@@ -253,7 +270,7 @@ struct MovieDetailScreen: View {
                     }
                     .background(.blackColour)
                     .cornerRadius(20)
-                    .padding(.top, -30)
+                    .padding(.top, -upperviewPadding)
                     .padding(.bottom, 30)
                     
                     Spacer()
@@ -287,9 +304,6 @@ struct MovieDetailScreen: View {
                         }
                     }
             }
-        }
-        .sheet(isPresented: $viewModel.isShowPreview) {
-            PhotoPreviewSheet(images: viewModel.movieImage?.posters ?? [], selectedPosterIndex: viewModel.posterIndex)
         }
         .sheet(isPresented: $viewModel.isShowAllCast) {
             VStack {
@@ -413,6 +427,9 @@ struct PhotoPreviewSheet: View {
     
     var body: some View {
         VStack {
+            DefaultDesign.Header(name: "")
+                .padding(.horizontal, 16)
+            
             ZStack {
                 ScrollView(.horizontal) {
                     LazyHStack(spacing: 0) {
@@ -450,25 +467,52 @@ struct PhotoPreviewSheet: View {
             }
             
             HStack(spacing: 24) {
-                DefaultDesign.SmallButton(image: "ic_arrow_left") {
-                    if selectedIndex > 0 {
-                        selectedIndex -= 1
-//                        withAnimation(.easeInOut(duration: 0.35)) {
+                if selectedIndex > 0 {
+                    DefaultDesign.SmallButton(image: "ic_arrow_left") {
+                        if selectedIndex > 0 {
+                            selectedIndex -= 1
                             scrollPosition = selectedIndex
-//                        }
+                        }
                     }
+                } else {
+                    Image("ic_arrow_left")
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundColor(.grayColour.opacity(0.2))
+                        .frame(width: 24, height: 24, alignment: .center)
+                        .padding(10)
+                        .background(.grayColour.opacity(0.1))
+                        .cornerRadius(22)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 22)
+                                .strokeBorder(.grayColour.opacity(0.2), lineWidth: 1)
+                        }
                 }
                 
-                DefaultDesign.SmallButton(image: "ic_arrow_right") {
-                    if selectedIndex < images.count - 1 {
-                        selectedIndex += 1
-//                        withAnimation(.easeInOut(duration: 0.35)) {
+                if selectedIndex < images.count - 1 {
+                    DefaultDesign.SmallButton(image: "ic_arrow_right") {
+                        if selectedIndex < images.count - 1 {
+                            selectedIndex += 1
                             scrollPosition = selectedIndex
-//                        }
+                        }
                     }
+                } else {
+                    Image("ic_arrow_right")
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundColor(.grayColour.opacity(0.2))
+                        .frame(width: 24, height: 24, alignment: .center)
+                        .padding(10)
+                        .background(.grayColour.opacity(0.1))
+                        .cornerRadius(22)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 22)
+                                .strokeBorder(.grayColour.opacity(0.2), lineWidth: 1)
+                        }
                 }
             }
             .padding(.bottom, 24)
         }
+        .defaultPage()
     }
 }

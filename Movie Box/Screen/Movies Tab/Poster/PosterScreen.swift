@@ -40,8 +40,7 @@ struct PosterScreen: View {
                             .background()
                             .cornerRadius(24)
                             .onTapGesture {
-                                viewModel.posterIndex = index
-                                viewModel.isShowPosterDetail = true
+                                Router.shared.push(.posterDetail(movies: viewModel.images, index: index))
                             }
                         }
                     }
@@ -50,10 +49,6 @@ struct PosterScreen: View {
             .padding(.horizontal, 16)
         }
         .defaultPage()
-        .sheet(isPresented: $viewModel.isShowPosterDetail) {
-            PhotoPreviewSheet(images: viewModel.images,
-                              selectedPosterIndex: viewModel.posterIndex)
-        }
     }
 }
 

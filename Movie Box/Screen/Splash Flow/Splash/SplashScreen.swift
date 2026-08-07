@@ -18,7 +18,9 @@ struct SplashScreen: View {
         }
         .defaultPage()
         .onAppear() {
-            viewModel.webservice_getJSON_api {
+            viewModel.webservice_getJSON_api() {}
+            
+            viewModel.requestTrackingPermission() {
                 viewModel.navigationManager()
             }
         }
@@ -55,6 +57,7 @@ class DefaultDesign {
     struct FullScreenButton: View {
         var name: String
         var onClick: (() -> Void)?
+        var isDisable = false
         
         var body: some View {
             Button {
@@ -63,13 +66,14 @@ class DefaultDesign {
                 Text(name)
                     .frame(height: 54)
                     .frame(maxWidth: .infinity)
-                    .foregroundColor(.whiteColour)
+                    .foregroundColor(isDisable ? .grayColour : .whiteColour)
                     .font(.system(size: 18, weight: .semibold))
                     .background(
-                        LinearGradient(colors: [.cyanColour, .greenColour], startPoint: .topLeading, endPoint: .bottomTrailing)
+                        LinearGradient(colors: [.cyanColour.opacity(isDisable ? 0.4 : 1), .greenColour.opacity(isDisable ? 0.4 : 1)], startPoint: .topLeading, endPoint: .bottomTrailing)
                     )
                     .cornerRadius(14)
             }
+            .disabled(isDisable)
         }
     }
     
@@ -199,7 +203,6 @@ class DefaultDesign {
         @State var isLiked: Bool = false
         
         var width: CGFloat {
-            
             if Device.isiPadPortrait {
                 return screenWidth/4.5
             } else if Device.isiPadLandscape {
@@ -298,6 +301,7 @@ class DefaultDesign {
             }
             .frame(width: width, alignment: .center)
             .onTapGesture {
+                Utility.closeKeyboard()
                 Router.shared.push(.movieDetail(movieId: movies.id, isMovie: movies.title != nil ? true : false))
 //                movieDetail
             }

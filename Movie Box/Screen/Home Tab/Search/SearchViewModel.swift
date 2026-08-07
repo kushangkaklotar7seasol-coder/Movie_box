@@ -21,9 +21,6 @@ class SearchViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     @Published var selectedIndex: Int = 0
     
-    @Published var selectedMovie: MediaItem?
-    @Published var isShowmovieDetail = false
-    
     @Published var keyboardHeight: CGFloat = 0
     @Published var isKeyboardVisible: Bool = false
     

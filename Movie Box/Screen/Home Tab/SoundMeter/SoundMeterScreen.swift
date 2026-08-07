@@ -68,7 +68,7 @@ struct SoundMeterScreen: View {
                             .padding()
                             .frame(maxWidth: .infinity)
                             .background(
-                                LinearGradient(colors: [viewModel.isStarted ? . clear : .cyanColour, viewModel.isStarted ? . clear : .greenColour], startPoint: .top, endPoint: .bottom)
+                                LinearGradient(colors: [viewModel.isStarted ? . clear : .cyanColour, viewModel.isStarted ? . clear : .greenColour], startPoint: .topLeading, endPoint: .bottomTrailing)
                             )
                             .cornerRadius(14)
                             .overlay {
@@ -85,7 +85,7 @@ struct SoundMeterScreen: View {
                         viewModel.lowestDB = 0
                         viewModel.averageDB = 0
                         viewModel.stopMonitoring()
-                    })
+                    }, isDisable: !viewModel.isStarted && viewModel.highestDB == 0 || viewModel.lowestDB == 0)
                 }
                 .padding(.bottom, 10)
                 .padding(.horizontal, 16)
@@ -94,9 +94,7 @@ struct SoundMeterScreen: View {
         }
         .defaultPage()
         .alert(Strings.microphoneAccess, isPresented: $viewModel.isShowPermissionAlert) {
-            Button(Strings.cancel, role: .cancel) {
-                Router.shared.pop()
-            }
+            Button(Strings.cancel, role: .cancel) { }
             Button(Strings.openSettings) {
                 if let url = URL(string: UIApplication.openSettingsURLString) {
                     UIApplication.shared.open(url)

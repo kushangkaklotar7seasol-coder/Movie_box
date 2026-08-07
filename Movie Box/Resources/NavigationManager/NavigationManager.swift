@@ -52,6 +52,8 @@ func destination(for route: Route) -> some View {
         AddNotesScreen(viewModel: AddNotesViewModel(oldNote: notes))
     case .pinedNotes:
         PinedNotesScreen()
+    case .posterDetail(let movies, let index):
+        PhotoPreviewSheet(images: movies, selectedPosterIndex: index)
     }
 }
 
@@ -77,6 +79,7 @@ enum Route: Hashable {
     case liked
     case addNote(notes: Notes?)
     case pinedNotes
+    case posterDetail(movies: [MovieImage], index: Int)
 }
 
 final class Router: ObservableObject {

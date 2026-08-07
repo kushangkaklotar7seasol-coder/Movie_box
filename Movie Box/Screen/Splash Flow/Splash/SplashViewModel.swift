@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import AWSCore
 
 class SplashViewModel: ObservableObject {
 
@@ -32,6 +33,21 @@ class SplashViewModel: ObservableObject {
             Router.shared.updateRoot(.intro)
         }
     }
+    
+    func requestTrackingPermission(completion: (() -> Void)? = nil) {
+            
+            UserDefaults.standard.set(true, forKey: userdefaultKey.hasShownConsent)
+            
+            let credentials = AWSStaticCredentialsProvider(accessKey: ACCESS, secretKey: SECRET)
+            let configuration = AWSServiceConfiguration(region: AWSRegionType.EUWest1, credentialsProvider: credentials)
+            AWSServiceManager.default().defaultServiceConfiguration = configuration
+            
+            AdsManager.shared.requestForConsentForm { _ in
+                DispatchQueue.main.async{
+                    completion?()
+                }
+            }
+        }
     
     func webservice_getJSON_api(completion: (() -> Void)? = nil) {
 

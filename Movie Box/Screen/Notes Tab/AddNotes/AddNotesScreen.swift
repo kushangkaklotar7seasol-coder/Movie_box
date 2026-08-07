@@ -14,7 +14,46 @@ struct AddNotesScreen: View {
     var body: some View {
         ZStack {
             VStack(spacing: 10) {
-                DefaultDesign.Header(name: viewModel.isEdit ? Strings.editNotes : Strings.addNotes)
+                HStack {
+                    
+                    Button {
+                        Router.shared.pop()
+                    } label: {
+                        Image("ic_back")
+                            .resizable()
+                            .frame(width: 44, height: 44, alignment: .center)
+                    }
+                    
+                    Spacer()
+                    
+                    Text(viewModel.isEdit ? Strings.editNotes : Strings.addNotes)
+                        .font(.system(size: 18, weight: .semibold))
+                    
+                    Spacer()
+                    
+                    if viewModel.nameTextField != "" || viewModel.notesTextEditor != "" {
+                        
+                        if viewModel.keyboardHeight != 0 {
+                            Button {
+                                isNotesFocused = false
+                                Utility.closeKeyboard()
+                                viewModel.onSaveButton()
+                            } label: {
+                                Image("ic_right")
+                                    .resizable()
+                                    .frame(width: 44, height: 44, alignment: .center)
+                            }
+                        } else {
+                            Image("ic_right")
+                                .resizable()
+                                .frame(width: 44, height: 44, alignment: .center)
+                        }
+                    } else {
+                        Image("")
+                            .resizable()
+                            .frame(width: 44, height: 44, alignment: .center)
+                    }
+                }
                 
                 TextField(
                     "",
@@ -26,10 +65,6 @@ struct AddNotesScreen: View {
                 )
                 .font(.system(size: 30, weight: .bold))
                 .focused($isNotesFocused)
-//                .submitLabel(.done)
-//                .onSubmit {
-//                    viewModel.onSaveButton()
-//                }
                 
                 ZStack(alignment: .topLeading) {
                     if viewModel.notesTextEditor.isEmpty {
@@ -41,36 +76,48 @@ struct AddNotesScreen: View {
                     
                     TextEditor(text: $viewModel.notesTextEditor)
                         .scrollContentBackground(.hidden)
-                        .submitLabel(.done)
                         .focused($isNotesFocused)
-                        .toolbar {
-                            ToolbarItemGroup(placement: .keyboard) {
-                                Spacer()
-                                if viewModel.nameTextField != "" || viewModel.notesTextEditor != "" {
-                                    Button(viewModel.isEdit ? Strings.updateNote : Strings.saveNote) {
-                                        isNotesFocused = false
-                                        Utility.closeKeyboard()
-                                        viewModel.onSaveButton()
-                                    }
-                                    .fontWeight(.bold)
-                                }
-                            }
-                        }
                 }
                 
-                if !isNotesFocused {
-                    DefaultDesign.FullScreenButton(name: viewModel.isEdit ? Strings.updateNote : Strings.saveNote, onClick: {
-                        viewModel.onSaveButton()
-                    })
+//                ZStack {
+//                    Color.clear
+//                }
+//                .frame(maxHeight: viewModel.keyboardHeight)
+                
+                if viewModel.nameTextField != "" || viewModel.notesTextEditor != "" {
+                    if !isNotesFocused {
+                        DefaultDesign.FullScreenButton(name: viewModel.isEdit ? Strings.updateNote : Strings.saveNote, onClick: {
+                            viewModel.onSaveButton()
+                        })
+                    }
                 }
             }
             .padding(.horizontal, 16)
+            .padding(.bottom, viewModel.keyboardHeight)
         }
         .defaultPage()
         .contentShape(Rectangle())
         .onTapGesture {
             Utility.closeKeyboard()
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { notification in
+            if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+                withAnimation(.easeOut(duration: 0.25)) {
+                    viewModel.keyboardHeight = keyboardFrame.height
+                }
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
+            withAnimation(.easeOut(duration: 0.25)) {
+                viewModel.keyboardHeight = 0
+            }
+        }
+//        .toolbar {
+//            ToolbarItemGroup(placement: .keyboard) {
+//                Spacer()
+//                
+//            }
+//        }
         .ignoresSafeArea(.keyboard, edges: .bottom)
     }
 }

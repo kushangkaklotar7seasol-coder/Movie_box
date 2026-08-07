@@ -143,6 +143,8 @@
 "START_TYPING" = "Start typing...";
 "UPDATE_NOTE" = "Update Note";
 "SAVE_NOTE" = "Save Note";
+"UPDATE" = "Update";
+"SAVE" = "Save";
 
 // MARK: - Pinned Notes -
 "PINNED_NOTES" = "Pinned Notes";

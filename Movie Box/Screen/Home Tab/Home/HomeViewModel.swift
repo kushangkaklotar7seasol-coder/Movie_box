@@ -15,7 +15,7 @@ class HomeViewModel: ObservableObject {
     @Published var discover: [OnBordingInfo] = [OnBordingInfo(id: 0, image: "ic_compas", name: "COMPASS", info: "NAV_TOOL"),
                                                 OnBordingInfo(id: 1, image: "ic_photo_edit", name: "EDIT_PHOTO", info: "EDIT_PHOTO"),
                                                 OnBordingInfo(id: 2, image: "ic_photo_cleander", name: "PHOTO_CLEANER", info: "FIND_DUBLICATE"),
-                                                OnBordingInfo(id: 3, image: "ic_sound_meter", name: "FIND_DUBLICATE", info: "MEASURE_NOICE")]
+                                                OnBordingInfo(id: 3, image: "ic_sound_meter", name: "SOUND_METER", info: "MEASURE_NOICE")]
     init() {
         self.topRatedMovieAPI()
     }
