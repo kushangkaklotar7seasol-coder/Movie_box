@@ -200,3 +200,18 @@
 "COMIC" = "漫画";
 "EDGES" = "边缘检测";
 "POSTERIZE" = "色调分离";
+"VIGNETTE" = "暗角";
+
+"DOWNLOAD_SUCCESS" = "导出成功!";
+"CHECK_PHOTO_APP" = "照片已成功保存到照片应用!";
+"PERMISSION_ACCESS" = "权限访问";
+"CANCEL" = "取消";
+"ALLOW_PHOTO_DOWNLOAD" = "请在设置中允许访问照片库以导出照片。";
+"OK" = "确定";
+
+"PLAY_TRAILER" = "播放预告片";
+"MANAGE" = "管理";
+"CHANGE_SETTING" = "更改设置";
+"SELECT_PHOTO_SIMPLE" = "选择照片";
+"YOUR_GIVEN" = "你已授予";
+"ACCESS_NUBERS_PHOTO" = "访问所选照片的权限。";

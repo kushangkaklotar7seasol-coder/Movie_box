@@ -55,14 +55,23 @@ struct VideosScreen: View {
         .defaultPage()
         .sheet(isPresented: $viewModel.isYoutubeVideo) {
             NavigationStack {
-                WebView(url: URL(string: viewModel.youtubeUrl)!)
-                    .toolbar {
-                        ToolbarItem(placement: .topBarTrailing) {
-                            Button("Done") {
-                                viewModel.isYoutubeVideo = false
-                            }
-                        }
+                Group {
+                    if let url = URL(string: viewModel.youtubeUrl), !viewModel.youtubeUrl.isEmpty {
+                        WebView(url: url)
+                    } else {
+                        ContentUnavailableView("Invalid URL", image: "exclamationmark.triangle")
                     }
+                }
+                .navigationTitle("YouTube")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("Done") {
+                            viewModel.isYoutubeVideo = false
+                        }
+                        .bold()
+                    }
+                }
             }
         }
     }
@@ -70,4 +79,18 @@ struct VideosScreen: View {
 
 #Preview {
     VideosScreen(viewModel: VideoViewModel())
+}
+
+struct WebView: UIViewRepresentable {
+    let url: URL
+
+    func makeUIView(context: Context) -> WKWebView {
+        let webView = WKWebView()
+        return webView
+    }
+
+    func updateUIView(_ uiView: WKWebView, context: Context) {
+        let request = URLRequest(url: url)
+        uiView.load(request)
+    }
 }

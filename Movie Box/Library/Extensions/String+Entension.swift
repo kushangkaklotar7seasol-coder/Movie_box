@@ -221,7 +221,13 @@ class Strings {
     static var downloadSuccess: String { "DOWNLOAD_SUCCESS".localized() }
     static var checkPhotosApp: String { "CHECK_PHOTO_APP".localized() }
     static var permissionAccess: String { "PERMISSION_ACCESS".localized() }
-    static var openSetting: String { "OPEN_SETTING".localized() }
     static var photoDownloadAllow: String { "ALLOW_PHOTO_DOWNLOAD".localized() }
     static var ok: String { "OK".localized() }
+    
+    static var playTrailer: String { "PLAY_TRAILER".localized() }
+    static var manage: String { "MANAGE".localized() }
+    static var changeSetting: String { "CHANGE_SETTING".localized() }
+    static var selectPhotoSimple: String { "SELECT_PHOTO_SIMPLE".localized() }
+    static var yougiven: String { "YOUR_GIVEN".localized() }
+    static var accessNumberPhotos: String { "ACCESS_NUBERS_PHOTO".localized() }
 }

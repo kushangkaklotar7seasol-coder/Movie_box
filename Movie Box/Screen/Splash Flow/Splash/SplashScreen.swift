@@ -200,6 +200,7 @@ class DefaultDesign {
         var movies: MediaItem
         var isShowLike = true
         var onLike: ((MediaItem) -> Void)?
+        var onClick: (() -> Void)?
         @State var isLiked: Bool = false
         
         var width: CGFloat {
@@ -301,6 +302,7 @@ class DefaultDesign {
             }
             .frame(width: width, alignment: .center)
             .onTapGesture {
+                onClick?()
                 Utility.closeKeyboard()
                 Router.shared.push(.movieDetail(movieId: movies.id, isMovie: movies.title != nil ? true : false))
 //                movieDetail

@@ -135,7 +135,9 @@ struct ArtistDetail: View {
                         LazyVGrid(columns: self.columns, spacing: 10) {
                             ForEach(series.indices, id: \.self) { index in
                                 let movie = series[index]
-                                DefaultDesign.MovieCard(movies: movie)
+                                DefaultDesign.MovieCard(movies: movie, onClick: {
+                                    viewModel.isViewAllSheet = false
+                                })
                             }
                         }
                     }

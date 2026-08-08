@@ -45,7 +45,7 @@ struct MovieDetailScreen: View {
                                         viewModel.isYoutubeVideo = true
                                     })
                                     
-                                    Text("Play Trailer")
+                                    Text(Strings.playTrailer)
                                         .font(.system(size: 18, weight: .medium))
                                 }
                                 .padding(.bottom, upperviewPadding)

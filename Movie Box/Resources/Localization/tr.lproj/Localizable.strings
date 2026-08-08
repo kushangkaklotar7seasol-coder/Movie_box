@@ -200,3 +200,18 @@
 "COMIC" = "Çizgi Roman";
 "EDGES" = "Kenarlar";
 "POSTERIZE" = "Posterize";
+"VIGNETTE" = "Vinyet";
+
+"DOWNLOAD_SUCCESS" = "Başarıyla Dışa Aktarıldı!";
+"CHECK_PHOTO_APP" = "Fotoğraf, Fotoğraflar uygulamasına başarıyla kaydedildi!";
+"PERMISSION_ACCESS" = "İzin Erişimi";
+"CANCEL" = "İptal";
+"ALLOW_PHOTO_DOWNLOAD" = "Fotoğrafları dışa aktarmak için lütfen Ayarlar'dan fotoğraf kitaplığı erişimine izin verin.";
+"OK" = "Tamam";
+
+"PLAY_TRAILER" = "Fragmanı Oynat";
+"MANAGE" = "Yönet";
+"CHANGE_SETTING" = "Ayarı Değiştir";
+"SELECT_PHOTO_SIMPLE" = "Fotoğraf Seç";
+"YOUR_GIVEN" = "Izin verdiniz:";
+"ACCESS_NUBERS_PHOTO" = "seçilen sayıda fotoğrafa erişim.";

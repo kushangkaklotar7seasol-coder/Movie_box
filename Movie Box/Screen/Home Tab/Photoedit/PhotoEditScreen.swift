@@ -10,7 +10,13 @@ struct PhotoEditScreen: View {
                 HStack {
                     
                     Button {
-                        Router.shared.pop()
+                        if viewModel.isPhtoAvailable {
+                            viewModel.isPhtoAvailable = false
+                            viewModel.selectedImage = nil
+                            viewModel.originalImage = nil
+                        } else {
+                            Router.shared.pop()
+                        }
                     } label: {
                         Image("ic_back")
                             .resizable()
@@ -26,16 +32,19 @@ struct PhotoEditScreen: View {
                     
                     Button {
                         if let image = viewModel.selectedImage {
-                            viewModel.saveImageUsingPhotos(image:  image)
+                            viewModel.saveImageUsingPhotos(image: image)
                         }
                     } label: {
                         Image("ic_image_download")
                             .resizable()
                             .renderingMode(.template)
-                            .foregroundColor(!viewModel.isPhtoAvailable || viewModel.isShowFiltes || viewModel.isShowAdjust ? .grayColour : .whiteColour)
-                            .frame(width: 30, height: 30, alignment: .center)
+                            .foregroundColor(
+                                (!viewModel.isPhtoAvailable || !viewModel.hasEdits || viewModel.isShowFiltes || viewModel.isShowAdjust)
+                                ? .grayColour : .whiteColour
+                            )
+                            .frame(width: 30, height: 30)
                     }
-                    .disabled(!viewModel.isPhtoAvailable || viewModel.isShowFiltes || viewModel.isShowAdjust ? true : false)
+                    .disabled(!viewModel.isPhtoAvailable || !viewModel.hasEdits || viewModel.isShowFiltes || viewModel.isShowAdjust)
                 }
                 .padding(.horizontal, 16)
                 
@@ -48,22 +57,76 @@ struct PhotoEditScreen: View {
                                     .scaledToFit()
                             }
                         } else {
-                            PhotosPicker(
-                                selection: $viewModel.selectedItem,
-                                matching: .images,
-                                photoLibrary: .shared()
-                            ) {
-                                Text(Strings.selectPhoto)
+                            let columns = [
+                                    GridItem(.flexible(), spacing: 2),
+                                    GridItem(.flexible(), spacing: 2),
+                                    GridItem(.flexible(), spacing: 2)
+                            ]
+                            
+                            if viewModel.isPhotosAppAccessShow {
+                                VStack {
+                                    Text(Strings.allowPhotoAccess)
+                                        .font(.system(size: 18, weight: .bold))
+                                        .multilineTextAlignment(.center)
+                                    
+                                    Button(Strings.openSettings) {
+                                        if let url = URL(string: UIApplication.openSettingsURLString) {
+                                            UIApplication.shared.open(url)
+                                        }
+                                    }
                                     .padding()
-                                    .foregroundColor(.blackColour)
-                                    .background(.blackColour.opacity(0.2))
-                                    .cornerRadius(14)
+                                    .background(.whiteColour.opacity(0.2))
+                                    .cornerRadius(24)
+                                }
+                            } else {
+                                VStack {
+                                    if viewModel.isLimitedAccess {
+                                        HStack {
+                                            Text("\(Strings.yougiven) \(appName) \(Strings.accessNumberPhotos)")
+                                                .font(.system(size: 14, weight: .bold))
+                                                .multilineTextAlignment(.leading)
+                                            
+                                            Spacer()
+                                            
+                                            Menu {
+                                                Button(Strings.selectPhotoSimple) {
+                                                    viewModel.isShowPhotoPicker = true
+                                                }
+                                                Button(Strings.changeSetting) {
+                                                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                                                        UIApplication.shared.open(url)
+                                                    }
+                                                }
+                                            } label: {
+                                                Text(Strings.manage)
+                                                    .padding(10)
+                                                    .background(.whiteColour.opacity(0.2))
+                                                    .cornerRadius(24)
+                                            }
+                                        }
+                                    }
+                                    ScrollView {
+                                        LazyVGrid(columns: columns, spacing: 2) {
+                                            ForEach(0..<viewModel.photosImages.count, id: \.self) { index in
+                                                Image(uiImage: viewModel.photosImages[index])
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(minWidth: 0, maxWidth: .infinity)
+                                                    .frame(height: 120)
+                                                    .clipped()
+                                                    .onTapGesture {
+                                                        viewModel.selectedImage = viewModel.photosImages[index]
+                                                        viewModel.originalImage = viewModel.photosImages[index]
+                                                        viewModel.isPhtoAvailable = true
+                                                    }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(viewModel.isPhtoAvailable ? .clear : .grayColour)
-                    .cornerRadius(24)
                     .padding(.horizontal, 16)
 
                     if viewModel.isPhtoAvailable {
@@ -107,21 +170,6 @@ struct PhotoEditScreen: View {
                     }
                 }
             }
-
-//            VStack {
-//                Spacer()
-//
-//                if viewModel.isShowFiltes {
-//                    PhotoEditDesign.FilterBottomview(viewModel: viewModel)
-//                        .transition(.move(edge: .bottom).combined(with: .opacity))
-//                }
-//
-//                if viewModel.isShowAdjust {
-//                    PhotoEditDesign.AdjustBottomView(viewModel: viewModel)
-//                        .transition(.move(edge: .bottom).combined(with: .opacity))
-//                }
-//            }
-//            .edgesIgnoringSafeArea(.bottom)
         }
         .defaultPage()
         .onChange(of: viewModel.selectedItem) { _, newItem in
@@ -137,17 +185,19 @@ struct PhotoEditScreen: View {
             }
         }
         .alert(Strings.downloadSuccess, isPresented: $viewModel.showAlert) {
-            Button(Strings.ok) { }
+            Button(Strings.ok) {
+                Router.shared.pop()
+            }
         } message: {
             Text(Strings.checkPhotosApp)
         }
         .alert(Strings.permissionAccess, isPresented: $viewModel.showSettingsAlert) {
             Button(Strings.cancel, role: .cancel) { }
-            Button(Strings.openSetting) {
+            Button(Strings.openSettings) {
                 Utility.openAppPermissionSettings()
             }
         } message: {
-            Text(Strings.photoDownloadAllow)
+            Text(Strings.photoDownloadAllow) 
         }
         .photosPicker(
             isPresented: $viewModel.isShowPhotoPicker,
@@ -156,7 +206,8 @@ struct PhotoEditScreen: View {
             photoLibrary: .shared()
         )
         .onAppear {
-            viewModel.isShowPhotoPicker = true
+//            viewModel.isShowPhotoPicker = true
+            viewModel.requestPermissionAndFetchPhotos()
         }
         .fullScreenCover(isPresented: $viewModel.isShowCropper) {
             if let originalImage = viewModel.selectedImage {

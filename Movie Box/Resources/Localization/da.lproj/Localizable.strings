@@ -200,3 +200,18 @@
 "COMIC" = "Tegneserie";
 "EDGES" = "Kanter";
 "POSTERIZE" = "Posterisér";
+"VIGNETTE" = "Vignet";
+
+"DOWNLOAD_SUCCESS" = "Eksporteret med Succes!";
+"CHECK_PHOTO_APP" = "Foto blev gemt i Fotos-appen!";
+"PERMISSION_ACCESS" = "Adgangstilladelse";
+"CANCEL" = "Annuller";
+"ALLOW_PHOTO_DOWNLOAD" = "Tillad venligst adgang til fotobiblioteket i Indstillinger for at eksportere fotos.";
+"OK" = "OK";
+
+"PLAY_TRAILER" = "Afspil trailer";
+"MANAGE" = "Administrer";
+"CHANGE_SETTING" = "Skift indstilling";
+"SELECT_PHOTO_SIMPLE" = "Vælg foto";
+"YOUR_GIVEN" = "Du har givet";
+"ACCESS_NUBERS_PHOTO" = "adgang til et begrænset antal fotos.";

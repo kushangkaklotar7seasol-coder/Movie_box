@@ -200,3 +200,18 @@
 "COMIC" = "Banda Desenhada";
 "EDGES" = "Contornos";
 "POSTERIZE" = "Posterizar";
+"VIGNETTE" = "Vinheta";
+
+"DOWNLOAD_SUCCESS" = "Exportado com Sucesso!";
+"CHECK_PHOTO_APP" = "A foto foi guardada com sucesso na aplicação Fotos!";
+"PERMISSION_ACCESS" = "Acesso a Permissões";
+"CANCEL" = "Cancelar";
+"ALLOW_PHOTO_DOWNLOAD" = "Por favor, permite o acesso à biblioteca de fotos nas Definições para exportar fotos.";
+"OK" = "OK";
+
+"PLAY_TRAILER" = "Ver trailer";
+"MANAGE" = "Gerir";
+"CHANGE_SETTING" = "Alterar definição";
+"SELECT_PHOTO_SIMPLE" = "Selecionar foto";
+"YOUR_GIVEN" = "Concedeu";
+"ACCESS_NUBERS_PHOTO" = "acesso a um número selecionado de fotos.";

@@ -200,3 +200,18 @@
 "COMIC" = "Bande Dessinée";
 "EDGES" = "Contours";
 "POSTERIZE" = "Postériser";
+"VIGNETTE" = "Vignette";
+
+"DOWNLOAD_SUCCESS" = "Exporté avec Succès !";
+"CHECK_PHOTO_APP" = "Photo enregistrée avec succès dans l'application Photos !";
+"PERMISSION_ACCESS" = "Accès aux Autorisations";
+"CANCEL" = "Annuler";
+"ALLOW_PHOTO_DOWNLOAD" = "Veuillez autoriser l'accès à la photothèque dans les Réglages pour exporter des photos.";
+"OK" = "OK";
+
+"PLAY_TRAILER" = "Regarder la bande-annonce";
+"MANAGE" = "Gérer";
+"CHANGE_SETTING" = "Changer les réglages";
+"SELECT_PHOTO_SIMPLE" = "Sélectionner une photo";
+"YOUR_GIVEN" = "Vous avez accordé";
+"ACCESS_NUBERS_PHOTO" = "l'accès à un nombre limité de photos.";

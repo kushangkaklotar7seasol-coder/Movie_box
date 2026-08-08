@@ -66,6 +66,8 @@
 "DELETE_MEDIA" = "चयनित मीडिया हटाएं";
 "SELECT_ALL" = "सभी चुनें";
 "REMOVE_ALL" = "सभी हटाएं";
+"PHOTO_ACCESS" = "फोटोज़ ऐप एक्सेस आवश्यक";
+"ALLOW_PHOTO_ACCESS" = "इस फीचर का उपयोग करने के लिए कृपया सेटिंग्स में फोटोज़ एक्सेस की अनुमति दें।";
 
 // MARK: - Sound Meter Screen -
 "DECIBELS" = "डेसिबल (dB)";
@@ -199,3 +201,17 @@
 "EDGES" = "एजेस";
 "POSTERIZE" = "पोस्टराइज़";
 "VIGNETTE" = "विनेट";
+
+"DOWNLOAD_SUCCESS" = "सफलतापूर्वक एक्सपोर्ट हो गया!";
+"CHECK_PHOTO_APP" = "फोटो सफलतापूर्वक फोटो ऐप में सेव हो गई!";
+"PERMISSION_ACCESS" = "अनुमति पहुंच";
+"CANCEL" = "रद्द करें";
+"ALLOW_PHOTO_DOWNLOAD" = "फोटो एक्सपोर्ट करने के लिए कृपया सेटिंग्स में फोटो लाइब्रेरी की अनुमति दें।";
+"OK" = "ठीक है";
+
+"PLAY_TRAILER" = "ट्रेलर चलाएं";
+"MANAGE" = "प्रबंधित करें";
+"CHANGE_SETTING" = "सेटिंग बदलें";
+"SELECT_PHOTO_SIMPLE" = "फ़ोटो चुनें";
+"YOUR_GIVEN" = "आपने अनुमति दी है";
+"ACCESS_NUBERS_PHOTO" = "चुनिंदा फ़ोटो तक पहुँचने की।";

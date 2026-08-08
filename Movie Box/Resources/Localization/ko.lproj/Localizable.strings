@@ -200,3 +200,18 @@
 "COMIC" = "코믹";
 "EDGES" = "윤곽선";
 "POSTERIZE" = "포스터화";
+"VIGNETTE" = "비네트";
+
+"DOWNLOAD_SUCCESS" = "내보내기 완료!";
+"CHECK_PHOTO_APP" = "사진이 사진 앱에 성공적으로 저장되었습니다!";
+"PERMISSION_ACCESS" = "권한 접근";
+"CANCEL" = "취소";
+"ALLOW_PHOTO_DOWNLOAD" = "사진을 내보내려면 설정에서 사진 보관함 접근을 허용해 주세요.";
+"OK" = "확인";
+
+"PLAY_TRAILER" = "예고편 재생";
+"MANAGE" = "관리";
+"CHANGE_SETTING" = "설정 변경";
+"SELECT_PHOTO_SIMPLE" = "사진 선택";
+"YOUR_GIVEN" = "다음 권한을 허용했습니다:";
+"ACCESS_NUBERS_PHOTO" = "선택한 일부 사진에 대한 접근 권한.";

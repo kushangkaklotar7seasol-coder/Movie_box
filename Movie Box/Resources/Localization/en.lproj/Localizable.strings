@@ -208,6 +208,12 @@
 "CHECK_PHOTO_APP" = "Photo is save to photos app successfully!";
 "PERMISSION_ACCESS" = "Permission Access";
 "CANCEL" = "Cancel";
-"OPEN_SETTING" = "Open Settings";
 "ALLOW_PHOTO_DOWNLOAD" = "Please allow photo library access in Settings to export photos.";
 "OK" = "OK";
+
+"PLAY_TRAILER" = "Play Trailer";
+"MANAGE" = "Manage";
+"CHANGE_SETTING" = "Change Setting";
+"SELECT_PHOTO_SIMPLE" = "Select Photo";
+"YOUR_GIVEN" = "You've given";
+"ACCESS_NUBERS_PHOTO" = "access to a select number of photos.";

@@ -24,7 +24,10 @@ class PhotoEditViewModel: ObservableObject {
 
     @Published var showAlert: Bool = false
     @Published var showSettingsAlert: Bool = false
-    
+    @Published var isPhotosAppAccessShow: Bool = false
+    @Published var isPhotoSaveAvailable: Bool = false
+    @Published var isLimitedAccess: Bool = false
+    @Published var photosImages: [UIImage] = []
     // MARK: - Adjust state (bound to sliders = live preview values)
     @Published var isShowAdjust: Bool = false
     @Published var contrast: Double = 1.0
@@ -35,6 +38,7 @@ class PhotoEditViewModel: ObservableObject {
     @Published var temp: Double = 6500.0
     @Published var vignette: Double = 0.0
 
+    @Published var isImagedCroped: Bool = false
     private var committedAdjust = AdjustValues()
 
     struct AdjustValues {
@@ -56,7 +60,31 @@ class PhotoEditViewModel: ObservableObject {
                                           PersonalDetail(id: 4, name: Strings.saturation, value: "ic_saturation"),
                                           PersonalDetail(id: 5, name: Strings.temp, value: "ic_temp"),
                                           PersonalDetail(id: 6, name: Strings.vignette, value: "ic_vignette")]
-
+    var hasEdits: Bool {
+        // 1. Filter applied?
+        if appliedFilter != Strings.original {
+            return true
+        }
+        
+        // 2. Any adjustment different from default?
+        if committedAdjust.contrast != 1.0 ||
+           committedAdjust.brightness != 0.0 ||
+           committedAdjust.dark != 0.0 ||
+           committedAdjust.hueAngle != 0.0 ||
+           committedAdjust.saturation != 1.0 ||
+           committedAdjust.temp != 6500.0 ||
+           committedAdjust.vignette != 0.0 {
+            return true
+        }
+        
+        // 3. Cropped?
+        if isImagedCroped {
+            return true
+        }
+        
+        return false
+    }
+    
     let filters = [
         Strings.original, Strings.sepia, Strings.mono, Strings.nori, Strings.fade, Strings.chrome,
         Strings.vintage, Strings.dramatic, Strings.cool, Strings.warm, Strings.boost, Strings.vivid,
@@ -66,8 +94,6 @@ class PhotoEditViewModel: ObservableObject {
     ]
 
     // MARK: - Initial photo load
-
-    /// Call this ONCE right after the user picks a photo from PhotosPicker.
     func setInitialImage(_ image: UIImage) {
         originalImage = image
         appliedFilter = Strings.original
@@ -78,6 +104,61 @@ class PhotoEditViewModel: ObservableObject {
         isPhtoAvailable = true
     }
 
+    func requestPermissionAndFetchPhotos() {
+        PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+            DispatchQueue.main.async {
+                switch status {
+                case .authorized:
+                    self.fetchAllPhotos()
+                case .limited:
+                    self.fetchAllPhotos()
+                    self.isLimitedAccess = true
+                case .denied, .restricted:
+                    self.showSettingsAlert = true
+                    self.isPhotosAppAccessShow = true
+                case .notDetermined:
+                    self.showSettingsAlert = true
+                    self.isPhotosAppAccessShow = true
+                @unknown default:
+                    break
+                }
+            }
+        }
+    }
+        
+    // ૨. Photo Library માંથી બધા ફોટોઝ ફેચ કરવા
+    private func fetchAllPhotos() {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        
+        let assets = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+        let imageManager = PHImageManager.default()
+        
+        let requestOptions = PHImageRequestOptions()
+        // 💡 ૧. ઓરિજિનલ નેટિવ ક્વોલિટી સેટ કરવી
+        requestOptions.deliveryMode = .highQualityFormat
+        requestOptions.isNetworkAccessAllowed = true // iCloud પરથી પણ HD લોડ થશે
+        
+        assets.enumerateObjects { (asset, index, stop) in
+            // 💡 ૨. PHImageManagerMaximumSize આપવાથી ઈમેજ પોતાની ઓરિજિનલ સાઈઝમાં જ આવશે
+            imageManager.requestImage(
+                for: asset,
+                targetSize: PHImageManagerMaximumSize,
+                contentMode: .default,
+                options: requestOptions
+            ) { image, info in
+                
+                let isDegraded = (info?[PHImageResultIsDegradedKey] as? Bool) ?? false
+                
+                if let image = image, !isDegraded {
+                    DispatchQueue.main.async {
+                        self.photosImages.append(image)
+                    }
+                }
+            }
+        }
+    }
+    
     // MARK: - Adjust panel
 
     func openAdjustPanel() {
@@ -95,6 +176,7 @@ class PhotoEditViewModel: ObservableObject {
     func saveAdjust() {
         committedAdjust = currentAdjustValues()
         isShowAdjust = false
+        isPhotoSaveAvailable = true
     }
 
     /// Called from slider onChange for live preview while dragging.
@@ -110,6 +192,7 @@ class PhotoEditViewModel: ObservableObject {
         committedAdjust = AdjustValues()
         pushLocalsFromCommitted()
         selectedImage = croppedImage
+        isImagedCroped = true
     }
 
     // MARK: - Filter panel
@@ -130,6 +213,7 @@ class PhotoEditViewModel: ObservableObject {
     }
 
     func saveFilter() {
+        isPhotoSaveAvailable = true
         appliedFilter = selectedFilter
         isShowFiltes = false
     }

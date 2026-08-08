@@ -200,3 +200,18 @@
 "COMIC" = "Fumetto";
 "EDGES" = "Contorni";
 "POSTERIZE" = "Posterizza";
+"VIGNETTE" = "Vignettatura";
+
+"DOWNLOAD_SUCCESS" = "Esportato con Successo!";
+"CHECK_PHOTO_APP" = "Foto salvata con successo nell'app Foto!";
+"PERMISSION_ACCESS" = "Accesso ai Permessi";
+"CANCEL" = "Annulla";
+"ALLOW_PHOTO_DOWNLOAD" = "Consenti l'accesso alla libreria foto nelle Impostazioni per esportare le foto.";
+"OK" = "OK";
+
+"PLAY_TRAILER" = "Riproduci il trailer";
+"MANAGE" = "Gestisci";
+"CHANGE_SETTING" = "Modifica impostazione";
+"SELECT_PHOTO_SIMPLE" = "Seleziona foto";
+"YOUR_GIVEN" = "Hai consentito";
+"ACCESS_NUBERS_PHOTO" = "l'accesso a un numero limitato di foto.";

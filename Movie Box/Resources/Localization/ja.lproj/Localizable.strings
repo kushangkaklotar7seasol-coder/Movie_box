@@ -200,3 +200,18 @@
 "COMIC" = "コミック";
 "EDGES" = "エッジ";
 "POSTERIZE" = "ポスタリゼーション";
+"VIGNETTE" = "ビネット";
+
+"DOWNLOAD_SUCCESS" = "エクスポートが完了しました!";
+"CHECK_PHOTO_APP" = "写真は写真アプリに正常に保存されました!";
+"PERMISSION_ACCESS" = "権限のアクセス";
+"CANCEL" = "キャンセル";
+"ALLOW_PHOTO_DOWNLOAD" = "写真をエクスポートするには、設定で写真ライブラリへのアクセスを許可してください。";
+"OK" = "OK";
+
+"PLAY_TRAILER" = "予告編を再生";
+"MANAGE" = "管理";
+"CHANGE_SETTING" = "設定を変更";
+"SELECT_PHOTO_SIMPLE" = "写真を選択";
+"YOUR_GIVEN" = "許可しています:";
+"ACCESS_NUBERS_PHOTO" = "選択した写真へのアクセスを。";
