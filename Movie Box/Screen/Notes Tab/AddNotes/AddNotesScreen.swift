@@ -9,13 +9,35 @@ import SwiftUI
 
 struct AddNotesScreen: View {
     @StateObject var viewModel: AddNotesViewModel
-    @FocusState private var isNotesFocused: Bool
+    @FocusState private var focusedField: Field?
+    
+    enum Field {
+        case title
+        case notes
+    }
     
     var body: some View {
         ZStack {
-            VStack(spacing: 10) {
+            // MARK: - 1. Fixed Background (ઝીરો મુવમેન્ટ)
+            GeometryReader { geometry in
+                Image("img_background")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .clipped()
+            }
+            .ignoresSafeArea()
+            .contentShape(Rectangle())
+            .onTapGesture {
+                // Sirf background par tap thay tyare j keyboard dismiss thashe
+                focusedField = nil
+                Utility.closeKeyboard()
+            }
+            
+            // MARK: - 2. Foreground Content
+            VStack(spacing: 0) {
+                // Header (Top Bar)
                 HStack {
-                    
                     Button {
                         Router.shared.pop()
                     } label: {
@@ -31,94 +53,83 @@ struct AddNotesScreen: View {
                     
                     Spacer()
                     
-                    if viewModel.nameTextField != "" || viewModel.notesTextEditor != "" {
+                    if !viewModel.nameTextField.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ||
+                        !viewModel.notesTextEditor.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                         
-                        if viewModel.keyboardHeight != 0 {
-                            Button {
-                                isNotesFocused = false
-                                Utility.closeKeyboard()
-                                viewModel.onSaveButton()
-                            } label: {
-                                Image("ic_right")
-                                    .resizable()
-                                    .frame(width: 44, height: 44, alignment: .center)
-                            }
-                        } else {
+                        Button {
+                            focusedField = nil
+                            Utility.closeKeyboard()
+                            viewModel.onSaveButton()
+                        } label: {
                             Image("ic_right")
                                 .resizable()
                                 .frame(width: 44, height: 44, alignment: .center)
                         }
                     } else {
-                        Image("")
-                            .resizable()
-                            .frame(width: 44, height: 44, alignment: .center)
+                        Color.clear
+                            .frame(width: 44, height: 44)
                     }
                 }
+                .padding(.bottom, 10)
                 
+                // Title Input
                 TextField(
                     "",
                     text: $viewModel.nameTextField,
                     prompt: Text(Strings.noteTitle)
                         .font(.system(size: 30, weight: .bold))
                         .foregroundStyle(.whiteColour.opacity(0.2))
-                        .font(.subheadline)
                 )
                 .font(.system(size: 30, weight: .bold))
-                .focused($isNotesFocused)
+                .focused($focusedField, equals: .title)
                 
-                ZStack(alignment: .topLeading) {
-                    if viewModel.notesTextEditor.isEmpty {
-                        Text(Strings.startTyping)
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 0) {
+                            TextField(
+                                "",
+                                text: $viewModel.notesTextEditor,
+                                prompt: Text(Strings.startTyping)
+                                    .font(.system(size: 16, weight: .regular))
+                                    .foregroundStyle(.whiteColour.opacity(0.4)),
+                                axis: .vertical
+                            )
                             .font(.system(size: 16, weight: .regular))
-                            .foregroundStyle(.whiteColour.opacity(0.4))
-                            .padding(.top, 10)
+                            .focused($focusedField, equals: .notes)
+                            Color.clear
+                                .frame(height: 20)
+                                .id("BOTTOM_MARKER")
+                        }
                     }
-                    
-                    TextEditor(text: $viewModel.notesTextEditor)
-                        .scrollContentBackground(.hidden)
-                        .focused($isNotesFocused)
+                    .scrollDismissesKeyboard(.interactively)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        focusedField = .notes
+                    }
+                    .onChange(of: viewModel.notesTextEditor) { _ in
+                        withAnimation(.easeOut(duration: 0.1)) {
+                            proxy.scrollTo("BOTTOM_MARKER", anchor: .bottom)
+                        }
+                    }
                 }
                 
-//                ZStack {
-//                    Color.clear
-//                }
-//                .frame(maxHeight: viewModel.keyboardHeight)
+                Spacer(minLength: 0)
                 
-                if viewModel.nameTextField != "" || viewModel.notesTextEditor != "" {
-                    if !isNotesFocused {
-                        DefaultDesign.FullScreenButton(name: viewModel.isEdit ? Strings.updateNote : Strings.saveNote, onClick: {
+                // Bottom Action Button
+                if (!viewModel.nameTextField.isEmpty || !viewModel.notesTextEditor.isEmpty) && focusedField == nil {
+                    DefaultDesign.FullScreenButton(
+                        name: viewModel.isEdit ? Strings.updateNote : Strings.saveNote,
+                        onClick: {
                             viewModel.onSaveButton()
-                        })
-                    }
+                        }
+                    )
+                    .padding(.vertical, 8)
                 }
             }
             .padding(.horizontal, 16)
-            .padding(.bottom, viewModel.keyboardHeight)
         }
-        .defaultPage()
-        .contentShape(Rectangle())
-        .onTapGesture {
-            Utility.closeKeyboard()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { notification in
-            if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
-                withAnimation(.easeOut(duration: 0.25)) {
-                    viewModel.keyboardHeight = keyboardFrame.height
-                }
-            }
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
-            withAnimation(.easeOut(duration: 0.25)) {
-                viewModel.keyboardHeight = 0
-            }
-        }
-//        .toolbar {
-//            ToolbarItemGroup(placement: .keyboard) {
-//                Spacer()
-//                
-//            }
-//        }
-        .ignoresSafeArea(.keyboard, edges: .bottom)
+        .navigationBarBackButtonHidden(true)
+        .foregroundColor(.whiteColour)
     }
 }
 

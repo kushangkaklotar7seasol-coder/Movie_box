@@ -213,6 +213,7 @@ struct NotesGridView: View {
             
             if notes.name != "" {
                 Text(notes.name)
+                    .lineLimit(2)
                 .font(.system(size: 14, weight: .medium))
                 .foregroundColor(.whiteColour)
                 .padding(.top, 6)
