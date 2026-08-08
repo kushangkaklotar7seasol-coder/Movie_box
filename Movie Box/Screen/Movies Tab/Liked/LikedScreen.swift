@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LikedScreen: View {
     @StateObject var viewModel = LikedViewModel()
+    @State var refresh = UUID()
+    
     var columns: [GridItem] {
         let count = Device.isiPadPortrait ? 4 : Device.isiPadLandscape ? 5 : 2
         return Array(repeating: GridItem(.flexible(), spacing: 15), count: count)
@@ -95,6 +97,7 @@ struct LikedScreen: View {
             .padding(.horizontal, 16)
         }
         .defaultPage()
+        
     }
 }
 

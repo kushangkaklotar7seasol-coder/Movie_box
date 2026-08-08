@@ -12,11 +12,15 @@
 
 // MARK: - Intro Screen -
 "PAGE1_TITLE" = "Ontdek Verhalen";
-"PAGE1_INFO" = "Verken duizenden films in elk genre, van tijdloze klassiekers tot de hits van vandaag.";
+"PAGE1_INFO" = "Ontdek duizenden films met gedetailleerde informatie, beoordelingen, genres en releasedatums.";
 "PAGE2_TITLE" = "Speciaal voor Jou Gemaakt";
-"PAGE2_INFO" = "Ontvang persoonlijke aanbevelingen op basis van je interesses en ontdek je volgende film.";
-"PAGE3_TITLE" = "Kijk Zonder Grenzen";
-"PAGE3_INFO" = "Stream wanneer je wilt op elk apparaat of download je favorieten voor offline entertainment.";
+"PAGE2_INFO" = "Blader op genre, populariteit of zoek om films te ontdekken die bij jouw interesses passen.";
+"PAGE3_TITLE" = "Filminzichten";
+"PAGE3_INFO" = "Ontdek beoordelingen, cast, recensies, trailers en alles wat je nodig hebt voordat je gaat kijken.";
+"PAGE4_TITLE" = "Jouw entertainmentgids";
+"PAGE4_INFO" = "Ontdek films, tv-shows, trailers, beoordelingen en waar je ze kunt kijken.";
+"GOOD_TO_KNOW" = "Goed om te weten";
+"GOOD_TO_KNOW_INFO" = "Wij streamen of hosten geen films of tv-shows. Wij bieden informatie, beoordelingen en legale kijkopties.";
 "NEXT" = "Volgende";
 "GET_STATED" = "Aan de Slag";
 
@@ -211,7 +215,8 @@
 
 "PLAY_TRAILER" = "Trailer afspelen";
 "MANAGE" = "Beheren";
-"CHANGE_SETTING" = "Instelling wijzigen";
+"CHANGE_SETTING" = "Geef volledige toegang";
 "SELECT_PHOTO_SIMPLE" = "Selecteer foto";
 "YOUR_GIVEN" = "Je hebt toegang gegeven";
 "ACCESS_NUBERS_PHOTO" = "tot een beperkt aantal foto's.";
+"NO_PIC" = "Geen foto's gevonden";

@@ -208,10 +208,14 @@ class HomeDesign {
     
     struct QuickDiscover: View {
         @StateObject var viewModel: HomeViewModel
-        let columns = [
-            GridItem(.flexible(), spacing: 10),
-            GridItem(.flexible(), spacing: 10)
-        ]
+//        let columns = [
+//            GridItem(.flexible(), spacing: 10),
+//            GridItem(.flexible(), spacing: 10)
+//        ]
+        var columns: [GridItem] {
+            let count = Device.isIpad ? 4 : 2
+            return Array(repeating: GridItem(.flexible(), spacing: 15), count: count)
+        }
         
         var body: some View {
             VStack {
@@ -227,7 +231,11 @@ class HomeDesign {
                     ForEach(viewModel.discover.indices, id: \.self) { index in
                         let discover = viewModel.discover[index]
                         HStack {
-                            VStack(alignment: .leading) {
+                            if Device.isIpad {
+                                Spacer()
+                            }
+                            
+                            VStack(alignment: Device.isIpad ? .center : .leading) {
                                 Image(discover.image)
                                     .resizable()
                                     .scaledToFill()

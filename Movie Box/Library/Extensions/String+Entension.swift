@@ -34,6 +34,10 @@ class Strings {
     static var page2Info: String { "PAGE2_INFO".localized() }
     static var page3Title: String { "PAGE3_TITLE".localized() }
     static var page3Info: String { "PAGE3_INFO".localized() }
+    static var page4Title: String { "PAGE4_TITLE".localized() }
+    static var page4Info: String { "PAGE4_INFO".localized() }
+    static var goodToKnow: String { "GOOD_TO_KNOW".localized() }
+    static var goodToKnowInfo: String { "GOOD_TO_KNOW_INFO".localized() }
     static var next: String { "NEXT".localized() }
     static var getStated: String { "GET_STATED".localized() }
     
@@ -230,4 +234,5 @@ class Strings {
     static var selectPhotoSimple: String { "SELECT_PHOTO_SIMPLE".localized() }
     static var yougiven: String { "YOUR_GIVEN".localized() }
     static var accessNumberPhotos: String { "ACCESS_NUBERS_PHOTO".localized() }
+    static var noPic: String { "NO_PIC".localized() }
 }

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import _LocationEssentials
+import CoreLocation
 
 struct CompassScreen: View {
     var body: some View {
@@ -14,11 +16,10 @@ struct CompassScreen: View {
                 DefaultDesign.Header(name: Strings.compass)
                     .padding(.horizontal, 16)
                 
-                Spacer()
-                
                 CompassView()
                 
-                Spacer()
+                Spacer(minLength: 8)
+                
             }
             .padding(.horizontal, 16)
         }
@@ -28,4 +29,33 @@ struct CompassScreen: View {
 
 #Preview {
     CompassScreen()
+}
+
+class CompassDesign {
+    
+    struct Detail: View {
+        let name: String
+        let value: String
+        
+        var body: some View {
+            VStack(alignment: .leading) {
+                Text(name)
+                    .font(.system(size: 14, weight: .regular))
+                    .foregroundColor(.grayColour)
+                
+                Text(value)
+                    .font(.system(size: 16, weight: .regular))
+                    .foregroundColor(.whiteColour)
+            }
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(.backgroundColour)
+            .cornerRadius(24)
+            .overlay {
+                RoundedRectangle(cornerRadius: 24)
+                    .stroke(.whiteColour.opacity(0.3))
+            }
+
+        }
+    }
 }

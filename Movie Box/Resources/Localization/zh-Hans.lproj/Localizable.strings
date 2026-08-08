@@ -12,11 +12,15 @@
 
 // MARK: - Intro Screen -
 "PAGE1_TITLE" = "发现精彩故事";
-"PAGE1_INFO" = "探索各种类型的数千部电影,从经典之作到当今热门影片。";
+"PAGE1_INFO" = "探索数千部包含详细信息、评分、类型和上映日期的电影。";
 "PAGE2_TITLE" = "为您量身打造";
-"PAGE2_INFO" = "根据您的兴趣获取个性化推荐,发现您的下一部电影。";
-"PAGE3_TITLE" = "畅享无限观影";
-"PAGE3_INFO" = "随时随地在任何设备上流畅播放,或下载您喜爱的内容离线观看。";
+"PAGE2_INFO" = "按类型、热门程度浏览或搜索，探索符合您喜好的电影。";
+"PAGE3_TITLE" = "电影资讯";
+"PAGE3_INFO" = "在观影前探索评分、演员阵容、影评、预告片以及您所需的一切信息。";
+"PAGE4_TITLE" = "您的娱乐指南";
+"PAGE4_INFO" = "探索电影、电视节目、预告片、评分及播放平台。";
+"GOOD_TO_KNOW" = "须知事项";
+"GOOD_TO_KNOW_INFO" = "我们不提供或托管任何电影或电视节目的流媒体服务。我们仅提供相关信息、评分及正版观看渠道。";
 "NEXT" = "下一步";
 "GET_STATED" = "开始使用";
 
@@ -211,7 +215,8 @@
 
 "PLAY_TRAILER" = "播放预告片";
 "MANAGE" = "管理";
-"CHANGE_SETTING" = "更改设置";
+"CHANGE_SETTING" = "允许完全访问";
 "SELECT_PHOTO_SIMPLE" = "选择照片";
 "YOUR_GIVEN" = "你已授予";
 "ACCESS_NUBERS_PHOTO" = "访问所选照片的权限。";
+"NO_PIC" = "未找到照片";

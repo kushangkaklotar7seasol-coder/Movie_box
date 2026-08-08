@@ -50,6 +50,7 @@ struct IntroScreen: View {
                 Text(viewModel.information[selectedIndex].name)
                     .font(.system(size: 30, weight: .bold))
                     .foregroundColor(.whiteColour)
+                    .multilineTextAlignment(.center)
                     .padding(.bottom, 10)
                 
                 Text(viewModel.information[selectedIndex].info)
@@ -57,6 +58,33 @@ struct IntroScreen: View {
                     .foregroundColor(.grayColour)
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 10)
+                
+                if  selectedIndex == viewModel.information.count - 1 {
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Image("ic_info_empty")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                            
+                            Text(Strings.goodToKnow)
+                                .font(.system(size: 18, weight: .medium))
+                        }
+                        
+                        Text(Strings.goodToKnowInfo)
+                            .font(.system(size: 14))
+                            .foregroundColor(.grayColour)
+                    }
+                    .padding(20)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(.backgroundColour)
+                    .cornerRadius(24)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 24)
+                            .strokeBorder(.whiteColour.opacity(0.2))
+                    }
+                    .padding(.bottom, 10)
+                    .padding(.top, 10)
+                }
                 
                 HStack(spacing: 8) {
                     ForEach(viewModel.information.indices, id: \.self) { index in

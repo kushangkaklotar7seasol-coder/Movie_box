@@ -12,11 +12,15 @@
 
 // MARK: - Intro Screen -
 "PAGE1_TITLE" = "Hikayeleri Keşfet";
-"PAGE1_INFO" = "Zamansız klasiklerden günümüzün hitlerine, her türde binlerce filmi keşfedin.";
+"PAGE1_INFO" = "Detaylı bilgiler, puanlar, türler ve yayın tarihleriyle binlerce filmi keşfedin.";
 "PAGE2_TITLE" = "Sadece Sizin İçin";
-"PAGE2_INFO" = "İlgi alanlarınıza göre kişiselleştirilmiş öneriler alın ve bir sonraki filminizi keşfedin.";
-"PAGE3_TITLE" = "Sınırsız İzleyin";
-"PAGE3_INFO" = "İstediğiniz zaman herhangi bir cihazda yayın yapın veya çevrimdışı eğlence için favorilerinizi indirin.";
+"PAGE2_INFO" = "İlgi alanlarınıza uygun filmleri keşfetmek için türe, popülerliğe göre göz atın veya arama yapın.";
+"PAGE3_TITLE" = "Film Detayları";
+"PAGE3_INFO" = "İzlemeden önce derecelendirmeleri, oyuncu kadrosunu, incelemeleri, fragmanları ve ihtiyacınız olan her şeyi keşfedin.";
+"PAGE4_TITLE" = "Eğlence Rehberiniz";
+"PAGE4_INFO" = "Filmleri, TV dizilerini, fragmanları, puanları ve nerede izleyeceğinizi keşfedin.";
+"GOOD_TO_KNOW" = "Bilmenizde fayda var";
+"GOOD_TO_KNOW_INFO" = "Filmleri veya TV dizilerini yayınlamıyor ya da barındırmıyoruz. Yalnızca bilgi, derecelendirme ve yasal izleme seçenekleri sunuyoruz.";
 "NEXT" = "İleri";
 "GET_STATED" = "Başlayın";
 
@@ -211,7 +215,8 @@
 
 "PLAY_TRAILER" = "Fragmanı Oynat";
 "MANAGE" = "Yönet";
-"CHANGE_SETTING" = "Ayarı Değiştir";
+"CHANGE_SETTING" = "Tam Erişim Ver";
 "SELECT_PHOTO_SIMPLE" = "Fotoğraf Seç";
 "YOUR_GIVEN" = "Izin verdiniz:";
 "ACCESS_NUBERS_PHOTO" = "seçilen sayıda fotoğrafa erişim.";
+"NO_PIC" = "Fotoğraf Bulunamadı";

@@ -12,11 +12,15 @@
 
 // MARK: - Intro Screen -
 "PAGE1_TITLE" = "Opdag Historier";
-"PAGE1_INFO" = "Udforsk tusindvis af film i alle genrer, fra tidløse klassikere til nutidens hits.";
+"PAGE1_INFO" = "Udforsk tusindvis af film med detaljerede oplysninger, bedømmelser, genrer og udgivelsesdatoer.";
 "PAGE2_TITLE" = "Lavet Kun til Dig";
-"PAGE2_INFO" = "Få personlige anbefalinger baseret på dine interesser, og find din næste film.";
-"PAGE3_TITLE" = "Se Uden Grænser";
-"PAGE3_INFO" = "Stream når som helst på enhver enhed, eller download dine favoritter til offline underholdning.";
+"PAGE2_INFO" = "Gennemse efter genre, popularitet eller søg for at finde film, der passer til dine interesser.";
+"PAGE3_TITLE" = "Filmindsigter";
+"PAGE3_INFO" = "Udforsk bedømmelser, medvirkende, anmeldelser, trailere og alt, hvad du har brug for, før du ser filmen.";
+"PAGE4_TITLE" = "Din underholdningsguide";
+"PAGE4_INFO" = "Oplev film, serier, trailere, bedømmelser og hvor du kan se dem.";
+"GOOD_TO_KNOW" = "Godt at vide";
+"GOOD_TO_KNOW_INFO" = "Vi streamer eller hoster ikke film eller serier. Vi leverer information, bedømmelser og lovlige visningsmuligheder.";
 "NEXT" = "Næste";
 "GET_STATED" = "Kom i Gang";
 
@@ -211,7 +215,8 @@
 
 "PLAY_TRAILER" = "Afspil trailer";
 "MANAGE" = "Administrer";
-"CHANGE_SETTING" = "Skift indstilling";
+"CHANGE_SETTING" = "Giv fuld adgang";
 "SELECT_PHOTO_SIMPLE" = "Vælg foto";
 "YOUR_GIVEN" = "Du har givet";
 "ACCESS_NUBERS_PHOTO" = "adgang til et begrænset antal fotos.";
+"NO_PIC" = "Ingen fotos fundet";

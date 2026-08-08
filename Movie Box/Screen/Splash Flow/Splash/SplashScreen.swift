@@ -13,8 +13,12 @@ struct SplashScreen: View {
     
     var body: some View {
         ZStack {
-            Text("Splash Screen")
-                .font(.system(size: 22, weight: .semibold))
+            VStack {
+                Spacer()
+                Text("Splash Screen")
+                    .font(.system(size: 22, weight: .semibold))
+                Spacer()
+            }
         }
         .defaultPage()
         .onAppear() {

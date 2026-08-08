@@ -12,11 +12,15 @@
 
 // MARK: - Intro Screen -
 "PAGE1_TITLE" = "Descobre Histórias";
-"PAGE1_INFO" = "Explora milhares de filmes em todos os géneros, dos clássicos intemporais aos sucessos de hoje.";
+"PAGE1_INFO" = "Explore milhares de filmes com informações detalhadas, classificações, géneros e datas de lançamento.";
 "PAGE2_TITLE" = "Feito Só para Ti";
-"PAGE2_INFO" = "Recebe recomendações personalizadas com base nos teus interesses e descobre o teu próximo filme.";
-"PAGE3_TITLE" = "Assiste Sem Limites";
-"PAGE3_INFO" = "Faz streaming a qualquer hora em qualquer dispositivo ou descarrega os teus favoritos para veres offline.";
+"PAGE2_INFO" = "Navegue por género, popularidade ou pesquise para descobrir filmes que correspondam aos seus interesses.";
+"PAGE3_TITLE" = "Informações de filmes";
+"PAGE3_INFO" = "Explore classificações, elenco, críticas, trailers e tudo o que precisa antes de assistir.";
+"PAGE4_TITLE" = "O seu guia de entretenimento";
+"PAGE4_INFO" = "Descubra filmes, séries, trailers, classificações e onde assistir.";
+"GOOD_TO_KNOW" = "Útil saber";
+"GOOD_TO_KNOW_INFO" = "Não transmitimos nem alojamos filmes ou séries. Disponibilizamos informações, classificações e opções legais de visualização.";
 "NEXT" = "Seguinte";
 "GET_STATED" = "Começar";
 
@@ -211,7 +215,8 @@
 
 "PLAY_TRAILER" = "Ver trailer";
 "MANAGE" = "Gerir";
-"CHANGE_SETTING" = "Alterar definição";
+"CHANGE_SETTING" = "Dar acesso total";
 "SELECT_PHOTO_SIMPLE" = "Selecionar foto";
 "YOUR_GIVEN" = "Concedeu";
 "ACCESS_NUBERS_PHOTO" = "acesso a um número selecionado de fotos.";
+"NO_PIC" = "Nenhuma foto encontrada";

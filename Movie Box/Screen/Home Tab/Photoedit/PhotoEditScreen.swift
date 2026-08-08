@@ -105,22 +105,36 @@ struct PhotoEditScreen: View {
                                             }
                                         }
                                     }
-                                    ScrollView {
-                                        LazyVGrid(columns: columns, spacing: 2) {
-                                            ForEach(0..<viewModel.photosImages.count, id: \.self) { index in
-                                                Image(uiImage: viewModel.photosImages[index])
-                                                    .resizable()
-                                                    .scaledToFill()
-                                                    .frame(minWidth: 0, maxWidth: .infinity)
-                                                    .frame(height: 120)
-                                                    .clipped()
-                                                    .onTapGesture {
-                                                        viewModel.selectedImage = viewModel.photosImages[index]
-                                                        viewModel.originalImage = viewModel.photosImages[index]
-                                                        viewModel.isPhtoAvailable = true
-                                                    }
+                                    
+                                    if !viewModel.photosImages.isEmpty {
+                                        ScrollView {
+                                            LazyVGrid(columns: columns, spacing: 2) {
+                                                ForEach(0..<viewModel.photosImages.count, id: \.self) { index in
+                                                    Image(uiImage: viewModel.photosImages[index])
+                                                        .resizable()
+                                                        .scaledToFill()
+                                                        .frame(minWidth: 0, maxWidth: (screenWidth-4)/3)
+                                                        .frame(height: (screenWidth-4)/3)
+                                                        .clipped()
+                                                        .onTapGesture {
+                                                            viewModel.selectedImage = viewModel.photosImages[index]
+                                                            viewModel.originalImage = viewModel.photosImages[index]
+                                                            viewModel.isPhtoAvailable = true
+                                                        }
+                                                }
                                             }
                                         }
+                                    } else {
+                                        VStack(spacing: 10) {
+                                            Spacer()
+                                            
+                                            Image("ic_nonotes")
+                                            
+                                            Text(Strings.noPic)
+                                            
+                                            Spacer()
+                                        }
+                                        .multilineTextAlignment(.center)
                                     }
                                 }
                             }

@@ -104,9 +104,9 @@ struct ArtistDetail: View {
                             }
                         }
                     }
+                    .background(.blackColour)
                 }
-                
-                
+                .background(.blackColour)
             }
         }
         .defaultPage()

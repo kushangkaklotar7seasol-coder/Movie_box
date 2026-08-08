@@ -12,11 +12,15 @@
 
 // MARK: - Intro Screen -
 "PAGE1_TITLE" = "Discover Stories";
-"PAGE1_INFO" = "Explore thousands of movies across every genre, from timeless classics to today's hits.";
+"PAGE1_INFO" = "Explore thousands of movies with detailed information, ratings, genres, and release dates.";
 "PAGE2_TITLE" = "Made Just for You";
-"PAGE2_INFO" = "Get personalized recommendations based on your interests and discover your next movie.";
-"PAGE3_TITLE" = "Watch Without Limits";
-"PAGE3_INFO" = "Stream anytime on any device or download your favorites for offline entertainment.";
+"PAGE2_INFO" = "Browse by genre, popularity, or search to discover movies that match your interests.";
+"PAGE3_TITLE" = "Movie Insights";
+"PAGE3_INFO" = "Explore ratings, cast, reviews, trailers, and everything you need before watching.";
+"PAGE4_TITLE" = "Your Entertainment Guide";
+"PAGE4_INFO" = "Discover movies, TV Shows, trailers, ratings and where to watch.";
+"GOOD_TO_KNOW" = "Good to know";
+"GOOD_TO_KNOW_INFO" = "We don’t stream or host movies or TV shows. We provide information, ratings and legal viewing availability.";
 "NEXT" = "Next";
 "GET_STATED" = "Get Started";
 
@@ -213,7 +217,8 @@
 
 "PLAY_TRAILER" = "Play Trailer";
 "MANAGE" = "Manage";
-"CHANGE_SETTING" = "Change Setting";
+"CHANGE_SETTING" = "Give Full Access";
 "SELECT_PHOTO_SIMPLE" = "Select Photo";
 "YOUR_GIVEN" = "You've given";
 "ACCESS_NUBERS_PHOTO" = "access to a select number of photos.";
+"NO_PIC" = "No Photos Found";

@@ -12,11 +12,15 @@
 
 // MARK: - Intro Screen -
 "PAGE1_TITLE" = "Découvrez des Histoires";
-"PAGE1_INFO" = "Explorez des milliers de films dans tous les genres, des classiques intemporels aux succès d'aujourd'hui.";
+"PAGE1_INFO" = "Découvrez des milliers de films avec des informations détaillées, des notes, des genres et des dates de sortie.";
 "PAGE2_TITLE" = "Fait Rien que pour Vous";
-"PAGE2_INFO" = "Recevez des recommandations personnalisées selon vos centres d'intérêt et découvrez votre prochain film.";
-"PAGE3_TITLE" = "Regardez Sans Limites";
-"PAGE3_INFO" = "Diffusez à tout moment sur n'importe quel appareil ou téléchargez vos favoris pour un visionnage hors ligne.";
+"PAGE2_INFO" = "Parcourez par genre, popularité ou lancez une recherche pour découvrir des films qui correspondent à vos goûts.";
+"PAGE3_TITLE" = "Aperçu des films";
+"PAGE3_INFO" = "Découvrez les notes, la distribution, les avis, les bandes-annonces et tout ce dont vous avez besoin avant de regarder.";
+"PAGE4_TITLE" = "Votre guide de divertissement";
+"PAGE4_INFO" = "Découvrez des films, séries, bandes-annonces, notes et où les regarder.";
+"GOOD_TO_KNOW" = "Bon à savoir";
+"GOOD_TO_KNOW_INFO" = "Nous ne diffusons et n'hébergeons aucun film ou série. Nous fournissons des informations, des notes et la disponibilité légale de visionnage.";
 "NEXT" = "Suivant";
 "GET_STATED" = "Commencer";
 
@@ -211,7 +215,8 @@
 
 "PLAY_TRAILER" = "Regarder la bande-annonce";
 "MANAGE" = "Gérer";
-"CHANGE_SETTING" = "Changer les réglages";
+"CHANGE_SETTING" = "Autoriser l'accès complet";
 "SELECT_PHOTO_SIMPLE" = "Sélectionner une photo";
 "YOUR_GIVEN" = "Vous avez accordé";
 "ACCESS_NUBERS_PHOTO" = "l'accès à un nombre limité de photos.";
+"NO_PIC" = "Aucune photo trouvée";

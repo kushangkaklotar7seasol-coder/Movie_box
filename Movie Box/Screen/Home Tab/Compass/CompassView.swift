@@ -26,63 +26,66 @@ import Combine
 // the "long way" around.
 
 final class CompassManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    @Published private(set) var heading: Double = 0
+    @Published private(set) var rotation: Double = 0
+    @Published private(set) var isCalibrated: Bool = true
+    @Published private(set) var authorizationStatus: CLAuthorizationStatus
 
-   /// Current heading in degrees, ALWAYS normalized to 0..<360.
-   /// Safe to use for text display and array/index lookups.
-   @Published private(set) var heading: Double = 0
-   /// Unbounded rotation value (can go negative or past 360) used only to
-   /// drive `.rotationEffect` smoothly across the 0°/360° wrap. Never use
-   /// this for indexing — use `heading` instead.
-   @Published private(set) var rotation: Double = 0
-   /// Whether the manager currently has a usable heading.
-   @Published private(set) var isCalibrated: Bool = true
-   /// Authorization state, in case you want to show a permission prompt.
-   @Published private(set) var authorizationStatus: CLAuthorizationStatus
+    // NEW: current coordinates
+    @Published private(set) var latitude: Double?
+    @Published private(set) var longitude: Double?
 
-   private let manager = CLLocationManager()
+    private let manager = CLLocationManager()
 
-   override init() {
-       authorizationStatus = manager.authorizationStatus
-       super.init()
-       manager.delegate = self
-       manager.desiredAccuracy = kCLLocationAccuracyBest
-       manager.headingFilter = 0.5   // degrees of change before a new callback fires
-   }
+    override init() {
+        authorizationStatus = manager.authorizationStatus
+        super.init()
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.headingFilter = 0.5
+    }
 
-   /// Call this from `.onAppear` (or a button) to start receiving updates.
-   func start() {
-       manager.requestWhenInUseAuthorization()
-       if CLLocationManager.headingAvailable() {
-           manager.startUpdatingHeading()
-       }
-   }
+    func start() {
+        manager.requestWhenInUseAuthorization()
+        if CLLocationManager.headingAvailable() {
+            manager.startUpdatingHeading()
+        }
+        manager.startUpdatingLocation()   // NEW — this is what actually triggers the popup reliably
+    }
 
-   func stop() {
-       manager.stopUpdatingHeading()
-   }
+    func stop() {
+        manager.stopUpdatingHeading()
+        manager.stopUpdatingLocation()    // NEW
+    }
 
-   // MARK: CLLocationManagerDelegate
+    // MARK: CLLocationManagerDelegate
 
-   func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-       authorizationStatus = manager.authorizationStatus
-       if authorizationStatus == .authorizedWhenInUse || authorizationStatus == .authorizedAlways {
-           start()
-       }
-   }
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        authorizationStatus = manager.authorizationStatus
+        if authorizationStatus == .authorizedWhenInUse || authorizationStatus == .authorizedAlways {
+            start()
+        }
+    }
 
-   func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-       isCalibrated = newHeading.headingAccuracy >= 0 && newHeading.headingAccuracy < 15
-       // Prefer true heading when available (needs location fix), else magnetic.
-       let raw = newHeading.trueHeading >= 0 ? newHeading.trueHeading : newHeading.magneticHeading
-       setHeading(raw)
-   }
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        isCalibrated = newHeading.headingAccuracy >= 0 && newHeading.headingAccuracy < 15
+        let raw = newHeading.trueHeading >= 0 ? newHeading.trueHeading : newHeading.magneticHeading
+        setHeading(raw)
+    }
 
-   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-       // In production you might surface this to the UI.
-       #if DEBUG
-       print("CompassManager error: \(error.localizedDescription)")
-       #endif
-   }
+    // NEW: location callback — prints lat/long and stores them
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let loc = locations.last else { return }
+        latitude = loc.coordinate.latitude
+        longitude = loc.coordinate.longitude
+        print("Lat: \(loc.coordinate.latitude), Long: \(loc.coordinate.longitude)")
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        #if DEBUG
+        print("CompassManager error: \(error.localizedDescription)")
+        #endif
+    }
 
    /// Sets heading while avoiding the 359°→0° animation "spin the wrong way" bug.
    /// `heading` is always written as a clean, normalized 0..<360 value (safe for
@@ -140,7 +143,35 @@ struct CompassView: View {
            VStack(spacing: 28) {
                headerSection
                dialSection
-               Spacer(minLength: 8)
+               if compass.authorizationStatus == .authorizedAlways || compass.authorizationStatus == .authorizedWhenInUse {
+                   HStack {
+                       let lat = String("\(compass.latitude ?? 0.0)".prefix(9))
+                       let long = String("\(compass.longitude ?? 0.0)".prefix(9))
+                       CompassDesign.Detail(name: "Latitude", value: String("\(lat)° N"))
+                       Spacer()
+                       CompassDesign.Detail(name: "Longitude", value: String("\(long)° N"))
+                   }
+                   Spacer(minLength: 8)
+               } else {
+                   HStack {
+                       Text("Allow location to see lat long")
+                           .font(.system(size: 14, weight: .bold))
+                           .multilineTextAlignment(.leading)
+                       
+                       Spacer()
+                       
+                       Button {
+                           if let url = URL(string: UIApplication.openSettingsURLString) {
+                               UIApplication.shared.open(url)
+                           }
+                       } label: {
+                           Text(Strings.changeSetting)
+                               .padding(10)
+                               .background(.whiteColour.opacity(0.2))
+                               .cornerRadius(24)
+                       }
+                   }
+               }
            }
            .padding(.top, 40)
            .padding(.horizontal, 24)
