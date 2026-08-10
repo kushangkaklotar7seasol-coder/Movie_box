@@ -10,104 +10,146 @@ import Kingfisher
 
 struct ArtistDetail: View {
     @StateObject var viewModel: ArtistDetailViewModel
+    @State var refreshID = UUID()
     let columns = [
         GridItem(.flexible(), spacing: 10),
         GridItem(.flexible(), spacing: 10)
     ]
+    var upperviewPadding: CGFloat = 30
     
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
                                 
-                MovieDetailDesign.TopView(viewModel: viewModel)
+//                MovieDetailDesign.TopView(viewModel: viewModel)
                 
                 ScrollView(showsIndicators: false) {
                     VStack() {
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(viewModel.celebrityDetail?.name ?? "")
-                                    .font(.system(size: 20, weight: .semibold))
-                                    .foregroundColor(.whiteColour)
-                                    .lineLimit(1)
+                        ZStack {
+                            KFImage(URL(string: imageUrl+(viewModel.celebrityDetail?.profilePath ?? "")))
+                                .placeholder({ progress in
+                                    let placeHolderImage = "ic_noImage"
+                                    Image(placeHolderImage)
+                                        .resizable()
+                                        .scaledToFill()
+                                })
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: Device.isiPadLandscape ? screenWidth/2 : screenWidth, height: Device.isiPadLandscape ? screenWidth/2 : screenWidth)
+                                .clipped()
+                        }
+                        .frame(width: Device.isiPadLandscape ? screenWidth/2 : screenWidth, height: Device.isiPadLandscape ? screenWidth/2 : screenWidth, alignment: .center)
+                        .id(refreshID)
+
+                        VStack {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(viewModel.celebrityDetail?.name ?? "")
+                                        .font(.system(size: 20, weight: .semibold))
+                                        .foregroundColor(.whiteColour)
+                                        .lineLimit(1)
+                                    
+                                    Text(viewModel.celebrityDetail?.knownForDepartment ?? "")
+                                        .font(.system(size: 14, weight: .regular))
+                                        .foregroundColor(.grayColour)
+                                        .lineLimit(1)
+                                }
                                 
-                                Text(viewModel.celebrityDetail?.knownForDepartment ?? "")
-                                    .font(.system(size: 14, weight: .regular))
-                                    .foregroundColor(.grayColour)
-                                    .lineLimit(1)
+                                Spacer()
+                            }
+                            .padding(.horizontal, 16)
+                            .padding(.top, 8)
+                            
+                            if viewModel.celebrityDetail?.biography != "" {
+                                VStack(spacing: 12) {
+                                    HStack {
+                                        Text(Strings.biography)
+                                            .font(.system(size: 18, weight: .semibold))
+                                        
+                                        Spacer()
+                                    }
+                                    
+                                    MovieDetailDesign.ExpandableText(text: viewModel.celebrityDetail?.biography ?? "")
+                                }
+                                .padding(.top, 16)
+                                .padding(.horizontal, 16)
                             }
                             
-                            Spacer()
-                        }
-                        .padding(.horizontal, 16)
-                        
-                        if viewModel.celebrityDetail?.biography != "" {
-                            VStack(spacing: 12) {
+                            if !viewModel.personalDetail.isEmpty {
                                 HStack {
-                                    Text(Strings.biography)
+                                    Text(Strings.personalInfo)
                                         .font(.system(size: 18, weight: .semibold))
                                     
                                     Spacer()
                                 }
-                                
-                                MovieDetailDesign.ExpandableText(text: viewModel.celebrityDetail?.biography ?? "")
-                            }
-                            .padding(.top, 16)
-                            .padding(.horizontal, 16)
-                        }
-                        
-                        if !viewModel.personalDetail.isEmpty {
-                            HStack {
-                                Text(Strings.personalInfo)
-                                    .font(.system(size: 18, weight: .semibold))
-                                
-                                Spacer()
-                            }
-                            .padding(.top, 16)
-                            .padding(.horizontal, 16)
-                            
-                            MovieDetailDesign.PersonalDetailView(personalDetail: viewModel.personalDetail)
-                        }
-                        
-                        if let movies = viewModel.movieCredits?.cast{
-                            DefaultDesign.SectionHeader(name: Strings.movie, onClick: {
-                                viewModel.type = 0
-                                viewModel.isViewAllSheet = true
-                            })
-                            .padding(.horizontal, 16)
-                            
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack {
-                                    ForEach(movies.indices, id: \.self) { index in
-                                        let movie = movies[index]
-                                        DefaultDesign.MovieCard(movies: movie)
-                                    }
-                                }
+                                .padding(.top, 16)
                                 .padding(.horizontal, 16)
+                                
+                                MovieDetailDesign.PersonalDetailView(personalDetail: viewModel.personalDetail)
                             }
-                        }
-                        
-                        if let series = viewModel.seriesCredits?.cast{
-                            DefaultDesign.SectionHeader(name: Strings.tvShow, onClick: {
-                                viewModel.type = 1
-                                viewModel.isViewAllSheet = true
-                            })
-                            .padding(.horizontal, 16)
                             
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack {
-                                    ForEach(series.indices, id: \.self) { index in
-                                        let movie = series[index]
-                                        DefaultDesign.MovieCard(movies: movie)
-                                    }
-                                }
+                            if let movies = viewModel.movieCredits?.cast{
+                                DefaultDesign.SectionHeader(name: Strings.movie, onClick: {
+                                    viewModel.type = 0
+                                    viewModel.isViewAllSheet = true
+                                })
                                 .padding(.horizontal, 16)
+                                
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack {
+                                        ForEach(movies.indices, id: \.self) { index in
+                                            let movie = movies[index]
+                                            DefaultDesign.MovieCard(movies: movie)
+                                        }
+                                    }
+                                    .padding(.horizontal, 16)
+                                }
+                            }
+                            
+                            if let series = viewModel.seriesCredits?.cast{
+                                DefaultDesign.SectionHeader(name: Strings.tvShow, onClick: {
+                                    viewModel.type = 1
+                                    viewModel.isViewAllSheet = true
+                                })
+                                .padding(.horizontal, 16)
+                                
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack {
+                                        ForEach(series.indices, id: \.self) { index in
+                                            let movie = series[index]
+                                            DefaultDesign.MovieCard(movies: movie)
+                                        }
+                                    }
+                                    .padding(.horizontal, 16)
+                                }
                             }
                         }
+                        .background(.blackColour)
+                        .cornerRadius(20)
+                        .padding(.top, -upperviewPadding)
                     }
-                    .background(.blackColour)
                 }
-                .background(.blackColour)
+//                .background(.blackColour)
             }
+            .edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                HStack {
+                    Button {
+                        Router.shared.pop()
+                    } label: {
+                        Image("ic_back_special")
+                            .resizable()
+                            .frame(width: 44, height: 44, alignment: .center)
+                    }
+                    
+                    Spacer()
+                }
+                .padding(.horizontal, 16)
+                
+                Spacer()
+            }
+
         }
         .defaultPage()
         .sheet(isPresented: $viewModel.isViewAllSheet) {
@@ -145,6 +187,9 @@ struct ArtistDetail: View {
                 }
                 
             }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            refreshID = UUID()
         }
     }
 }
@@ -214,9 +259,17 @@ class MovieDetailDesign {
                     .clipped()
                     
                 VStack {
-                    DefaultDesign.Header(name: "")
-                        .padding(.top, 100)
-                        .padding(.horizontal, 16)
+                    HStack {
+                        Button {
+                            Router.shared.pop()
+                        } label: {
+                            Image("ic_back_special")
+                                .resizable()
+                                .frame(width: 44, height: 44, alignment: .center)
+                        }
+                        
+                        Spacer()
+                    }
                     
                     Spacer()
                     
@@ -242,10 +295,14 @@ class MovieDetailDesign {
     }
     
     struct PersonalDetailView: View {
-        let columns = [
-            GridItem(.flexible(), spacing: 10),
-            GridItem(.flexible(), spacing: 10)
-        ]
+//        let columns = [
+//            GridItem(.flexible(), spacing: 10),
+//            GridItem(.flexible(), spacing: 10)
+//        ]
+        var columns: [GridItem] {
+            let count = Device.isIpad ? 4 : 2
+            return Array(repeating: GridItem(.flexible(), spacing: 15), count: count)
+        }
         var personalDetail: [PersonalDetail]
         
         var body: some View {

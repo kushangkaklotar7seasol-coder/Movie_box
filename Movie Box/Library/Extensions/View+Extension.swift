@@ -24,7 +24,7 @@ extension View {
                         Image("ic_top_background")
                             .resizable()
                             .scaledToFill()
-                            .frame(width: Device.isIpad ? screenHeight : screenWidth, height: Device.isIpad ? 250 : 150, alignment: .center)
+                            .frame(width: screenWidth > screenHeight ? screenWidth : screenHeight, height: Device.isIpad ? 250 : 150, alignment: .center)
                             .edgesIgnoringSafeArea(.top)
                         
                         Spacer()

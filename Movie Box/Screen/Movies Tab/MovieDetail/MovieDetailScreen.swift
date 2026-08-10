@@ -12,7 +12,7 @@ import WebKit
 struct MovieDetailScreen: View {
     @StateObject var viewModel: MovieDetailViewModel
     var upperviewPadding: CGFloat = 30
-    
+    @State var refreshID = UUID()
     let columns = [
         GridItem(.flexible(), spacing: 10),
         GridItem(.flexible(), spacing: 10),
@@ -33,7 +33,7 @@ struct MovieDetailScreen: View {
                             })
                             .resizable()
                             .scaledToFill()
-                            .frame(width: screenWidth, height: screenWidth)
+                            .frame(width: Device.isiPadLandscape ? screenWidth/2 : screenWidth, height: Device.isiPadLandscape ? screenWidth/2 : screenWidth)
                             .clipped()
                         
                         if isYoutubeEnabled {
@@ -52,8 +52,8 @@ struct MovieDetailScreen: View {
                             }
                         }
                     }
-                    .frame(width: screenWidth, height: screenWidth, alignment: .center)
-                    .background()
+                    .frame(width: Device.isiPadLandscape ? screenWidth/2 : screenWidth, height: Device.isiPadLandscape ? screenWidth/2 : screenWidth, alignment: .center)
+                    .id(refreshID)
                     
                     ZStack {
                         VStack(spacing: 0) {
@@ -152,7 +152,7 @@ struct MovieDetailScreen: View {
                                                     .lineLimit(2)
                                             }
                                             .padding()
-                                            .frame(width: (screenWidth-32)/2.5, alignment: .leading)
+                                            .frame(width: Device.isIpad ? (screenWidth-32)/3.5 : (screenWidth-32)/2.5, alignment: .leading)
                                             .frame(height: 100)
                                             .background(.backgroundColour)
                                             .cornerRadius(14)
@@ -199,7 +199,7 @@ struct MovieDetailScreen: View {
                                                     .resizable()
                                                     .scaledToFill()
                                             }
-                                            .frame(width: (screenWidth-32)/2.5, height: (screenWidth-32)/2, alignment: .center)
+                                            .frame(width: Device.isIpad ? (screenWidth-32)/3.5 : (screenWidth-32)/3.5, height:  Device.isIpad ? (screenWidth-32)/3 : (screenWidth-32)/2, alignment: .center)
                                             .background()
                                             .cornerRadius(24)
                                             .onTapGesture {
@@ -251,7 +251,7 @@ struct MovieDetailScreen: View {
                                                         .frame(width: 30, height: 30, alignment: .center)
                                                 }
                                             }
-                                            .frame(width: (screenWidth-32)/2, height: (screenWidth-32)/2.5, alignment: .center)
+                                            .frame(width: Device.isIpad ? (screenWidth-32)/3 : (screenWidth-32)/2, height: Device.isIpad ? (screenWidth-32)/3.5 : (screenWidth-32)/2.5, alignment: .center)
                                             .background()
                                             .cornerRadius(14)
                                             .onTapGesture {
@@ -281,9 +281,13 @@ struct MovieDetailScreen: View {
             VStack {
                 
                 HStack {
-                    DefaultDesign.SmallButton(image: "ic_arrow_left", onClick: {
+                    Button {
                         Router.shared.pop()
-                    })
+                    } label: {
+                        Image("ic_back_special")
+                            .resizable()
+                            .frame(width: 44, height: 44, alignment: .center)
+                    }
                     
                     Spacer()
                 }
@@ -342,6 +346,9 @@ struct MovieDetailScreen: View {
                     }
                 }
             }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            refreshID = UUID()
         }
 //        .customSheetView($viewModel.isShowPreview,config:
 //                            CustomSheetConfig(customSheetCornerRadius: 20,

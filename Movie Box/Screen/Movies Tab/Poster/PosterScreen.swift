@@ -10,10 +10,31 @@ import Kingfisher
 
 struct PosterScreen: View {
     @StateObject var viewModel: PosterViewModel
-    let columns = [
-       GridItem(.flexible()),
-       GridItem(.flexible())
-   ]
+    var columns: [GridItem] {
+        let count = Device.isiPadPortrait ? 3 : Device.isiPadLandscape ? 4 : 2
+        return Array(repeating: GridItem(.flexible(), spacing: 15), count: count)
+    }
+    @State var refreshID = UUID()
+    var posterWidth: CGFloat {
+        
+        if Device.isiPadLandscape {
+            return (screenWidth-32)/4.1
+        } else if Device.isIpad {
+            return (screenWidth-32)/3.1
+        } else {
+            return (screenWidth-32)/2.1
+        }
+    }
+    
+    var posterHeight: CGFloat {
+        if Device.isiPadLandscape {
+            return (screenWidth-32)/3.7
+        } else if Device.isIpad {
+            return (screenWidth-32)/2.7
+        } else {
+            return (screenWidth-32)/1.7
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -36,19 +57,22 @@ struct PosterScreen: View {
                                     .resizable()
                                     .scaledToFill()
                             }
-                            .frame(width: (screenWidth-32)/2.1, height: (screenWidth-32)/1.7, alignment: .center)
-                            .background()
+                            .frame(width: posterWidth, height: posterHeight, alignment: .center)
                             .cornerRadius(24)
                             .onTapGesture {
                                 Router.shared.push(.posterDetail(movies: viewModel.images, index: index))
                             }
                         }
                     }
+                    .id(refreshID)
                 }
             }
             .padding(.horizontal, 16)
         }
         .defaultPage()
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            refreshID = UUID()
+        }
     }
 }
 

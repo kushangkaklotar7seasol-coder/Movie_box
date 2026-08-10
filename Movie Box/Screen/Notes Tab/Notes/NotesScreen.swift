@@ -10,6 +10,8 @@ import SwiftUI
 struct NotesScreen: View {
     @StateObject var viewModel = NotesViewModel()
     @EnvironmentObject var localization: LocalizationManager
+    @State var refreshID = UUID()
+    
     let columns = [
        GridItem(.flexible()),
        GridItem(.flexible())
@@ -34,7 +36,7 @@ struct NotesScreen: View {
                 .padding(.horizontal, 16)
                 
                 NotesGridView(viewModel: viewModel)
-                    .id(localization.selectedLanguage)
+                    .id(refreshID)
                 
                 Spacer()
             }
@@ -92,6 +94,9 @@ struct NotesScreen: View {
         } message: {
             Text(Strings.deleteInfo)
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            refreshID = UUID()
+        }
     }
 }
 
@@ -107,7 +112,7 @@ struct NotesGridView: View {
         ScrollView(showsIndicators: false) {
             MasonryVGrid(
                 data: viewModel.allNotes,
-                columns: 2,
+                columns: Device.isiPadLandscape ? 4 : Device.isIpad ? 3 : 2,
                 spacing: 16,
                 estimatedHeight: estimatedCardHeight
             ) { note in
@@ -126,7 +131,7 @@ struct NotesGridView: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
                 Text(notes.createdDate.formatted(.dateTime.day().month()))
-                    .font(.system(size: 16, weight: .medium))
+                    .font(.system(size: Device.isIpad ? 18 : 16, weight: .medium))
                     .foregroundColor(.greenColour)
                 
                 Spacer()
@@ -214,14 +219,14 @@ struct NotesGridView: View {
             if notes.name != "" {
                 Text(notes.name)
                     .lineLimit(2)
-                .font(.system(size: 14, weight: .medium))
+                    .font(.system(size: Device.isIpad ? 16 : 14, weight: .medium))
                 .foregroundColor(.whiteColour)
                 .padding(.top, 6)
             }
             
             if notes.notes != "" {
                 Text(notes.notes)
-                    .font(.system(size: 12, weight: .regular))
+                    .font(.system(size: Device.isIpad ? 14 : 12, weight: .regular))
                     .foregroundColor(.grayColour)
                     .padding(.top, 6)
                     .frame(maxHeight: screenHeight/2)

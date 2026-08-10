@@ -11,10 +11,15 @@ struct LanguageScreen: View {
     @StateObject var viewModel: LanguageViewModel
     @EnvironmentObject var localization: LocalizationManager
     @Environment(\.dismiss) var dismiss
-    let columns = [
-        GridItem(.flexible(), spacing: 15),
-        GridItem(.flexible(), spacing: 15)
-    ]
+    @State var refreshID = UUID()
+//    let columns = [
+//        GridItem(.flexible(), spacing: 15),
+//        GridItem(.flexible(), spacing: 15)
+//    ]
+    var columns: [GridItem] {
+        let count = Device.isiPadPortrait ? 3 : Device.isiPadLandscape ? 4 : 2
+        return Array(repeating: GridItem(.flexible(), spacing: 15), count: count)
+    }
     
     var body: some View {
         ZStack {
@@ -99,6 +104,7 @@ struct LanguageScreen: View {
                             }
                         }
                     }
+                    .id(refreshID)
                 }
                 
                 Spacer()
@@ -108,6 +114,9 @@ struct LanguageScreen: View {
         .defaultPage(viewModel.isShowBack)
         .onAppear {
             viewModel.selectedLanguage = UserdefaultManager.shared.getLanguage() ?? LanguageItem(code: "en")
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            refreshID = UUID()
         }
     }
 }

@@ -11,6 +11,7 @@ import _WebKit_SwiftUI
 
 struct VideosScreen: View {
     @StateObject var viewModel: VideoViewModel
+    @State var refreshID = UUID()
     
     var body: some View {
         ZStack {
@@ -38,7 +39,7 @@ struct VideosScreen: View {
                                     .frame(width: 30, height: 30, alignment: .center)
                             }
                         }
-                        .frame(width: screenWidth-32, height: (screenHeight-150)/3, alignment: .center)
+                        .frame(width: screenWidth-32, height: Device.isiPadLandscape ? (screenHeight-150)/2 : (screenHeight-150)/3, alignment: .center)
                         .background()
                         .cornerRadius(24)
                         .onTapGesture {
@@ -49,6 +50,7 @@ struct VideosScreen: View {
                         }
                     }
                 }
+                .id(refreshID)
             }
             .padding(.horizontal, 16)
         }
@@ -73,6 +75,9 @@ struct VideosScreen: View {
                     }
                 }
             }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            refreshID = UUID()
         }
     }
 }

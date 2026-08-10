@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LikedScreen: View {
     @StateObject var viewModel = LikedViewModel()
-    @State var refresh = UUID()
+    @State var refreshID = UUID()
     
     var columns: [GridItem] {
         let count = Device.isiPadPortrait ? 4 : Device.isiPadLandscape ? 5 : 2
@@ -38,6 +38,7 @@ struct LikedScreen: View {
                                     .id(movie.id)
                                 }
                             }
+                            .id(refreshID)
                         }
                     } else {
                         VStack {
@@ -72,6 +73,7 @@ struct LikedScreen: View {
                                     .id(movie.id)
                                 }
                             }
+                            .id(refreshID)
                         }
                     } else {
                         VStack {
@@ -97,7 +99,9 @@ struct LikedScreen: View {
             .padding(.horizontal, 16)
         }
         .defaultPage()
-        
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            refreshID = UUID()
+        }
     }
 }
 
