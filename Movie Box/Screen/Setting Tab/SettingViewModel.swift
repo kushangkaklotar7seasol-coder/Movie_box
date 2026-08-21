@@ -12,10 +12,9 @@ import UIKit
 class SettingViewModel: ObservableObject {
     var settingItem: [PersonalDetail] = [PersonalDetail(id: 0, name: "LANGUAGE", value: "ic_language"),
                                          PersonalDetail(id: 1, name: "SHARE_APP", value: "ic_share_clear"),
-//                                         PersonalDetail(id: 2, name: "RATE_US", value: "ic_star_white"),
+                                         PersonalDetail(id: 2, name: "RATE_US", value: "ic_star_white"),
                                          PersonalDetail(id: 3, name: "PRIVECY_POLICY", value: "ic_privacy"),
-                                         PersonalDetail(id: 4, name: "TERMS_USE", value: "ic_terms"),
-                                         PersonalDetail(id: 5, name: "ABOUT_US", value: "ic_info")]
+                                         PersonalDetail(id: 4, name: "TERMS_USE", value: "ic_terms")]
     
     func onSelect(_ id: Int) {
         switch id {

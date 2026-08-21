@@ -7,17 +7,30 @@
 
 import SwiftUI
 import Kingfisher
+import Lottie
 
 struct SplashScreen: View {
     @StateObject var viewModel = SplashViewModel()
     
     var body: some View {
         ZStack {
+            Image("img_splash")
+                        .resizable()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .ignoresSafeArea()
+            
+            Image("app_icon")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 110, height: 110, alignment: .center)
+            
             VStack {
                 Spacer()
-                Text("Splash Screen")
-                    .font(.system(size: 22, weight: .semibold))
-                Spacer()
+                
+                LottieView(animation: .named("loading_lottie"))
+                    .looping()
+                    .resizable()
+                    .frame(width: 100, height: 100)
             }
         }
         .defaultPage()
@@ -236,7 +249,7 @@ class DefaultDesign {
                                         .scaledToFill()
                                         .frame(width: 10, height: 10, alignment: .center)
                                     
-                                    Text("4.5")
+                                    Text("\(movies.voteAverage/2)".prefix(3))
                                         .foregroundColor(.blackColour)
                                         .font(.system(size: 10, weight: .medium))
                                 }

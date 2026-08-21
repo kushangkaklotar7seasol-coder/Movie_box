@@ -63,8 +63,8 @@ struct Movie: Codable, Identifiable {
 struct CelebrityResponse: Codable, Hashable {
     var page: Int
     var results: [Celebrity]
-    let totalPages: Int
-    let totalResults: Int
+    var totalPages: Int
+    var totalResults: Int
  
     enum CodingKeys: String, CodingKey {
         case page

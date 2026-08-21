@@ -41,9 +41,30 @@ struct MovieDetailScreen: View {
                                 Spacer()
                                 
                                 HStack(alignment: .center) {
-                                    DefaultDesign.SmallButton(image: "ic_play_empty", onClick: {
+//                                    DefaultDesign.SmallButton(image: "", onClick: {
+//                                        
+//                                    })
+                                    
+                                    Button {
                                         viewModel.isYoutubeVideo = true
-                                    })
+                                    } label: {
+                                        Image("ic_play_empty")
+                                            .resizable()
+                                            .frame(width: 24, height: 24, alignment: .center)
+                                            .padding(10)
+                                            .background(.whiteColour.opacity(0.1))
+                                            
+                                            .background(
+                                                LinearGradient(colors: [.cyanColour, .greenColour],
+                                                               startPoint: .topLeading,
+                                                               endPoint: .bottomTrailing)
+                                            )
+                                            .cornerRadius(22)
+                                            .overlay {
+                                                RoundedRectangle(cornerRadius: 22)
+                                                    .strokeBorder(.whiteColour.opacity(0.2), lineWidth: 1)
+                                            }
+                                    }
                                     
                                     Text(Strings.playTrailer)
                                         .font(.system(size: 18, weight: .medium))
@@ -199,7 +220,7 @@ struct MovieDetailScreen: View {
                                                     .resizable()
                                                     .scaledToFill()
                                             }
-                                            .frame(width: Device.isIpad ? (screenWidth-32)/3.5 : (screenWidth-32)/3.5, height:  Device.isIpad ? (screenWidth-32)/3 : (screenWidth-32)/2, alignment: .center)
+                                            .frame(width: Device.isIpad ? (screenWidth-32)/3.5 : (screenWidth-32)/2.5, height:  Device.isIpad ? (screenWidth-32)/3 : (screenWidth-32)/2, alignment: .center)
                                             .background()
                                             .cornerRadius(24)
                                             .onTapGesture {

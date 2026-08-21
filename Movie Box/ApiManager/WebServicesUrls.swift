@@ -7,7 +7,7 @@
 
 import Foundation
 
-var proxiUrl = "https://api-livevideocall.7seasol.in/proxy?url="
+var proxiUrl = ""
 let serverUrl = proxiUrl + "https://api.themoviedb.org/3/"
 
 //  MARK: - Home -
@@ -43,5 +43,5 @@ let wallpapaerUrl = "https://api-pexels.7seasol.in/api/images/by-category?catego
 let generalInfoUrl : String = "https://7seasol-application.s3.amazonaws.com/admin_prod/pbz-grfgvat-arj.json"
 #else
 //Prod
-let generalInfoUrl : String = ""
+let generalInfoUrl : String = "https://7seasol-application.s3.amazonaws.com/admin_prod/pbz-gni-reb.json"
 #endif

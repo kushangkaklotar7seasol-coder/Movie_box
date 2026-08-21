@@ -11,6 +11,7 @@ struct IntroScreen: View {
     @StateObject var viewModel = IntroViewModel()
     @State var scrollPosition: Int? = 0
     @State var selectedIndex: Int = 0
+    @State var refreshID = UUID()
     
     var body: some View {
         ZStack {
@@ -119,6 +120,9 @@ struct IntroScreen: View {
         }
         .defaultPage(true)
         .background(.blackColour)
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+            refreshID = UUID()
+        }
     }
 }
 

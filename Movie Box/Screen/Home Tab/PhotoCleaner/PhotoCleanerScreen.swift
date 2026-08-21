@@ -33,44 +33,52 @@ struct PhotoCleanerScreen: View {
                         .padding(.horizontal, 16)
 //                }
                 
-                ScrollView(showsIndicators: false) {
-//                    if !viewModel.duplicateGroups.isEmpty {
+                    ScrollView(showsIndicators: false) {
                         VStack {
-                            ForEach(viewModel.duplicateGroups.indices, id: \.self) { groupIndex in
-                                let group = viewModel.duplicateGroups[groupIndex]
+                            ForEach(Array(viewModel.duplicateGroups.enumerated()), id: \.offset) { groupIndex, group in
                                 let isSelected = viewModel.isAllSelected(in: group)
                                 
-                                HStack {
-                                    Text("\(Strings.group) \(groupIndex + 1)")
-                                        .font(.system(size: 14, weight: .medium))
-                                    
-                                    Spacer()
-                                    
-                                    Button {
-                                        viewModel.toggleSelectAll(for: group)
-                                    } label: {
-                                        Image(isSelected ? "ic_check" : "ic_uncheck")
-                                            .resizable()
-                                            .frame(width: 20, height: 20, alignment: .center)
-                                        
-                                        Text(viewModel.isAllSelected(in: group) ? Strings.removeAll : Strings.selectAll)
+                                VStack(alignment: .leading, spacing: 10) {
+                                    // Group Header
+                                    HStack {
+                                        Text("\(Strings.group) \(groupIndex + 1)")
                                             .font(.system(size: 14, weight: .medium))
-                                            .foregroundColor(.grayColour)
-                                    }
-                                }
-                                .padding(.horizontal, 16)
-                                .padding(.top, 10)
-                                
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 10) {
-                                        ForEach(viewModel.duplicateGroups[groupIndex], id: \.localIdentifier) { asset in
-                                            AssetThumbnail(asset: asset, selectedImage: viewModel.isSelected(asset) ? "ic_check" : "ic_uncheck")
-                                                .onTapGesture {
-                                                    viewModel.toggleSelection(for: asset)
-                                                }
+                                        
+                                        Spacer()
+                                        
+                                        Button {
+                                            viewModel.toggleSelectAll(for: group)
+                                        } label: {
+                                            HStack(spacing: 6) {
+                                                Image(isSelected ? "ic_check" : "ic_uncheck")
+                                                    .resizable()
+                                                    .frame(width: 20, height: 20)
+                                                
+                                                Text(isSelected ? Strings.removeAll : Strings.selectAll)
+                                                    .font(.system(size: 14, weight: .medium))
+                                                    .foregroundColor(.grayColour)
+                                            }
                                         }
                                     }
                                     .padding(.horizontal, 16)
+                                    .padding(.top, 10)
+                                    
+                                    // Horizontal Scroll Thumbnail List
+                                    ScrollView(.horizontal, showsIndicators: false) {
+                                        LazyHStack(spacing: 10) { // LazyHStack વાપરવાથી પરફોર્મન્સ સુધરશે
+                                            ForEach(group, id: \.localIdentifier) { asset in
+                                                AssetThumbnail(
+                                                    asset: asset,
+                                                    selectedImage: viewModel.isSelected(asset) ? "ic_check" : "ic_uncheck"
+                                                )
+                                                .id(asset.localIdentifier)
+                                                .onTapGesture {
+                                                    viewModel.toggleSelection(for: asset)
+                                                }
+                                            }
+                                        }
+                                        .padding(.horizontal, 16)
+                                    }
                                 }
                             }
                         }
@@ -166,8 +174,10 @@ struct PhotoCleanerScreen: View {
 
 struct AssetThumbnail: View {
     let asset: PHAsset
-    @State private var image: UIImage?
     var selectedImage: String = ""
+    
+    @State private var image: UIImage?
+    @State private var fileSize: String = ""
     
     var body: some View {
         ZStack {
@@ -182,34 +192,34 @@ struct AssetThumbnail: View {
                 Rectangle()
                     .fill(Color.gray.opacity(0.3))
                     .frame(width: 150, height: 150)
+                    .cornerRadius(8)
             }
             
+            // Overlay Content
             VStack {
                 HStack {
-                    
                     Spacer()
-                    
                     Image(selectedImage)
                         .resizable()
-                        .frame(width: 20, height: 20, alignment: .center)
+                        .frame(width: 20, height: 20)
                 }
                 
                 Spacer()
                 
                 HStack {
-                    let size = self.getFileSize(for: asset)
-                    Text(size)
+                    Text(fileSize)
                         .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(.whiteColour)
-                    
+                        .foregroundColor(.white)
                     Spacer()
                 }
             }
-            .padding(5)
-            
+            .padding(8)
         }
+        .frame(width: 150, height: 150)
+        .contentShape(Rectangle()) // 150x150 નો આખો એરિયા ટેપબલ બનાવશે
         .onAppear {
             loadThumbnail()
+            loadFileSize()
         }
     }
     
@@ -218,25 +228,22 @@ struct AssetThumbnail: View {
         let options = PHImageRequestOptions()
         options.deliveryMode = .opportunistic
         
-        manager.requestImage(for: asset, targetSize: CGSize(width: 150, height: 150), contentMode: .aspectFill, options: options) { result, _ in
+        // Retina screen માટે 2x resolution target size
+        let size = CGSize(width: 300, height: 300)
+        manager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: options) { result, _ in
             self.image = result
         }
     }
     
-    func getFileSize(for asset: PHAsset) -> String {
+    private func loadFileSize() {
+        // body ની અંદર વારંવાર કોલ થવાને બદલે એક જ વાર loadFileSize માં ચલાવવું
         let resources = PHAssetResource.assetResources(for: asset)
-        
         guard let resource = resources.first,
-              let sizeValue = resource.value(forKey: "fileSize") as? Int64 else {
-            print("No resource found")
-            return ""
-        }
+              let sizeValue = resource.value(forKey: "fileSize") as? Int64 else { return }
         
         let formatter = ByteCountFormatter()
         formatter.allowedUnits = [.useKB, .useMB, .useGB]
         formatter.countStyle = .file
-        
-        let sizeString = formatter.string(fromByteCount: sizeValue)
-        return sizeString
+        self.fileSize = formatter.string(fromByteCount: sizeValue)
     }
 }

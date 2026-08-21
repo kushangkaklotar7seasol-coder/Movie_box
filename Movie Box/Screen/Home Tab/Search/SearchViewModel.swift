@@ -60,13 +60,10 @@ class SearchViewModel: ObservableObject {
         self.series = []
         
         if self.selectedIndex == 0 {
-            //            if self.searchTextField != "" {
             self.moviesSearchAPI(text: text.trimmingCharacters(in: .whitespacesAndNewlines))
-            //            }
         } else {
-            //            if self.searchTextField != "" {
             self.searchSeriesAPI(text: text.trimmingCharacters(in: .whitespacesAndNewlines))
-            //            }
+
         }
     }
     
@@ -74,15 +71,11 @@ class SearchViewModel: ObservableObject {
         
         if index == 0 {
             if movies.isEmpty {
-//                if self.searchTextField != "" {
                     self.moviesSearchAPI(text: self.searchTextField.trimmingCharacters(in: .whitespacesAndNewlines))
-//                }
             }
         } else {
             if series.isEmpty {
-//                if self.searchTextField != "" {
                     self.searchSeriesAPI(text: self.searchTextField.trimmingCharacters(in: .whitespacesAndNewlines))
-//                }
             }
         }
     }

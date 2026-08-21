@@ -27,7 +27,7 @@ class PhotoEditViewModel: ObservableObject {
     @Published var isPhotosAppAccessShow: Bool = false
     @Published var isPhotoSaveAvailable: Bool = false
     @Published var isLimitedAccess: Bool = false
-    @Published var photosImages: [UIImage] = []
+//    @Published var photosImages: [UIImage] = []
     // MARK: - Adjust state (bound to sliders = live preview values)
     @Published var isShowAdjust: Bool = false
     @Published var contrast: Double = 1.0
@@ -41,6 +41,10 @@ class PhotoEditViewModel: ObservableObject {
     @Published var isImagedCroped: Bool = false
     private var committedAdjust = AdjustValues()
 
+    @Published var photoAssets: [PHAsset] = []           // ✅ add this instead
+     
+    private let imageManager = PHCachingImageManager()
+    
     struct AdjustValues {
         var contrast: Double = 1.0
         var brightness: Double = 0.0
@@ -104,6 +108,28 @@ class PhotoEditViewModel: ObservableObject {
         isPhtoAvailable = true
     }
 
+//    func requestPermissionAndFetchPhotos() {
+//        PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+//            DispatchQueue.main.async {
+//                switch status {
+//                case .authorized:
+//                    self.fetchAllPhotos()
+//                case .limited:
+//                    self.fetchAllPhotos()
+//                    self.isLimitedAccess = true
+//                case .denied, .restricted:
+//                    self.showSettingsAlert = true
+//                    self.isPhotosAppAccessShow = true
+//                case .notDetermined:
+//                    self.showSettingsAlert = true
+//                    self.isPhotosAppAccessShow = true
+//                @unknown default:
+//                    break
+//                }
+//            }
+//        }
+//    }
+        
     func requestPermissionAndFetchPhotos() {
         PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
             DispatchQueue.main.async {
@@ -125,39 +151,94 @@ class PhotoEditViewModel: ObservableObject {
             }
         }
     }
-        
-    // ૨. Photo Library માંથી બધા ફોટોઝ ફેચ કરવા
+     
+    // Only fetches the PHAsset list — no image bytes are loaded here at all.
+    // This alone is what stops the crash: this call is fast and cheap no matter
+    // how many thousand photos are in the library.
     private func fetchAllPhotos() {
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        
-        let assets = PHAsset.fetchAssets(with: .image, options: fetchOptions)
-        let imageManager = PHImageManager.default()
-        
-        let requestOptions = PHImageRequestOptions()
-        // 💡 ૧. ઓરિજિનલ નેટિવ ક્વોલિટી સેટ કરવી
-        requestOptions.deliveryMode = .highQualityFormat
-        requestOptions.isNetworkAccessAllowed = true // iCloud પરથી પણ HD લોડ થશે
-        
-        assets.enumerateObjects { (asset, index, stop) in
-            // 💡 ૨. PHImageManagerMaximumSize આપવાથી ઈમેજ પોતાની ઓરિજિનલ સાઈઝમાં જ આવશે
-            imageManager.requestImage(
-                for: asset,
-                targetSize: PHImageManagerMaximumSize,
-                contentMode: .default,
-                options: requestOptions
-            ) { image, info in
-                
-                let isDegraded = (info?[PHImageResultIsDegradedKey] as? Bool) ?? false
-                
-                if let image = image, !isDegraded {
-                    DispatchQueue.main.async {
-                        self.photosImages.append(image)
-                    }
-                }
+     
+        let result = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+     
+        var assets: [PHAsset] = []
+        result.enumerateObjects { asset, _, _ in
+            assets.append(asset)
+        }
+     
+        DispatchQueue.main.async {
+            self.photoAssets = assets
+        }
+    }
+     
+    // Small thumbnail for grid cells — cheap, this is what keeps scrolling smooth
+    // and memory low even with thousands of photos.
+    func requestThumbnail(for asset: PHAsset, size: CGSize, completion: @escaping (UIImage?) -> Void) {
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .opportunistic
+        options.resizeMode = .fast
+        options.isNetworkAccessAllowed = true
+     
+        imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: options) { image, _ in
+            completion(image)
+        }
+    }
+     
+    // Full native-quality image — only requested for the ONE photo the user taps,
+    // exactly like your original code intended, just no longer done for all of them upfront.
+    func requestFullImage(for asset: PHAsset, completion: @escaping (UIImage?) -> Void) {
+        let options = PHImageRequestOptions()
+        options.deliveryMode = .highQualityFormat
+        options.isNetworkAccessAllowed = true
+        options.resizeMode = .exact
+     
+        imageManager.requestImage(
+            for: asset,
+            targetSize: PHImageManagerMaximumSize,
+            contentMode: .default,
+            options: options
+        ) { image, info in
+            let isDegraded = (info?[PHImageResultIsDegradedKey] as? Bool) ?? false
+            if let image, !isDegraded {
+                completion(image)
             }
         }
     }
+     
+    
+    
+//    // ૨. Photo Library માંથી બધા ફોટોઝ ફેચ કરવા
+//    private func fetchAllPhotos() {
+//        let fetchOptions = PHFetchOptions()
+//        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+//        
+//        let assets = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+//        let imageManager = PHImageManager.default()
+//        
+//        let requestOptions = PHImageRequestOptions()
+//        // 💡 ૧. ઓરિજિનલ નેટિવ ક્વોલિટી સેટ કરવી
+//        requestOptions.deliveryMode = .highQualityFormat
+//        requestOptions.isNetworkAccessAllowed = true // iCloud પરથી પણ HD લોડ થશે
+//        
+//        assets.enumerateObjects { (asset, index, stop) in
+//            // 💡 ૨. PHImageManagerMaximumSize આપવાથી ઈમેજ પોતાની ઓરિજિનલ સાઈઝમાં જ આવશે
+//            imageManager.requestImage(
+//                for: asset,
+//                targetSize: PHImageManagerMaximumSize,
+//                contentMode: .default,
+//                options: requestOptions
+//            ) { image, info in
+//                
+//                let isDegraded = (info?[PHImageResultIsDegradedKey] as? Bool) ?? false
+//                
+//                if let image = image, !isDegraded {
+//                    DispatchQueue.main.async {
+//                        self.photosImages.append(image)
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     // MARK: - Adjust panel
 

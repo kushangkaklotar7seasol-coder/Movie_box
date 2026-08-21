@@ -85,9 +85,9 @@ struct PhotoEditScreen: View {
                                             Text("\(Strings.yougiven) \(appName) \(Strings.accessNumberPhotos)")
                                                 .font(.system(size: 14, weight: .bold))
                                                 .multilineTextAlignment(.leading)
-                                            
+                                 
                                             Spacer()
-                                            
+                                 
                                             Menu {
                                                 Button(Strings.selectPhotoSimple) {
                                                     viewModel.isShowPhotoPicker = true
@@ -105,21 +105,23 @@ struct PhotoEditScreen: View {
                                             }
                                         }
                                     }
-                                    
-                                    if !viewModel.photosImages.isEmpty {
+                                 
+                                    if !viewModel.photoAssets.isEmpty {
                                         ScrollView {
                                             LazyVGrid(columns: columns, spacing: 2) {
-                                                ForEach(0..<viewModel.photosImages.count, id: \.self) { index in
-                                                    Image(uiImage: viewModel.photosImages[index])
-                                                        .resizable()
-                                                        .scaledToFill()
-                                                        .frame(minWidth: 0, maxWidth: (screenWidth-4)/3)
-                                                        .frame(height: (screenWidth-4)/3)
-                                                        .clipped()
+                                                ForEach(viewModel.photoAssets, id: \.localIdentifier) { asset in
+                                                    PhotoGridThumbnail(asset: asset, viewModel: viewModel)
+                                                        .id(asset.localIdentifier)
+                                                        .contentShape(Rectangle()) // આખા ચોરસ બોક્સને ટેપબલ બનાવશે
                                                         .onTapGesture {
-                                                            viewModel.selectedImage = viewModel.photosImages[index]
-                                                            viewModel.originalImage = viewModel.photosImages[index]
-                                                            viewModel.isPhtoAvailable = true
+                                                            // ચોક્કસ ક્લિક કરેલ asset જ પાસ થશે
+                                                            viewModel.requestFullImage(for: asset) { image in
+                                                                DispatchQueue.main.async {
+                                                                    viewModel.selectedImage = image
+                                                                    viewModel.originalImage = image
+                                                                    viewModel.isPhtoAvailable = true
+                                                                }
+                                                            }
                                                         }
                                                 }
                                             }
@@ -127,11 +129,8 @@ struct PhotoEditScreen: View {
                                     } else {
                                         VStack(spacing: 10) {
                                             Spacer()
-                                            
                                             Image("ic_nonotes")
-                                            
                                             Text(Strings.noPic)
-                                            
                                             Spacer()
                                         }
                                         .multilineTextAlignment(.center)
@@ -741,5 +740,40 @@ struct FilterThumbnailView: View {
         }
 
         return UIImage(cgImage: cgImage)
+    }
+}
+
+struct PhotoGridThumbnail: View {
+    let asset: PHAsset
+    @ObservedObject var viewModel: PhotoEditViewModel
+    
+    @State private var thumbnail: UIImage?
+    
+    var body: some View {
+        GeometryReader { geometry in
+            let size = geometry.size.width
+            
+            Group {
+                if let thumbnail {
+                    Image(uiImage: thumbnail)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: size, height: size)
+                        .clipped()
+                } else {
+                    Rectangle()
+                        .fill(Color.gray.opacity(0.15))
+                        .frame(width: size, height: size)
+                }
+            }
+            .onAppear {
+                // Retina display માટે ૨x સાઈઝ
+                let targetSize = CGSize(width: size * 2, height: size * 2)
+                viewModel.requestThumbnail(for: asset, size: targetSize) { image in
+                    self.thumbnail = image
+                }
+            }
+        }
+        .aspectRatio(1, contentMode: .fit) // ચોરસ સેલ માટે
     }
 }

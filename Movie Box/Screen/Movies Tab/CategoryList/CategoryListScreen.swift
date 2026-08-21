@@ -9,10 +9,6 @@ import SwiftUI
 
 struct CategoryListScreen: View {
     @StateObject var viewModel: CategoryListViewModel
-//    let columns = [
-//        GridItem(.flexible()),
-//        GridItem(.flexible())
-//    ]
     var columns: [GridItem] {
         let count = Device.isiPadPortrait ? 4 : Device.isiPadLandscape ? 5 : 2
         return Array(repeating: GridItem(.flexible(), spacing: 15), count: count)

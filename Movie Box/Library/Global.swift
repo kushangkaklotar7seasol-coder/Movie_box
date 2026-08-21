@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-let appName = "Movie Box"
+let appName = "Tavero"
 
 var screenWidth: CGFloat {
     return UIScreen.main.bounds.width
@@ -51,12 +51,12 @@ var isYoutubeEnabled = false
 let noInternet = "Please check you're internet connection!"
 
 struct AppInfo {
-    static let privacyPolicy       = "https://evanrozario.blogspot.com/2026/07/privacy-policy.html"
-    static let termsOfUse          = "https://evanrozario.blogspot.com/2026/07/terms-conditions.html"
+    static let privacyPolicy       = "https://sinclairamelia.blogspot.com/2026/08/privacy-policy.html"
+    static let termsOfUse          = "https://sinclairamelia.blogspot.com/2026/08/terms-conditions.html"
     static let shareApp            = "https://apps.apple.com/app/id\(appID)"
     static let appLink             = "https://itunes.apple.com/app/id\(appID)"
     static let rateApp             = "https://apps.apple.com/app/id\(appID)?action=write-review"
-    static var appID               = "6793888974"
+    static var appID               = "6802552901"
 }
 
 

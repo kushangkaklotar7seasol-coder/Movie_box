@@ -47,7 +47,6 @@ struct SettingScreen: View {
                     .padding(.top)
                 }
                 .id(localization.selectedLanguage)
-                
             }
             .padding(.horizontal, 16)
         }

@@ -25,6 +25,8 @@ class ArtistViewModel: ObservableObject {
                 for i in response.results {
                     self.celebrity?.results.append(i)
                 }
+                self.celebrity?.totalPages = response.totalPages
+                self.celebrity?.totalResults = response.totalResults
                 self.celebrity?.page += 1
             } failure: { error in
                 print(error)
