@@ -17,6 +17,7 @@ struct CompassScreen: View {
                     .padding(.horizontal, 16)
                 
                 CompassView()
+//                    .frame(width: Device.isIpad ? screenWidth/2 : .infinity, height: Device.isIpad ? screenWidth/2 : .infinity)
                 
                 Spacer(minLength: 8)
                 
